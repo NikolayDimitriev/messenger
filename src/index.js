@@ -1,4 +1,3 @@
-import "./style.css";
 import authPage from "./pages/auth";
 import registerPage from "./pages/registration";
 import profilePage from "./pages/profile";
@@ -8,68 +7,52 @@ import page500 from "./pages/500";
 
 import button from "./components/button";
 
-let app = document.getElementById("root");
-let routes = {};
-let templates = {};
+import tpl from "./index.hbs";
 
-function home() {
-    let div = document.createElement('div');
-    let link = document.createElement('a');
-    link.href = '/about';
-    link.innerText = 'About';
+const app = document.getElementById("root");
+const routes = {};
+const templates = {};
 
-    div.innerHTML = '<h1>Home</h1>';
-    div.appendChild(link);
-
-    app.appendChild(div);
-};
-
-function about() {
-    let div = document.createElement('div');
-    let link = document.createElement('a');
-    link.href = '/';
-    link.innerText = 'Home';
-
-    div.innerHTML = '<h1>About</h1>';
-    div.appendChild(link);
-
-    app.appendChild(div);
-};
+function chats() {
+  app.innerHTML = tpl({
+    page: chatsPage,
+  });
+}
 
 function route(path, template) {
-    if (typeof template === 'function') {
-        return routes[path] = template
-    } else if (typeof template === 'string') {
-        return routes[path] = templates[template];
-    } else {
-        return;
-    }
+  if (typeof template === "function") {
+    return (routes[path] = template);
+  } else if (typeof template === "string") {
+    return (routes[path] = templates[template]);
+  } else {
+    return;
+  }
 }
 
 function template(name, templateFunction) {
-    return templates[name] = templateFunction;
+  return (templates[name] = templateFunction);
 }
 
-template('home', () => home())
-template('about', () => about())
+template("chats", () => chats());
 
-route('/', 'home')
-route('/about', 'about')
+route("/", "chats");
+route("/chats", "chats");
+
 
 function resolveRoute(route) {
-    try {
-        return routes[route]
-    } catch(e) {
-        throw new Error(`Route ${route} not found`)
-    }
+  try {
+    return routes[route];
+  } catch (e) {
+    throw new Error(`Route ${route} not found`);
+  }
 }
 
-function router (event) {
-    let url = window.location.hash.slice(1) || '/';
-    let route = resolveRoute(url);
+function router(event) {
+  const url = window.location.hash.slice(1) || "/";
+  const route = resolveRoute(url);
 
-    route();
+  route();
 }
 
-window.addEventListener('load', router);
-window.addEventListener('hashchange', router);
+window.addEventListener("load", router);
+window.addEventListener("hashchange", router);
