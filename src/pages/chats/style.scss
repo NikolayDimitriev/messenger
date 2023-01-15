@@ -7,8 +7,43 @@
 
   &-left {
     width: 25%;
+    padding: 21px 10px 0 10px;
     border-right: 1px solid $br-color;
     display: flex;
     flex-direction: column;
+
+    &__profile {
+      display: flex;
+      justify-content: flex-end;
+      color: $gray;
+      margin-bottom: 23px;
+    }
+
+    &__search {
+      width: 100%;
+      background: $search-bg;
+      border-radius: 5px;
+      display: flex;
+      margin-bottom: 14px;
+    }
+
+    &__label {
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background-image: url("/static/icon_search.svg");
+    }
+
+    &__input {
+      padding-right: 5px;
+      border-radius: 5px;
+      flex-grow: 1;
+    }
+
+		&__dialogues {
+			display: flex;
+			flex-direction: column;
+		}
   }
 }

@@ -5,8 +5,6 @@ import chatsPage from "./pages/chats";
 import page404 from "./pages/404";
 import page500 from "./pages/500";
 
-import button from "./components/button";
-
 import tpl from "./index.hbs";
 
 const app = document.getElementById("root");

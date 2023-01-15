@@ -1,6 +1,20 @@
 <div class="chat">
   <div class="chat-left">
+    <div class="chat-left__profile">{{{link}}}</div>
+    <div class="chat-left__search">
+      <label class="chat-left__label" for="search"></label>
+      <input
+        class="chat-left__input"
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Поиск"
+      />
+    </div>
 
+    <div class="chat-left__dialogues">
+      {{{dialogues}}}
+    </div>
   </div>
   <div class="char-right"></div>
 </div>

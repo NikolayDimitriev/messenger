@@ -11,8 +11,8 @@ body {
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 500;
-	font-size: 12px;
-	line-height: 15px;
+  font-size: 12px;
+  line-height: 15px;
 }
 
 a {
@@ -21,7 +21,26 @@ a {
 }
 
 p {
-	margin: 0;
+  margin: 0;
+}
+
+input {
+  color: $black;
+  border: none;
+  background-color: inherit;
+  outline: none;
+
+  &::placeholder {
+    color: $gray;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+	padding: 0;
+	color: inherit;
+  cursor: pointer;
 }
 
 * {
