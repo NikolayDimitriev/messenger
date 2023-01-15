@@ -1,0 +1,40 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "Project on Yandex Practicum",
+  "scripts": {
+    "dev": "parcel src/index.html --no-cache --port=3000 --open",
+    "build": "parcel build src/index.html --no-cache",
+    "start": "npm run build && node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "parcel-transformer-hbs": "^1.0.4"
+  },
+  "target": {
+    "default": {
+      "sourceMap": false,
+      "engines": {
+        "browser": ">= 50%"
+      }
+    }
+  },
+  "engines": {
+    "node": ">= 14.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "handlebars": "^4.7.7"
+  }
+}
