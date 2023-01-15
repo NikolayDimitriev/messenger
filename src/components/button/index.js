@@ -1,6 +1,5 @@
-import tpl from './tpl.hbs';
-import './style.css';
+import tpl from "./tpl.hbs";
 
-export default (id, value) => {
-    return tpl({id, value})
-}
+export default (value) => {
+  return tpl({ value });
+};
