@@ -8,47 +8,23 @@ import page500 from "./pages/500";
 import tpl from "./index.hbs";
 
 const app = document.getElementById("root");
-const routes = {};
-const templates = {};
 
-function chats() {
-  app.innerHTML = tpl({
-    page: registerPage,
-  });
-}
-
-function route(path, template) {
-  if (typeof template === "function") {
-    return (routes[path] = template);
-  } else if (typeof template === "string") {
-    return (routes[path] = templates[template]);
-  } else {
-    return;
-  }
-}
-
-function template(name, templateFunction) {
-  return (templates[name] = templateFunction);
-}
-
-template("chats", () => chats());
-
-route("/", "chats");
-route("/chats", "chats");
-
-function resolveRoute(route) {
-  try {
-    return routes[route];
-  } catch (e) {
-    throw new Error(`Route ${route} not found`);
-  }
-}
+const routes = [
+  { path: "/", page: authPage() },
+  { path: "/registration", page: registerPage() },
+  { path: "/profile", page: profilePage() },
+  { path: "/chats", page: chatsPage() },
+  { path: "/404", page: page404() },
+  { path: "/500", page: page500() },
+];
 
 function router(event) {
   const url = window.location.hash.slice(1) || "/";
-  const route = resolveRoute(url);
+  const { page } = routes.find(({ path }) => path === url);
 
-  route();
+  app.innerHTML = tpl({
+    page,
+  });
 }
 
 window.addEventListener("load", router);
