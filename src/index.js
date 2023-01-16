@@ -13,7 +13,7 @@ const templates = {};
 
 function chats() {
   app.innerHTML = tpl({
-    page: authPage,
+    page: registerPage,
   });
 }
 
