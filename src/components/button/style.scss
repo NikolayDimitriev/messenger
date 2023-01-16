@@ -1,0 +1,12 @@
+@import "../../styles/variables.scss";
+
+.main-btn {
+  width: 100%;
+  background: $primary;
+  color: $white;
+  border-radius: 8px;
+  padding: 12px 0;
+	margin-bottom: 14px;
+	font-size: 13px;
+	line-height: 13px;
+}

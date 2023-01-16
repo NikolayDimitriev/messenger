@@ -15,6 +15,88 @@ export const messages = {
   ],
 };
 
+export const logIn = {
+  inputs: [
+    {
+      id: "login-auth",
+      placeholder: "Логин",
+      label: "Логин",
+      name: "login",
+      inputType: "text",
+      errMessage: "Неверный логин",
+    },
+    {
+      id: "password-auth",
+      placeholder: "Пароль",
+      label: "Пароль",
+      name: "password",
+      inputType: "password",
+      errMessage: "Неверный пароль",
+    },
+  ],
+};
+
+export const signUp = {
+  inputs: [
+    {
+      id: "email-registration",
+      placeholder: "Почта",
+      label: "Почта",
+      name: "email",
+      inputType: "email",
+      errMessage: "",
+    },
+    {
+      id: "login-registration",
+      placeholder: "Логин",
+      label: "Логин",
+      name: "login",
+      inputType: "text",
+      errMessage: "",
+    },
+    {
+      id: "first-name-registration",
+      placeholder: "Имя",
+      label: "Имя",
+      name: "first_name",
+      inputType: "text",
+      errMessage: "",
+    },
+    {
+      id: "second-name-registration",
+      placeholder: "Фамилия",
+      label: "Фамилия",
+      name: "second_name",
+      inputType: "text",
+      errMessage: "",
+    },
+    {
+      id: "phone-registration",
+      placeholder: "Телефон",
+      label: "Телефон",
+      name: "phone",
+      inputType: "text",
+      errMessage: "",
+    },
+    {
+      id: "password-registration",
+      placeholder: "Пароль",
+      label: "Пароль",
+      name: "password",
+      inputType: "password",
+      errMessage: "",
+    },
+    {
+      id: "password-registration-two",
+      placeholder: "Пароль (ещё раз)",
+      label: "Пароль (ещё раз)",
+      name: "password",
+      inputType: "password",
+      errMessage: "Пароли не совпадают",
+    },
+  ],
+};
+
 export const dialogues = {
   dialogues: [
     {

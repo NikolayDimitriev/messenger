@@ -13,7 +13,7 @@ const templates = {};
 
 function chats() {
   app.innerHTML = tpl({
-    page: chatsPage,
+    page: authPage,
   });
 }
 
@@ -35,7 +35,6 @@ template("chats", () => chats());
 
 route("/", "chats");
 route("/chats", "chats");
-
 
 function resolveRoute(route) {
   try {

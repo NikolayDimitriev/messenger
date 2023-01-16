@@ -6,6 +6,11 @@
   border-bottom: 1px solid $br-color;
   display: flex;
 
+	&--focused {
+		background-color: $focused;
+		border-radius: 5px;
+	}
+
   &__avatar {
     width: 47px;
     height: 47px;
