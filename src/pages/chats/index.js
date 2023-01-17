@@ -6,7 +6,7 @@ import "./style.scss";
 export default () => {
   return tpl({
     link: link({
-      href: "/setting",
+      href: "/profile",
       value: "Профиль >",
     }),
     dialogues: dialogues(),
