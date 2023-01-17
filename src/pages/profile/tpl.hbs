@@ -1,1 +1,35 @@
-<p>Profile</p>
+<div class="profile">
+  <div class="profile-sidebar">
+    <a href="/chats" class="profile-sidebar__link"></a>
+  </div>
+  <div class="profile-wrapper">
+    <button class="profile-wrapper__avatar profile-avatar">
+      <span class="profile-avatar__text">Поменять аватар</span>
+      <img src="{{avatar}}" alt="Аватар" class="profile-avatar__image"/>
+    </button>
+    <h2 class="profile-wrapper__name">{{name}}</h2>
+    <div class="profile-wrapper__passwords">
+      {{{passwords}}}
+    </div>
+    <div class="profile-wrapper__fields">
+      {{{fields}}}
+    </div>
+    <div class="profile-wrapper__actions">
+      <div class="profile-wrapper__button">
+        <button
+          class="profile-wrapper__btn profile-wrapper__btn--primary"
+        >Изменить данные</button>
+      </div>
+      <div class="profile-wrapper__button">
+        <button
+          class="profile-wrapper__btn profile-wrapper__btn--primary"
+        >Изменить пароль</button>
+      </div>
+      <div class="profile-wrapper__button">
+        <a href="/chats"
+          class="profile-wrapper__btn profile-wrapper__btn--red"
+        >Выйти</a>
+      </div>
+    </div>
+  </div>
+</div>
