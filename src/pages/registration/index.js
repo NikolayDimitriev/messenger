@@ -13,7 +13,6 @@ export default () => {
         data: signUp,
         button: button({
           value: "Зарегистрироваться",
-          className: "main-btn",
         }),
         link: link({
           href: "/auth",
