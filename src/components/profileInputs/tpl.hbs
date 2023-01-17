@@ -1,6 +1,7 @@
 {{#each fields}}
 	<div class="profile-field">
 		<label class="profile-field__label" for="{{id}}">{{label}}</label>
-		<input class="profile-field__input" id="{{id}}" name="{{name}}" type="{{inputType}}" value="{{value}}" disabled></input>
+		<input class="profile-field__input" id="{{id}}" name="{{name}}" type="{{inputType}}" value="{{value}}" {{#if disabled}}disabled{{/if}}></input>
 	</div>
 {{/each}}
+

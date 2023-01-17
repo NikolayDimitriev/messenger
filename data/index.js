@@ -150,6 +150,7 @@ export const user = {
         name: "email",
         inputType: "email",
         value: "pochta@yandex.ru",
+        disabled: true,
       },
       {
         id: "login-profile",
@@ -157,6 +158,7 @@ export const user = {
         name: "login",
         inputType: "text",
         value: "ivanivanov",
+        disabled: true,
       },
       {
         id: "first-name-profile",
@@ -164,6 +166,7 @@ export const user = {
         name: "first_name",
         inputType: "text",
         value: "Иван",
+        disabled: true,
       },
       {
         id: "second-name-profile",
@@ -171,6 +174,7 @@ export const user = {
         name: "second_name",
         inputType: "text",
         value: "Иванов",
+        disabled: true,
       },
       {
         id: "display-name-profile",
@@ -178,6 +182,7 @@ export const user = {
         name: "display_name",
         inputType: "text",
         value: "Иван",
+        disabled: true,
       },
       {
         id: "phone-profile",
@@ -186,6 +191,7 @@ export const user = {
         inputType: "text",
         errMessage: "",
         value: "+7 (999) 999 99 99 ",
+        disabled: true,
       },
     ],
   },
@@ -198,6 +204,7 @@ export const user = {
         name: "oldPassword",
         inputType: "password",
         value: "1234",
+        disabled: false,
       },
       {
         id: "new-password-profile",
@@ -205,6 +212,7 @@ export const user = {
         name: "newPassword",
         inputType: "password",
         value: "123456",
+        disabled: false,
       },
       {
         id: "new-password-profile-two",
@@ -212,6 +220,7 @@ export const user = {
         name: "newPassword",
         inputType: "password",
         value: "123456",
+        disabled: false,
       },
     ],
   },

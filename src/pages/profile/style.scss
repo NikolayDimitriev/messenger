@@ -34,24 +34,23 @@
   }
 
   &-avatar {
-		position: relative;
+    position: relative;
     &__text {
       display: none;
       color: $white;
       font-size: 13px;
       line-height: 14px;
-			position: absolute;
+      position: absolute;
     }
 
     &:hover {
       background-color: $hoverAvatar;
-			.profile-avatar {
-				&__text {
-					display: block;
-					max-width: 64px;
-				}
-			}
-			
+      .profile-avatar {
+        &__text {
+          display: block;
+          max-width: 64px;
+        }
+      }
     }
   }
 
@@ -111,6 +110,12 @@
       &--primary {
         color: $primary;
       }
+    }
+
+    &__save {
+      align-self: center;
+      width: 280px;
+			display: none;
     }
   }
 }
