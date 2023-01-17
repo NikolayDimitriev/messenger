@@ -15,6 +15,50 @@ export const messages = {
   ],
 };
 
+export const dialogues = {
+  dialogues: [
+    {
+      user: {
+        name: "Вадим",
+        avatar: null,
+      },
+      lastMessage: {
+        text: "Hello too!",
+        image: null,
+        date: "11:59",
+        owner: false,
+      },
+      newMessagesCount: 1,
+    },
+    {
+      user: {
+        name: "Киноклуб",
+        avatar: null,
+      },
+      lastMessage: {
+        text: "Cool!",
+        image: null,
+        date: "12:00",
+        owner: true,
+      },
+      newMessagesCount: null,
+    },
+    {
+      user: {
+        name: "Илья",
+        avatar: null,
+      },
+      lastMessage: {
+        text: "Друзья, товарищи!",
+        image: null,
+        date: "13:00",
+        owner: false,
+      },
+      newMessagesCount: 4,
+    },
+  ],
+};
+
 export const logIn = {
   inputs: [
     {
@@ -97,54 +141,90 @@ export const signUp = {
   ],
 };
 
-export const dialogues = {
-  dialogues: [
-    {
-      user: {
-        name: "Вадим",
-        avatar: null,
-      },
-      lastMessage: {
-        text: "Hello too!",
-        image: null,
-        date: "11:59",
-        owner: false,
-      },
-      newMessagesCount: 1,
-    },
-    {
-      user: {
-        name: "Киноклуб",
-        avatar: null,
-      },
-      lastMessage: {
-        text: "Cool!",
-        image: null,
-        date: "12:00",
-        owner: true,
-      },
-      newMessagesCount: null,
-    },
-    {
-      user: {
-        name: "Илья",
-        avatar: null,
-      },
-      lastMessage: {
-        text: "Друзья, товарищи!",
-        image: null,
-        date: "13:00",
-        owner: false,
-      },
-      newMessagesCount: 4,
-    },
-  ],
-};
-
 export const user = {
-  first_name: "Вадим",
-  second_name: "Иванов",
-  login: "vadik",
-  email: "vadik@mail.ru",
-  phone: "+7 (999) 999 99 99 ",
+  inputs: {
+    fields: [
+      {
+        id: "email-profile",
+        label: "Почта",
+        name: "email",
+        inputType: "email",
+        value: "pochta@yandex.ru",
+      },
+      {
+        id: "login-profile",
+        label: "Логин",
+        name: "login",
+        inputType: "text",
+        value: "ivanivanov",
+      },
+      {
+        id: "first-name-profile",
+        label: "Имя",
+        name: "first_name",
+        inputType: "text",
+        value: "Иван",
+      },
+      {
+        id: "second-name-profile",
+        label: "Фамилия",
+        name: "second_name",
+        inputType: "text",
+        value: "Иванов",
+      },
+      {
+        id: "display-name-profile",
+        label: "Имя в чате",
+        name: "display_name",
+        inputType: "text",
+        value: "Иван",
+      },
+      {
+        id: "phone-profile",
+        label: "Телефон",
+        name: "phone",
+        inputType: "text",
+        errMessage: "",
+        value: "+7 (999) 999 99 99 ",
+      },
+    ],
+  },
+
+  passwords: {
+    fields: [
+      {
+        id: "old-password-profile",
+        label: "Старый пароль",
+        name: "oldPassword",
+        inputType: "password",
+        value: "1234",
+      },
+      {
+        id: "new-password-profile",
+        label: "Повторите новый пароль",
+        name: "newPassword",
+        inputType: "password",
+        value: "123456",
+      },
+      {
+        id: "new-password-profile-two",
+        label: "Новый пароль",
+        name: "newPassword",
+        inputType: "password",
+        value: "123456",
+      },
+    ],
+  },
+
+  shortFormat: {
+    avatarUrl: null,
+    email: "pochta@yandex.ru",
+    login: "ivanivanov",
+    first_name: "Иван",
+    second_name: "Иванов",
+    display_name: "Иван",
+    phone: "+7 (999) 999 99 99",
+    oldPassword: "1234",
+    newPassword: "123456",
+  },
 };
