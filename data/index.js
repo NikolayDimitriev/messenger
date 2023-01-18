@@ -1,16 +1,19 @@
 export const messages = {
+  date: "19 июня",
   messages: [
     {
-      text: "Hello world!",
+      text: "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну.",
       image: null,
       date: "11:56",
-      owner: true,
+      owner: false,
+      isReaded: true,
     },
     {
-      text: "Hello too!",
+      text: "Круто!",
       image: null,
       date: "11:59",
-      owner: false,
+      owner: true,
+      isReaded: true,
     },
   ],
 };
