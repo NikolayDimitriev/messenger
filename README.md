@@ -8,7 +8,7 @@
 
 [Pull Request](https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/pull/2)
 
-[Figma](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
+[Figma (макет от Яндекс)](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
 
 - `npm install` — установка зависимостей,
 - `npm run start` — запуск версии для разработчика,
