@@ -32,4 +32,3 @@ function router() {
 }
 
 window.addEventListener("load", router);
-

@@ -1,6 +1,6 @@
 import tpl from "./tpl.hbs";
 import "./style.scss";
 
-export default ({data}) => {
+export default ({ data }) => {
   return tpl(data);
 };
