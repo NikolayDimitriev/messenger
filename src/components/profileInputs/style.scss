@@ -1,28 +1,28 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .profile {
-  &-field {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid $br-color;
+	&-field {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 0;
+		border-bottom: 1px solid $br-color;
 
-    &:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
+		&:last-child {
+			border-bottom: none;
+			margin-bottom: 0;
+		}
 
-    &__label {
-      font-size: 13px;
-      line-height: 13px;
-    }
+		&__label {
+			font-size: 13px;
+			line-height: 13px;
+		}
 
-    &__input {
-      font-size: 13px;
-      line-height: 13px;
-      text-align: right;
-    }
-  }
+		&__input {
+			font-size: 13px;
+			line-height: 13px;
+			text-align: right;
+		}
+	}
 }

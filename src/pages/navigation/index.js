@@ -1,5 +1,5 @@
-import tpl from "./tpl.hbs";
+import tpl from './tpl.hbs'
 
 export default () => {
-  return tpl();
-};
+	return tpl()
+}
