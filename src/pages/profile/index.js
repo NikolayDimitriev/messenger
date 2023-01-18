@@ -18,7 +18,7 @@ window.changeUserInfo = () => {
 
 window.saveInfo = () => {
   const inputs = document.querySelectorAll(".profile-field__input");
-	document.querySelector(".profile-wrapper__fields").style.display = "block";
+  document.querySelector(".profile-wrapper__fields").style.display = "block";
   document.querySelector(".profile-wrapper__save").style.display = "none";
   document.querySelector(".profile-wrapper__passwords").style.display = "none";
   document.querySelector(".profile-wrapper__actions").style.display = "flex";
