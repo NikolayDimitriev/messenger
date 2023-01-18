@@ -6,6 +6,7 @@
     "start": "parcel src/index.html --no-cache --port=3000 --open",
     "build": "parcel build src/index.html --no-cache"
   },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex.git"
