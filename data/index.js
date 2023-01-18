@@ -20,7 +20,7 @@ export const dialogues = {
     {
       user: {
         name: "Вадим",
-        avatar: null,
+        avatarSrc: null,
       },
       lastMessage: {
         text: "Hello too!",
@@ -33,7 +33,7 @@ export const dialogues = {
     {
       user: {
         name: "Киноклуб",
-        avatar: null,
+        avatarSrc: null,
       },
       lastMessage: {
         text: "Cool!",
@@ -46,7 +46,7 @@ export const dialogues = {
     {
       user: {
         name: "Илья",
-        avatar: null,
+        avatarSrc: null,
       },
       lastMessage: {
         text: "Друзья, товарищи!",

@@ -5,11 +5,12 @@
   border-top: 1px solid $br-color;
   border-bottom: 1px solid $br-color;
   display: flex;
+  cursor: pointer;
 
-	&--focused {
-		background-color: $focused;
-		border-radius: 5px;
-	}
+  &--focused {
+    background-color: $focused;
+    border-radius: 5px;
+  }
 
   &__avatar {
     width: 47px;
@@ -33,23 +34,23 @@
     font-size: 13px;
     line-height: 13px;
     margin-bottom: 4px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__text {
     display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     max-height: 30px;
-		color: $gray;
+    color: $gray;
   }
 
-	&__owner {
-		color: $black;
-	}
+  &__owner {
+    color: $black;
+  }
 
   &__info {
     display: flex;
