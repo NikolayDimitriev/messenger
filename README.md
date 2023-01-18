@@ -6,7 +6,7 @@
 
 [Netlify](https://candid-malabi-7e182e.netlify.app/)
 
-[Pull Request]()
+[Pull Request](https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/pull/2)
 
 [Figma](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
 
