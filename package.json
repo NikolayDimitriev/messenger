@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"description": "Project on Yandex Practicum",
 	"scripts": {
-		"start": "parcel src/index.html --no-cache --port=3000 --open && node server",
+		"dev": "parcel src/index.html --no-cache --port=3000 --open",
+		"start": "npm run build && node server",
 		"build": "parcel build src/index.html --no-cache"
 	},
 	"browserslist": "> 0.5%, last 2 versions, not dead",
