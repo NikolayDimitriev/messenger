@@ -8,7 +8,7 @@ import navPage from './pages/navigation'
 
 import tpl from './index.hbs'
 
-const app = document.getElementById('root')
+const app: HTMLElement | null = document.getElementById('root')
 
 const routes = [
 	{ path: '/', page: navPage() },
@@ -26,9 +26,11 @@ function router() {
 		page: page404(),
 	}
 
-	app.innerHTML = tpl({
-		page,
-	})
+	if (app) {
+		app.innerHTML = tpl({
+			page,
+		})
+	}
 }
 
 window.addEventListener('load', router)

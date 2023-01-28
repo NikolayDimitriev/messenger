@@ -1,4 +1,6 @@
-export const messages = {
+import { TMessages, TDialogues, TAuth, TProfile } from './data.props'
+
+export const messages: TMessages = {
 	date: '19 июня',
 	messages: [
 		{
@@ -18,7 +20,7 @@ export const messages = {
 	],
 }
 
-export const dialogues = {
+export const dialogues: TDialogues = {
 	dialogues: [
 		{
 			user: {
@@ -62,7 +64,7 @@ export const dialogues = {
 	],
 }
 
-export const logIn = {
+export const logIn: TAuth = {
 	inputs: [
 		{
 			id: 'login-auth',
@@ -83,7 +85,7 @@ export const logIn = {
 	],
 }
 
-export const signUp = {
+export const signUp: TAuth = {
 	inputs: [
 		{
 			id: 'email-registration',
@@ -144,7 +146,7 @@ export const signUp = {
 	],
 }
 
-export const user = {
+export const user: TProfile = {
 	inputs: {
 		fields: [
 			{
@@ -229,7 +231,7 @@ export const user = {
 	},
 
 	shortFormat: {
-		avatarUrl: null,
+		avatarSrc: null,
 		email: 'pochta@yandex.ru',
 		login: 'ivanivanov',
 		first_name: 'Иван',
