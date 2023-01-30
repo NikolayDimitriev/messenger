@@ -1,15 +1,19 @@
 {
-	"compilerOptions": {
-		"outDir": "dist",
-		"target": "es2016",
-		"declaration": false,
-		"module": "commonjs",
-		"noImplicitAny": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"sourceMap": true,
-		"strictNullChecks": false
-	},
-	"include": ["index.d.ts", "images.d.ts", "src/**/*.ts"],
-	"exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "./src",
+    "target": "es2016",
+    "declaration": false,
+    "module": "commonjs",
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strictNullChecks": false
+  },
+  "include": ["index.d.ts", "images.d.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

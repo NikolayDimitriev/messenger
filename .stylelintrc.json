@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-order-config-standard",
+    "stylelint-config-standard-scss"
+  ],
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "rules": {
+    "indentation": 2,
+    "color-hex-case": "upper"
+  },
+  "ignoreFiles": [
+    "dist/*",
+    "src/styles/normalize.scss",
+    "src/styles/variables.scss"
+  ]
+}

@@ -4,7 +4,7 @@ import './style.scss'
 type TProps = {
 	errorCode: string
 	errorText: string;
-	link: () => void;
+	link: () => Function;
 }
 
 export default ({ errorCode, errorText, link }: TProps) => {
