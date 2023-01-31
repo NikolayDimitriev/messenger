@@ -1,12 +1,12 @@
-import tpl from './tpl.hbs'
-import link from '../../components/link'
-import dialogues from '../../components/dialogues'
-import messages from '../../components/messages'
+import tpl from './tpl.hbs';
+import link from '../../components/link';
+import dialogues from '../../components/dialogues';
+import messages from '../../components/messages';
 
-import attach from '../../../static/attach.svg'
-import chatMenuDots from '../../../static/chat-menu-dots.svg'
+import attach from '../../../static/attach.svg';
+import chatMenuDots from '../../../static/chat-menu-dots.svg';
 
-import './style.scss'
+import './style.scss';
 
 export default () => {
 	return tpl({
@@ -18,5 +18,5 @@ export default () => {
 		messages: messages(),
 		chatMenuDots,
 		attach,
-	})
-}
+	});
+};

@@ -7,5 +7,5 @@ type TProps = {
   className?: string;
 };
 
-export default ({ href, value, className }: TProps): Function =>
+export default ({ href, value, className }: TProps): string =>
   tpl({ href, value, className });

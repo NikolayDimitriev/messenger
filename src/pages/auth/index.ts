@@ -1,9 +1,9 @@
-import tpl from './tpl.hbs'
-import button from '../../components/button'
-import link from '../../components/link'
-import form from '../../components/form'
-import { logIn } from '../../data'
-import login from '../../components/login'
+import tpl from './tpl.hbs';
+import button from '../../components/button';
+import link from '../../components/link';
+import form from '../../components/form';
+import { logIn } from '../../data';
+import login from '../../components/login';
 
 export default () => {
 	return tpl({
@@ -21,5 +21,5 @@ export default () => {
 				}),
 			}),
 		}),
-	})
-}
+	});
+};

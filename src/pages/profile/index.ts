@@ -1,56 +1,56 @@
-import tpl from './tpl.hbs'
-import avatar from '../../../static/avatar.svg'
-import profileInputs from '../../components/profileInputs'
-import button from '../../components/button'
-import link from '../../components/link'
-import { user } from '../../data'
-import './style.scss'
+import tpl from './tpl.hbs';
+import avatar from '../../../static/avatar.svg';
+import profileInputs from '../../components/profileInputs';
+import button from '../../components/button';
+import link from '../../components/link';
+import { user } from '../../data';
+import './style.scss';
 
 const changeUserInfo = () => {
-	const inputs = document.querySelectorAll('.profile-field__input')
+	const inputs = document.querySelectorAll('.profile-field__input');
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__actions'
-	).style.display = 'none'
+	).style.display = 'none';
 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-		'block'
+		'block';
 
 	inputs.forEach((input) => {
-		input.removeAttribute('disabled')
-	})
-}
+		input.removeAttribute('disabled');
+	});
+};
 
 const saveInfo = () => {
-	const inputs = document.querySelectorAll('.profile-field__input')
+	const inputs = document.querySelectorAll('.profile-field__input');
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__fields'
-	).style.display = 'block'
+	).style.display = 'block';
 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-		'none'
+		'none';
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__passwords'
-	).style.display = 'none'
+	).style.display = 'none';
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__actions'
-	).style.display = 'flex'
+	).style.display = 'flex';
 
 	inputs.forEach((input) => {
-		input.setAttribute('disabled', '')
-	})
-}
+		input.setAttribute('disabled', '');
+	});
+};
 
 const changePassword = () => {
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__fields'
-	).style.display = 'none'
+	).style.display = 'none';
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__passwords'
-	).style.display = 'block'
+	).style.display = 'block';
 	document.querySelector<HTMLElement>(
 		'.profile-wrapper__actions'
-	).style.display = 'none'
+	).style.display = 'none';
 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-		'block'
-}
+		'block';
+};
 
 export default () => {
 	return tpl({
@@ -67,5 +67,5 @@ export default () => {
 			value: 'Сохранить',
 			onClick: 'saveInfo()',
 		}),
-	})
-}
+	});
+};

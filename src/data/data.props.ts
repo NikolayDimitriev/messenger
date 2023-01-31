@@ -1,10 +1,10 @@
-type TDate = Date | string
-type TImage = null | string
+type TDate = Date | string;
+type TImage = null | string;
 
 export type TMessages = {
 	date: TDate
 	messages: TMessage[]
-}
+};
 
 type TMessage = {
 	text: string
@@ -12,11 +12,11 @@ type TMessage = {
 	image: TImage
 	owner: boolean
 	isReaded: boolean
-}
+};
 
 export type TDialogues = {
 	dialogues: TDialogue[]
-}
+};
 
 type TDialogue = {
 	user: {
@@ -30,11 +30,11 @@ type TDialogue = {
 		owner: boolean
 	}
 	newMessagesCount: number | null
-}
+};
 
 export type TAuth = {
 	inputs: TInput[]
-}
+};
 
 type TInput = {
 	id: string
@@ -45,7 +45,7 @@ type TInput = {
 	placeholder?: string
 	errMessage?: string
 	disabled?: boolean
-}
+};
 
 export type TProfile = {
 	inputs: { fields: TInput[] }
@@ -61,4 +61,4 @@ export type TProfile = {
 		oldPassword: string
 		newPassword: string
 	}
-}
+};

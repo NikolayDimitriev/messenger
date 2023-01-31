@@ -6,9 +6,11 @@ import page404 from './pages/404';
 import page500 from './pages/500';
 import navPage from './pages/navigation';
 
-import tpl from './index.hbs';
 
-const app: HTMLElement | null = document.getElementById('root');
+import Layout from './components/layout';
+
+import render from './core/render';
+
 
 const routes = [
   { path: '/', page: navPage() },
@@ -26,11 +28,7 @@ function router() {
     page: page404(),
   };
 
-  if (app) {
-    app.innerHTML = tpl({
-      page,
-    });
-  }
+  render('#root', new Layout({ page }));
 }
 
 window.addEventListener('load', router);

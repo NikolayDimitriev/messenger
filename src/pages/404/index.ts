@@ -1,6 +1,6 @@
-import tpl from './tpl.hbs'
-import error from '../../components/error'
-import link from '../../components/link'
+import tpl from './tpl.hbs';
+import error from '../../components/error';
+import link from '../../components/link';
 
 export default () => {
 	return tpl({
@@ -13,5 +13,5 @@ export default () => {
 				className: 'form-link',
 			}),
 		}),
-	})
-}
+	});
+};
