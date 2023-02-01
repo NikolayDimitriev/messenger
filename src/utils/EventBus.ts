@@ -1,13 +1,13 @@
-type TEventCallback = (...args: unknown[]) => void;
-type TListener<T extends string> = Record<T, TEventCallback[]>; 
-
-export default class EventBus<T extends string> {
-  private listeners: TListener<T>;
+export default class EventBus {
+  private readonly listeners: Record<
+    string,
+    Array<(...args: unknown[]) => void>
+  >;
   constructor() {
-    this.listeners = {} as TListener<T>;
+    this.listeners = {};
   }
 
-  on(event: T, callback: TEventCallback) {
+  on(event: string, callback: (...args: unknown[]) => void) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -15,7 +15,7 @@ export default class EventBus<T extends string> {
     this.listeners[event].push(callback);
   }
 
-  off(event: T, callback: TEventCallback) {
+  off(event: string, callback: (...args: unknown[]) => void) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -25,7 +25,7 @@ export default class EventBus<T extends string> {
     );
   }
 
-  emit(event: T, ...args: unknown[]) {
+  emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

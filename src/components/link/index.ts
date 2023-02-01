@@ -1,11 +1,18 @@
+import Block from '../../utils/Block';
+import { TProps } from '../../utils/typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TProps = {
-  href: string;
+type LinkProps = {
   value: string;
-  className?: string;
-};
+} & TProps;
 
-export default ({ href, value, className }: TProps): string =>
-  tpl({ href, value, className });
+export default class Link extends Block {
+  constructor(props: LinkProps) {
+    super('a', props);
+  }
+
+  render() {
+    return this.compile(tpl, { value: this.props.value });
+  }
+}

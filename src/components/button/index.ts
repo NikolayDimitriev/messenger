@@ -1,24 +1,19 @@
-import Block from '../../core/Block';
+import Block from '../../utils/Block';
+import { TProps } from '../../utils/typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
 type ButtonProps = {
   value: string;
-  className?: string;
-  onClick?: string;
-};
+} & TProps;
 
-// export default ({ value, className = 'main-btn', onClick = '' }: TProps) => {
-//   return tpl({ value, className, onClick });
-// };
-
-
-export default class Button extends Block<ButtonProps> {
+export default class Button extends Block {
   constructor(props: ButtonProps) {
+    props.classname = [...props.classname, "main-btn"];
     super('button', props);
   }
 
   render() {
-    return `<div>${this.props.text}</div>`;
+    return this.compile(tpl, { value: this.props.value });
   }
 }

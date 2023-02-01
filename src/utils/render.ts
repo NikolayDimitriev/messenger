@@ -6,7 +6,7 @@ export default function render(query: string, block: Block) {
   if (!root) {
     return;
   }
-
+  
   root.innerHTML = "";
   root.appendChild(block.getContent());
   

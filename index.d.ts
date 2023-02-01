@@ -1,4 +1,4 @@
 declare module '*.hbs' {
-	const _: Function;
-	export default _;
+  const _: (...args: unknown[]) => string;
+  export default _;
 }
