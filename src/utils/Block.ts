@@ -210,8 +210,12 @@ export default abstract class Block<T extends TProps> {
   protected compile(tpl: (context: T) => string, context: T = {} as T) {
     const stubs: Record<string, string | string[]> = {};
 
-    Object.entries(this.children).forEach(([name, component]) => {
-      stubs[name] = `<div data-id="${component.id}" />`;
+    Object.entries(this.children).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        stubs[key] = value.map((block) => `<div data-id="${block.id}" />`);
+      } else {
+        stubs[key] = `<div data-id="${value.id}" />`;
+      }
     });
 
     const html = tpl({ ...context, ...stubs });
@@ -219,13 +223,15 @@ export default abstract class Block<T extends TProps> {
     const temp = document.createElement('template');
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach(([, component]) => {
-      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-      if (!stub) {
-        return;
-      }
-
-      stub.replaceWith(component.getContent());
+    Object.entries(this.children).forEach(([, value]) => {
+      const children = Array.isArray(value) ? value : [value];
+      children.forEach((child) => {
+        const stub = temp.content.querySelector(`[data-id="${child.id}"]`);
+        if (!stub) {
+          return;
+        }
+        stub.replaceWith(child.getContent());
+      });
     });
 
     return temp.content;

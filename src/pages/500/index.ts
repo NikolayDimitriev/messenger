@@ -1,17 +1,23 @@
+import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
-import error from '../../components/error';
-import link from '../../components/link';
+import Error from '../../components/error';
 
-export default () => {
-	return tpl({
-		error: error({
-			errorCode: '500',
-			errorText: 'Мы уже фиксим',
-			link: link({
-				href: '/chats',
-				value: 'Назад к чатам',
-				className: 'form-link',
-			}),
-		}),
-	});
-};
+export default class Page500 extends Block<TProps> {
+  constructor(props: TProps) {
+    super('div', props);
+  }
+
+  override init() {
+    this.children.error = new Error({
+      errorCode: '500',
+      errorText: 'Мы уже фиксим',
+      attr: {
+        class: 'error',
+      },
+    });
+  }
+
+  render() {
+    return this.compile(tpl, {});
+  }
+}

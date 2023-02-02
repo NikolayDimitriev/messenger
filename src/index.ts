@@ -3,7 +3,7 @@
 // import profilePage from './pages/profile';
 // import chatsPage from './pages/chats';
 import Page404 from './pages/404';
-// import page500 from './pages/500';
+import Page500 from './pages/500';
 import Navigation from './pages/navigation';
 
 import Layout from './components/layout';
@@ -11,21 +11,35 @@ import Layout from './components/layout';
 import render from './utils/render';
 
 const routes = [
-  { path: '/', page: new Navigation() },
+  { path: '/', page: Navigation },
   // { path: '/auth', page: new AuthPage() },
   // { path: '/registration', page: registerPage() },
   // { path: '/profile', page: profilePage() },
   // { path: '/chats', page: chatsPage() },
-  { path: '/404', page: new Page404() },
-  // { path: '/500', page: page500() },
+  { path: '/404', page: Page404 },
+  { path: '/500', page: Page500 },
 ];
 
 function router() {
   const url = window.location.pathname;
+
   const { page } = routes.find(({ path }) => path === url) || {
-    page: new Page404(),
+    page: Page404,
   };
-  render('#root', new Layout({ page }));
+
+  render(
+    '#root',
+    new Layout({
+      page: new page({
+        attr: {
+          class: 'page',
+        },
+      }),
+      attr: {
+        class: 'layout',
+      },
+    })
+  );
 }
 
 window.addEventListener('load', router);
