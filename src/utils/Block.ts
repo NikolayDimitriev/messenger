@@ -1,6 +1,12 @@
 import EventBus from './EventBus';
-import { TProps } from './typing';
 import { nanoid } from 'nanoid';
+
+export type TProps = Record<string, any> & {
+  events?: Record<string, (e?: Event) => void>;
+  classname?: string[];
+  attr?: Record<string, string>;
+  page?: Block<TProps>;
+};
 
 enum EVENTS {
   INIT = 'init',
@@ -9,16 +15,18 @@ enum EVENTS {
   FLOW_RENDER = 'flow:render',
 }
 
-export default abstract class Block {
+type TChildren = Record<string, Block<TProps>>;
+
+export default abstract class Block<T extends TProps> {
   public id: string = nanoid(6);
   private _element: HTMLElement | null = null;
-  private _meta: { tagName: string; props: TProps };
+  private _meta: { tagName: string; props: T };
   private eventBus: () => EventBus;
-  
-  protected children: Record<string, Block>;
-  protected props: TProps;
 
-  constructor(tagName = 'div', propsWithChildren: TProps = {}) {
+  protected children: TChildren;
+  protected props: T;
+
+  constructor(tagName = 'div', propsWithChildren: T = {} as T) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -38,28 +46,45 @@ export default abstract class Block {
     eventBus.emit(EVENTS.INIT);
   }
 
-  private _getChildrenAndProps(childrenAndProps: TProps) {
-    const props: TProps = {};
-    const children: Record<string, Block> = {};
+  private _getChildrenAndProps(childrenAndProps: T): {
+    props: T;
+    children: TChildren;
+  } {
+    const props: T = {} as T;
+    const children: TChildren = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
       } else {
-        props[key] = value;
+        props[key as keyof T] = value;
       }
     });
 
-    return { props, children };
+    return { props: props as T, children };
   }
 
   private _addEvents(): void {
-    const { events = {} } = this.props as {
-      events: Record<string, () => void>;
-    };
+    const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
       this._element.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  private _removeEvents(): void {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
+  private _addAttribute(): void {
+    const { attr = {} } = this.props;
+
+    Object.entries(attr).forEach(([key, value]) => {
+      this._element.setAttribute(key, value);
     });
   }
 
@@ -89,6 +114,9 @@ export default abstract class Block {
 
   private _componentDidMount(): void {
     this.componentDidMount();
+    Object.values(this._element).forEach((child) => {
+      child.dispatchComponentDidMount();
+    });
   }
 
   protected componentDidMount(): void {
@@ -97,6 +125,9 @@ export default abstract class Block {
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(EVENTS.FLOW_CDM);
+    if (Object.keys(this._element).length) {
+      this.eventBus().emit(EVENTS.FLOW_RENDER);
+    }
   }
 
   private _componentDidUpdate(oldProps: any, newProps: any): void {
@@ -106,17 +137,25 @@ export default abstract class Block {
     }
   }
 
-  protected componentDidUpdate(oldProps: TProps, newProps: TProps) {
+  protected componentDidUpdate(oldProps: T, newProps: T) {
     console.log(oldProps, newProps);
     return true;
   }
 
-  setProps = (nextProps: TProps) => {
+  public setProps = (nextProps: T) => {
     if (!nextProps) {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    const { children, props } = this._getChildrenAndProps(nextProps);
+
+    if (Object.values(children).length) {
+      Object.assign(this.children, children);
+    }
+
+    if (Object.values(props).length) {
+      Object.assign(this.props, props);
+    }
   };
 
   get element() {
@@ -126,11 +165,15 @@ export default abstract class Block {
   private _render() {
     const block = this.render();
 
-    this._element.innerHTML = "";
+    this._removeEvents();
+
+    this._element.innerHTML = '';
 
     this._element.append(block);
 
     this._addEvents();
+
+    this._addAttribute();
   }
 
   protected render(): DocumentFragment {
@@ -141,20 +184,17 @@ export default abstract class Block {
     return this.element;
   }
 
-  private _makePropsProxy(props: TProps) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-
+  private _makePropsProxy(props: T) {
     return new Proxy(props, {
-      get(target: TProps, prop: string) {
+      get(target: T, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: TProps, prop: string, value: unknown) {
+      set: (target: T, prop: string, value) => {
         const oldTarget = { ...target };
-        target[prop] = value;
+        target[prop as keyof T] = value;
 
-        self.eventBus().emit(EVENTS.FLOW_CDU, oldTarget, target);
+        this.eventBus().emit(EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {
@@ -167,14 +207,14 @@ export default abstract class Block {
     return document.createElement(tagName);
   }
 
-  protected compile(tpl: (context: unknown) => string, context: TProps = {}) {
-    const contextAndStubs = {...context};
+  protected compile(tpl: (context: T) => string, context: T = {} as T) {
+    const stubs: Record<string, string | string[]> = {};
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}" />`;
+      stubs[name] = `<div data-id="${component.id}" />`;
     });
 
-    const html = tpl(contextAndStubs);
+    const html = tpl({ ...context, ...stubs });
 
     const temp = document.createElement('template');
     temp.innerHTML = html;

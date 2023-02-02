@@ -1,12 +1,12 @@
-import Block from '../../utils/Block';
+import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 
-export default class Navigation extends Block {
+export default class Navigation extends Block<TProps> {
   constructor() {
     super('nav');
   }
 
   render() {
-    return this.compile(tpl);
+    return this.compile(tpl, {});
   }
 }

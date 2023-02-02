@@ -25,7 +25,6 @@ function router() {
   const { page } = routes.find(({ path }) => path === url) || {
     page: new Page404(),
   };
-
   render('#root', new Layout({ page }));
 }
 

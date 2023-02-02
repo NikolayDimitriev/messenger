@@ -1,6 +1,6 @@
-import Block from './Block';
+import Block, { TProps } from './Block';
 
-export default function render(query: string, block: Block) {
+export default function render(query: string, block: Block<TProps>) {
   const root: HTMLElement | null = document.querySelector(query);
   
   if (!root) {

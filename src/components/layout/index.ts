@@ -1,13 +1,8 @@
-import Block from '../../utils/Block';
-import { TProps } from '../../utils/typing';
+import Block, {TProps} from '../../utils/Block';
 import tpl from './tpl.hbs';
 
-type LayoutProps = {
-  page: Block;
-} & TProps;
-
-export default class Layout extends Block {
-  constructor(props: LayoutProps) {
+export default class Layout extends Block<TProps> {
+  constructor(props: TProps) {
     super('div', props);
   }
 
