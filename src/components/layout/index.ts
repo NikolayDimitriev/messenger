@@ -7,7 +7,6 @@ export default class Layout extends Block<TProps> {
   }
 
   render() {
-    return this.compile(tpl, {
-      page: this.props.page});
+    return this.compile(tpl, { page: this.props.page });
   }
 }

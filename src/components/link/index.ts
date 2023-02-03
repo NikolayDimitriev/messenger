@@ -8,9 +8,6 @@ export default class Link extends Block<TProps> {
   }
 
   render() {
-    return this.compile(tpl, {
-      value: this.props.value,
-      attr: this.props.attr,
-    });
+    return this.compile(tpl, { value: this.props.value });
   }
 }

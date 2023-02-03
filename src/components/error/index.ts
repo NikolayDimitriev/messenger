@@ -8,7 +8,7 @@ export default class Error extends Block<TProps> {
     super('div', props);
   }
 
-  override init() {
+  init() {
     this.children.link = new Link({
       value: 'Назад к чатам',
       attr: {
