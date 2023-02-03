@@ -1,25 +1,27 @@
+import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
+import Login from '../../components/login';
 import { signUp } from '../../data';
-import login from '../../components/login';
-import button from '../../components/button';
-import link from '../../components/link';
-import form from '../../components/form';
 
-export default () => {
-	return tpl({
-		login: login({
-			title: 'Регистрация',
-			form: form({
-				data: signUp,
-				button: button({
-					value: 'Зарегистрироваться',
-				}),
-				link: link({
-					href: '/auth',
-					value: 'Войти',
-					className: 'form-link',
-				}),
-			}),
-		}),
-	});
-};
+export default class RegistrationPage extends Block<TProps> {
+  constructor(props: TProps) {
+    super('div', props);
+  }
+
+  init() {
+    this.children.login = new Login({
+      title: 'Регистрация',
+      data: signUp,
+      buttonValue: 'Зарегистрироваться',
+      linkValue: 'Войти',
+      linkHref: "/auth",
+      attr: {
+        class: 'login',
+      },
+    });
+  }
+
+  render() {
+    return this.compile(tpl, {});
+  }
+}

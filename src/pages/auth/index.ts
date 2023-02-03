@@ -14,6 +14,7 @@ export default class AuthPage extends Block<TProps> {
       data: logIn,
       buttonValue: 'Авторизоваться',
       linkValue: 'Нет аккаунта?',
+      linkHref: '/registration',
       attr: {
         class: 'login',
       },

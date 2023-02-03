@@ -13,6 +13,7 @@ export default class Login extends Block<TProps> {
       data: this.props.data,
       buttonValue: this.props.buttonValue,
       linkValue: this.props.linkValue,
+      linkHref: this.props.linkHref,
       attr: { class: 'form' },
     });
   }

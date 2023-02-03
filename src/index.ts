@@ -1,5 +1,5 @@
 import AuthPage from './pages/auth';
-// import registerPage from './pages/registration';
+import RegistrationPage from './pages/registration';
 // import profilePage from './pages/profile';
 // import chatsPage from './pages/chats';
 import Page404 from './pages/404';
@@ -13,7 +13,7 @@ import render from './utils/render';
 const routes = [
   { path: '/', Page: Navigation },
   { path: '/auth', Page: AuthPage },
-  // { path: '/registration', page: registerPage() },
+  { path: '/registration', Page: RegistrationPage },
   // { path: '/profile', page: profilePage() },
   // { path: '/chats', page: chatsPage() },
   { path: '/404', Page: Page404 },
@@ -26,7 +26,7 @@ function router() {
   const { Page } = routes.find(({ path }) => path === url) || {
     Page: Page404,
   };
-  
+
   render(
     '#root',
     new Layout({

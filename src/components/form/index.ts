@@ -36,7 +36,7 @@ export default class Form extends Block<TProps> {
       value: this.props.linkValue,
       attr: {
         class: 'form-link',
-        href: '/registration',
+        href: this.props.linkHref,
       },
     });
   }
