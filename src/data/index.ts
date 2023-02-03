@@ -1,4 +1,4 @@
-import { TMessages, TDialogues, TAuth, TProfile } from './data.props';
+import { TMessages, TDialogue, TAuth, TProfile } from './data.props';
 
 export const messages: TMessages = {
   date: '19 июня',
@@ -21,7 +21,7 @@ export const messages: TMessages = {
   ],
 };
 
-export const dialogues: TDialogues = [
+export const dialogues: TDialogue[] = [
   {
     user: {
       name: 'Вадим',

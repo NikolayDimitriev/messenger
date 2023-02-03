@@ -1,50 +1,50 @@
 <div class='chat'>
-	<div class='chat-left'>
-		<div class='chat-left__profile'>{{{link}}}</div>
-		<div class='chat-left__search'>
-			<label class='chat-left__label' for='search'></label>
-			<input
-				class='chat-left__input'
-				type='text'
-				name='search'
-				id='search'
-				placeholder='Поиск'
-			/>
-		</div>
+  <div class='chat-left'>
+    <div class='chat-left__profile'>{{{link}}}</div>
+    <div class='chat-left__search'>
+      <label class='chat-left__label' for='search'></label>
+      <input
+        class='chat-left__input'
+        type='text'
+        name='search'
+        id='search'
+        placeholder='Поиск'
+      />
+    </div>
 
-		<div class='chat-left__dialogues'>
-			{{{dialogues}}}
-		</div>
-	</div>
-	<div class='chat-right'>
-		<div class='chat-right__wrapper'>
-			<div class='chat-right__user'>
-				<div class='chat-right__about'>
-					<div class='chat-right__avatar'></div>
-					<span class='chat-right__name'>Киноклуб</span>
-				</div>
-				<button class='chat-right__menu'>
-					<img src='{{chatMenuDots}}' alt='Иконка меню чата' />
-				</button>
-			</div>
-		</div>
-		<div class='chat-right__tape'>
-			{{{messages}}}
-		</div>
-		<div class='chat-right__wrapper'>
-			<form class='chat-right__form'>
-				<button class='chat-right__attach'><img
-						src='{{attach}}'
-						alt='Иконка прикрепить'
-					/></button>
-				<input
-					type='text'
-					name='message'
-					placeholder='Сообщение'
-					class='chat-right__input'
-				/>
-				<button type='submit' class='chat-right__submit'></button>
-			</form>
-		</div>
-	</div>
+    <div class='chat-left__dialogues'>
+      {{{dialogues}}}
+    </div>
+  </div>
+  <div class='chat-right'>
+    <div class='chat-right__wrapper'>
+      <div class='chat-right__user'>
+        <div class='chat-right__about'>
+          <div class='chat-right__avatar'></div>
+          <span class='chat-right__name'>Киноклуб</span>
+        </div>
+        <button class='chat-right__menu'>
+          <img src='{{chatMenuDots}}' alt='Иконка меню чата' />
+        </button>
+      </div>
+    </div>
+    <div class='chat-right__tape'>
+      {{{messages}}}
+    </div>
+    <div class='chat-right__wrapper'>
+      <form class='chat-right__form'>
+        <button class='chat-right__attach'><img
+            src='{{attach}}'
+            alt='Иконка прикрепить'
+          /></button>
+        <input
+          type='text'
+          name='message'
+          placeholder='Сообщение'
+          class='chat-right__input'
+        />
+        <button type='submit' class='chat-right__submit'></button>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-type TDate = Date | string;
+export type TDate = Date | string;
 type TImage = null | string;
 
 export type TMessages = {
@@ -14,9 +14,7 @@ type TMessage = {
 	isReaded: boolean
 };
 
-export type TDialogues = TDialogue[];
-
-type TDialogue = {
+export type TDialogue = {
 	user: {
 		name: string
 		avatarSrc: TImage

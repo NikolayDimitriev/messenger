@@ -1,7 +1,7 @@
 import AuthPage from './pages/auth';
 import RegistrationPage from './pages/registration';
 // import profilePage from './pages/profile';
-// import chatsPage from './pages/chats';
+import Chat from './pages/chats';
 import Page404 from './pages/404';
 import Page500 from './pages/500';
 import Navigation from './pages/navigation';
@@ -15,7 +15,7 @@ const routes = [
   { path: '/auth', Page: AuthPage },
   { path: '/registration', Page: RegistrationPage },
   // { path: '/profile', page: profilePage() },
-  // { path: '/chats', page: chatsPage() },
+  { path: '/chats', Page: Chat },
   { path: '/404', Page: Page404 },
   { path: '/500', Page: Page500 },
 ];
