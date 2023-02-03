@@ -14,9 +14,7 @@ type TMessage = {
 	isReaded: boolean
 };
 
-export type TDialogues = {
-	dialogues: TDialogue[]
-};
+export type TDialogues = TDialogue[];
 
 type TDialogue = {
 	user: {
@@ -32,11 +30,9 @@ type TDialogue = {
 	newMessagesCount: number | null
 };
 
-export type TAuth = {
-	inputs: TInput[]
-};
+export type TAuth = TInput[];
 
-type TInput = {
+export type TInput = {
 	id: string
 	label: string
 	name: string

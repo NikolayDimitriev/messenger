@@ -1,4 +1,4 @@
-// import AuthPage from './pages/auth';
+import AuthPage from './pages/auth';
 // import registerPage from './pages/registration';
 // import profilePage from './pages/profile';
 // import chatsPage from './pages/chats';
@@ -11,26 +11,26 @@ import Layout from './components/layout';
 import render from './utils/render';
 
 const routes = [
-  { path: '/', page: Navigation },
-  // { path: '/auth', page: new AuthPage() },
+  { path: '/', Page: Navigation },
+  { path: '/auth', Page: AuthPage },
   // { path: '/registration', page: registerPage() },
   // { path: '/profile', page: profilePage() },
   // { path: '/chats', page: chatsPage() },
-  { path: '/404', page: Page404 },
-  { path: '/500', page: Page500 },
+  { path: '/404', Page: Page404 },
+  { path: '/500', Page: Page500 },
 ];
 
 function router() {
   const url = window.location.pathname;
 
-  const { page } = routes.find(({ path }) => path === url) || {
-    page: Page404,
+  const { Page } = routes.find(({ path }) => path === url) || {
+    Page: Page404,
   };
-
+  
   render(
     '#root',
     new Layout({
-      page: new page({
+      page: new Page({
         attr: {
           class: 'page',
         },

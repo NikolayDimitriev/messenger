@@ -1,38 +1,26 @@
-import Block from '../../utils/Block';
+import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
-import button from '../../components/button';
-import link from '../../components/link';
-import form from '../../components/form';
+import Login from '../../components/login';
 import { logIn } from '../../data';
-import login from '../../components/login';
 
-export default class AuthPage extends Block {
-  constructor() {
-    super('div');
+export default class AuthPage extends Block<TProps> {
+  constructor(props: TProps) {
+    super('div', props);
+  }
+
+  init() {
+    this.children.login = new Login({
+      title: 'Вход',
+      data: logIn,
+      buttonValue: 'Авторизоваться',
+      linkValue: 'Нет аккаунта?',
+      attr: {
+        class: 'login',
+      },
+    });
   }
 
   render() {
-    console.log('auth');
-
     return this.compile(tpl, {});
   }
 }
-
-// export default () => {
-// 	return tpl({
-// 		login: login({
-// 			title: 'Вход',
-// 			form: form({
-// 				data: logIn,
-// 				button: button({
-// 					value: 'Авторизоваться',
-// 				}),
-// 				link: link({
-// 					href: '/registration',
-// 					value: 'Нет аккаунта?',
-// 					className: 'form-link',
-// 				}),
-// 			}),
-// 		}),
-// 	});
-// };

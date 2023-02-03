@@ -7,9 +7,9 @@ export default class Page404 extends Block<TProps> {
     super('div', props);
   }
 
-  override init() {
+  init() {
     this.children.error = new Error({
-      errorCode: '400',
+      errorCode: '404',
       errorText: 'Не туда попали',
       attr: {
         class: 'error',
