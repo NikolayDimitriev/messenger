@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import EventBus from './EventBus';
 import { nanoid } from 'nanoid';
 
@@ -54,7 +55,11 @@ export default abstract class Block<T extends TProps> {
     const children: TChildren = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (value instanceof Block) {
+      if (
+        value instanceof Block ||
+        (Array.isArray(childrenAndProps) &&
+          childrenAndProps[key].every((block: any) => block instanceof Block))
+      ) {
         children[key] = value;
       } else {
         props[key as keyof T] = value;
@@ -207,14 +212,19 @@ export default abstract class Block<T extends TProps> {
     return document.createElement(tagName);
   }
 
-  protected compile(tpl: (context: T) => string, context: T = {} as T) {
+  protected compile(
+    tpl: (context: any) => string,
+    context: T = this.props as T
+  ) {
     const stubs: Record<string, string | string[]> = {};
 
     Object.entries(this.children).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        stubs[key] = value.map((block) => `<div data-id="${block.id}" />`);
+        stubs[key] = value
+          .map((block) => `<div data-id="${block.id}"></div>`)
+          .join('\n');
       } else {
-        stubs[key] = `<div data-id="${value.id}" />`;
+        stubs[key] = `<div data-id="${value.id}"></div>`;
       }
     });
 
