@@ -1,25 +1,46 @@
 import { TMessages, TDialogue, TAuth, TProfile } from './data.props';
 
-export const messages: TMessages = {
-  date: '19 июня',
-  messages: [
-    {
-      text: `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в 
-        какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну.`,
-      image: null,
-      date: '11:56',
-      owner: false,
-      isReaded: true,
-    },
-    {
-      text: 'Круто!',
-      image: null,
-      date: '11:59',
-      owner: true,
-      isReaded: true,
-    },
-  ],
-};
+export const messages: TMessages = [
+  {
+    date: '17 июня',
+    messages: [
+      {
+        text: `Привет! Смотри, тут всплыл интересный кусок лунной космической истории.`,
+        image: null,
+        date: '11:56',
+        owner: false,
+        isReaded: true,
+      },
+      {
+        text: 'Круто!',
+        image: null,
+        date: '11:59',
+        owner: true,
+        isReaded: true,
+      },
+    ],
+  },
+  {
+    date: '19 июня',
+    messages: [
+      {
+        text: `Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в 
+          какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну.`,
+        image: null,
+        date: '11:56',
+        owner: false,
+        isReaded: true,
+      },
+      {
+        text: 'Круто!',
+        image: null,
+        date: '11:59',
+        owner: true,
+        isReaded: true,
+      },
+    ],
+  },
+];
 
 export const dialogues: TDialogue[] = [
   {

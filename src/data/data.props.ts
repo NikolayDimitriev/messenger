@@ -1,12 +1,14 @@
 export type TDate = Date | string;
 type TImage = null | string;
 
-export type TMessages = {
-	date: TDate
-	messages: TMessage[]
+export type TMessages = TMessageBlock[];
+
+export type TMessageBlock = {
+  date: TDate;
+  messages: TMessage[];
 };
 
-type TMessage = {
+export type TMessage = {
 	text: string
 	date: TDate
 	image: TImage
