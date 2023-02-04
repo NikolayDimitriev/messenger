@@ -1,15 +1,26 @@
-const METHODS = {
-  GET: 'GET',
-  POST: 'POST',
-  PUT: 'PUT',
-  DELETE: 'DELETE',
-};
+enum METHODS {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
 
-function queryStringify(data) {
-  if (typeof data !== 'object') {
-    throw new Error('Data must be object');
-  }
+type TObject = Record<string, any>;
 
+type TOptions = {
+  timeout?: number;
+  headers?: TObject;
+  method?: METHODS;
+  data?: TObject;
+} & TObject;
+
+type HTTPMethod = (
+  url: string,
+  options?: TOptions,
+  timeout?: number
+) => Promise<unknown>;
+
+function queryStringify(data: TObject) {
   const keys = Object.keys(data);
   return keys.reduce((result, key, index) => {
     return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
@@ -17,7 +28,7 @@ function queryStringify(data) {
 }
 
 export class HTTPTransport {
-  get = (url, options = {}) => {
+  get: HTTPMethod = (url, options = {}) => {
     return this.request(
       url,
       { ...options, method: METHODS.GET },
@@ -25,7 +36,7 @@ export class HTTPTransport {
     );
   };
 
-  post = (url, options = {}) => {
+  post: HTTPMethod = (url, options = {}) => {
     return this.request(
       url,
       { ...options, method: METHODS.POST },
@@ -33,7 +44,7 @@ export class HTTPTransport {
     );
   };
 
-  put = (url, options = {}) => {
+  put: HTTPMethod = (url, options = {}) => {
     return this.request(
       url,
       { ...options, method: METHODS.PUT },
@@ -41,7 +52,7 @@ export class HTTPTransport {
     );
   };
 
-  delete = (url, options = {}) => {
+  delete: HTTPMethod = (url, options = {}) => {
     return this.request(
       url,
       { ...options, method: METHODS.DELETE },
@@ -49,7 +60,7 @@ export class HTTPTransport {
     );
   };
 
-  request = (url, options = {}, timeout = 5000) => {
+  request: HTTPMethod = (url, options = {}, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
     return new Promise(function (resolve, reject) {
@@ -80,7 +91,7 @@ export class HTTPTransport {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(data as XMLHttpRequestBodyInit);
       }
     });
   };

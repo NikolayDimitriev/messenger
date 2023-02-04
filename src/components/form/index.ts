@@ -28,7 +28,6 @@ export default class Form extends Block<TFormProps> {
           inputType: input.inputType,
           labelClass: input.labelClass,
           inputClass: input.inputClass,
-          placeholder: input.placeholder,
           attr: {
             class: 'field',
           },
