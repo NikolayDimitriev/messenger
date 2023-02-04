@@ -30,7 +30,6 @@ export default class Login extends Block<TLoginProps> {
   render() {
     return this.compile(tpl, {
       title: this.props.title,
-      
     });
   }
 }

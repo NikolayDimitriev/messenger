@@ -1,7 +1,7 @@
 import Block, { TProps } from '../../utils/Block';
 import Link from '../../components/link';
 import Button from '../../components/button';
-import Input from '../../components/input';
+import Input from '../../components/InputsBlock';
 import tpl from './tpl.hbs';
 
 import avatar from '../../../static/avatar.svg';
@@ -98,11 +98,15 @@ export default class ProfilePage extends Block<TProps> {
 
 function changeUserInfo() {
   const inputs = document.querySelectorAll('.profile-field__input');
-  document.querySelector<HTMLElement>(
+  const actions = document.querySelector<HTMLElement>(
     '.profile-wrapper__actions'
-  ).style.display = 'none';
-  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-    'block';
+  );
+  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
+
+  if (actions && saveBtn) {
+    actions.style.display = 'none';
+    saveBtn.style.display = 'block';
+  }
 
   inputs.forEach((input) => {
     input.removeAttribute('disabled');
@@ -111,17 +115,23 @@ function changeUserInfo() {
 
 function saveInfo() {
   const inputs = document.querySelectorAll('.profile-field__input');
-  document.querySelector<HTMLElement>(
+  const fields = document.querySelector<HTMLElement>(
     '.profile-wrapper__fields'
-  ).style.display = 'block';
-  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-    'none';
-  document.querySelector<HTMLElement>(
+  );
+  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
+  const passwordBlock = document.querySelector<HTMLElement>(
     '.profile-wrapper__passwords'
-  ).style.display = 'none';
-  document.querySelector<HTMLElement>(
+  );
+  const actions = document.querySelector<HTMLElement>(
     '.profile-wrapper__actions'
-  ).style.display = 'flex';
+  );
+
+  if (fields && saveBtn && passwordBlock && actions) {
+    fields.style.display = 'block';
+    saveBtn.style.display = 'none';
+    passwordBlock.style.display = 'none';
+    actions.style.display = 'flex';
+  }
 
   inputs.forEach((input) => {
     input.setAttribute('disabled', '');
@@ -129,15 +139,21 @@ function saveInfo() {
 }
 
 function changePassword() {
-  document.querySelector<HTMLElement>(
+  const fields = document.querySelector<HTMLElement>(
     '.profile-wrapper__fields'
-  ).style.display = 'none';
-  document.querySelector<HTMLElement>(
+  );
+  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
+  const passwordBlock = document.querySelector<HTMLElement>(
     '.profile-wrapper__passwords'
-  ).style.display = 'block';
-  document.querySelector<HTMLElement>(
+  );
+  const actions = document.querySelector<HTMLElement>(
     '.profile-wrapper__actions'
-  ).style.display = 'none';
-  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-    'block';
+  );
+
+  if (fields && saveBtn && passwordBlock && actions) {
+    fields.style.display = 'none';
+    saveBtn.style.display = 'block';
+    passwordBlock.style.display = 'block';
+    actions.style.display = 'none';
+  }
 }

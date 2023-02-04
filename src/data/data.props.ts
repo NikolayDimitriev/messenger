@@ -39,9 +39,10 @@ export type TInput = {
   inputType: string;
   labelClass: string;
   inputClass: string;
+  isError: boolean;
+  errMessage?: string;
   value?: string;
   placeholder?: string;
-  errMessage?: string;
   disabled?: boolean;
 };
 

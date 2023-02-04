@@ -13,7 +13,7 @@ export default class MessagesBlock extends Block<TMessageBlockProps> {
   }
 
   init() {
-    this.children.messages = this.props.messages.map(
+    this.children.messages = this.props.messages?.map(
       (message) =>
         new Message({
           owner: message.owner,

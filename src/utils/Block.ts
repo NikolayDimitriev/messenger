@@ -68,27 +68,27 @@ export default abstract class Block<T extends TProps> {
     return { props: props as T, children };
   }
 
-  private _addEvents(): void {
+  protected addEvents(): void {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(eventName, events[eventName]);
+      this._element?.addEventListener(eventName, events[eventName]);
     });
   }
 
-  private _removeEvents(): void {
+  protected removeEvents(): void {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.removeEventListener(eventName, events[eventName]);
+      this._element?.removeEventListener(eventName, events[eventName]);
     });
   }
 
-  private _addAttribute(): void {
+  protected addAttribute(): void {
     const { attr = {} } = this.props;
 
     Object.entries(attr).forEach(([key, value]) => {
-      this._element.setAttribute(key, value);
+      this._element?.setAttribute(key, value);
     });
   }
 
@@ -118,9 +118,11 @@ export default abstract class Block<T extends TProps> {
 
   private _componentDidMount(): void {
     this.componentDidMount();
-    Object.values(this._element).forEach((child) => {
-      child.dispatchComponentDidMount();
-    });
+    if (this._element) {
+      Object.values(this._element).forEach((child) => {
+        child.dispatchComponentDidMount();
+      });
+    }
   }
 
   protected componentDidMount(): void {
@@ -129,8 +131,10 @@ export default abstract class Block<T extends TProps> {
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(EVENTS.FLOW_CDM);
-    if (Object.keys(this._element).length) {
-      this.eventBus().emit(EVENTS.FLOW_RENDER);
+    if (this._element) {
+      if (Object.keys(this._element).length) {
+        this.eventBus().emit(EVENTS.FLOW_RENDER);
+      }
     }
   }
 
@@ -169,15 +173,16 @@ export default abstract class Block<T extends TProps> {
   private _render() {
     const block = this.render();
 
-    this._removeEvents();
+    this.removeEvents();
 
-    this._element.innerHTML = '';
+    if (this._element) {
+      this._element.innerHTML = '';
+      this._element.append(block);
+    }
 
-    this._element.append(block);
+    this.addEvents();
 
-    this._addEvents();
-
-    this._addAttribute();
+    this.addAttribute();
   }
 
   protected render(): DocumentFragment {

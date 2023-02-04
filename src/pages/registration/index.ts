@@ -14,7 +14,7 @@ export default class RegistrationPage extends Block<TProps> {
       data: signUp,
       buttonValue: 'Зарегистрироваться',
       linkValue: 'Войти',
-      linkHref: "/auth",
+      linkHref: '/auth',
       attr: {
         class: 'login',
       },

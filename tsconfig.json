@@ -12,7 +12,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "strictNullChecks": false
+    "strictNullChecks": true
   },
   "include": ["index.d.ts", "images.d.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

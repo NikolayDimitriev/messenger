@@ -1,26 +1,34 @@
 import Block, { TProps } from '../../utils/Block';
 import { TInput } from '../../data/data.props';
 import tpl from './tpl.hbs';
-import './style.scss';
 
-type TInputProps = TInput & TProps;
+type TInputsBlockProps = Partial<TInput> & TProps;
 
-export default class Input extends Block<TInputProps> {
-  constructor(props: TInputProps) {
-    super('div', props);
+export default class Input extends Block<TInputsBlockProps> {
+  constructor(props: TInputsBlockProps) {
+    super('input', props);
+  }
+
+  override addAttribute(): void {
+    super.addAttribute();
+    Object.entries(this.props).forEach(([key, value]) => {
+      if (typeof value === 'undefined') {
+        return;
+      }
+      if (key === 'events') {
+        return;
+      }
+
+      if (key === 'disabled' && value === false) {
+        this.element?.removeAttribute(key);
+        return;
+      }
+
+      this.element?.setAttribute(key, value);
+    });
   }
 
   render() {
-    return this.compile(tpl, {
-      id: this.props.id,
-      labelText: this.props.labelText,
-      labelClass: this.props.labelClass,
-      inputClass: this.props.inputClass,
-      placeholder: this.props.placeholder,
-      name: this.props.name,
-      inputType: this.props.inputType,
-      value: this.props.value,
-      disabled: this.props.disabled,
-    });
+    return this.compile(tpl, {});
   }
 }
