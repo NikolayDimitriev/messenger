@@ -3,8 +3,13 @@ import Link from '../link';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-export default class Error extends Block<TProps> {
-  constructor(props: TProps) {
+type TErrorProps = TProps & {
+  errorCode: string;
+  errorText: string;
+};
+
+export default class Error extends Block<TErrorProps> {
+  constructor(props: TErrorProps) {
     super('div', props);
   }
 

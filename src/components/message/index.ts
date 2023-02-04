@@ -1,9 +1,12 @@
 import Block, { TProps } from '../../utils/Block';
+import { TMessage } from '../../data/data.props';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-export default class Message extends Block<TProps> {
-  constructor(props: TProps) {
+type TMessageProps = TMessage & TProps;
+
+export default class Message extends Block<TMessageProps> {
+  constructor(props: TMessageProps) {
     super('div', props);
   }
 
@@ -13,6 +16,7 @@ export default class Message extends Block<TProps> {
       text: this.props.text,
       isReaded: this.props.isReaded,
       date: this.props.date,
+      image: this.props.image,
     });
   }
 }

@@ -7,6 +7,6 @@ export default class Navigation extends Block<TProps> {
   }
 
   render() {
-    return this.compile(tpl, { attr: { class: 'page' } });
+    return this.compile(tpl, {});
   }
 }

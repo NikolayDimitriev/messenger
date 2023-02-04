@@ -2,12 +2,11 @@
 import EventBus from './EventBus';
 import { nanoid } from 'nanoid';
 
-export type TProps = Record<string, any> & {
+export type TProps = {
   events?: Record<string, (e?: Event) => void>;
-  classname?: string[];
   attr?: Record<string, string>;
   page?: Block<TProps>;
-};
+} & Record<string, any>;
 
 enum EVENTS {
   INIT = 'init',
@@ -16,7 +15,7 @@ enum EVENTS {
   FLOW_RENDER = 'flow:render',
 }
 
-type TChildren = Record<string, Block<TProps>>;
+type TChildren = Record<string, any>;
 
 export default abstract class Block<T extends TProps> {
   public id: string = nanoid(6);

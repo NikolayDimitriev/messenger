@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .profile {
   position: relative;
@@ -27,7 +27,7 @@
       height: 28px;
       border-radius: 50%;
       background-color: $primary;
-      background-image: url("/static/arrow-left-sidebar.svg");
+      background-image: url('/static/arrow-left-sidebar.svg');
       background-repeat: no-repeat;
       background-position: center;
     }

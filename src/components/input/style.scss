@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .field {
   display: flex;
@@ -14,5 +14,32 @@
   &__input {
     padding: 7px 0;
     border-bottom: 1px solid $primary;
+  }
+}
+
+.profile {
+  &-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid $br-color;
+
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    &__label {
+      font-size: 13px;
+      line-height: 13px;
+    }
+
+    &__input {
+      text-align: right;
+      font-size: 13px;
+      line-height: 13px;
+    }
   }
 }

@@ -4,21 +4,31 @@ import './style.scss';
 import Inputs from '../input';
 import Button from '../button';
 import Link from '../link';
-import { TInput } from '../../data/data.props';
+import { TAuth } from '../../data/data.props';
 
-export default class Form extends Block<TProps> {
-  constructor(props: TProps) {
+type TFormProps = TProps & {
+  data?: TAuth;
+  buttonValue?: string;
+  linkValue?: string;
+  linkHref?: string;
+};
+
+export default class Form extends Block<TFormProps> {
+  constructor(props: TFormProps) {
     super('form', props);
   }
 
   init() {
     this.children.inputs = this.props.data.map(
-      (input: TInput) =>
+      (input) =>
         new Inputs({
           id: input.id,
-          placeholder: input.placeholder,
+          labelText: input.labelText,
           name: input.name,
           inputType: input.inputType,
+          labelClass: input.labelClass,
+          inputClass: input.inputClass,
+          placeholder: input.placeholder,
           attr: {
             class: 'field',
           },

@@ -2,8 +2,12 @@ import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-export default class Link extends Block<TProps> {
-  constructor(props: TProps) {
+type TLinkProps = TProps & {
+  value: string;
+};
+
+export default class Link extends Block<TLinkProps> {
+  constructor(props: TLinkProps) {
     super('a', props);
   }
 

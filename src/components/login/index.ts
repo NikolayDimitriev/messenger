@@ -2,9 +2,18 @@ import Block, { TProps } from '../../utils/Block';
 import Form from '../form';
 import tpl from './tpl.hbs';
 import './style.scss';
+import { TAuth } from '../../data/data.props';
 
-export default class Login extends Block<TProps> {
-  constructor(props: TProps) {
+export type TLoginProps = TProps & {
+  title: string;
+  data?: TAuth;
+  buttonValue?: string;
+  linkValue?: string;
+  linkHref?: string;
+};
+
+export default class Login extends Block<TLoginProps> {
+  constructor(props: TLoginProps) {
     super('div', props);
   }
 
@@ -21,6 +30,7 @@ export default class Login extends Block<TProps> {
   render() {
     return this.compile(tpl, {
       title: this.props.title,
+      
     });
   }
 }

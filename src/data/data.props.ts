@@ -9,52 +9,54 @@ export type TMessageBlock = {
 };
 
 export type TMessage = {
-	text: string
-	date: TDate
-	image: TImage
-	owner: boolean
-	isReaded: boolean
+  text: string;
+  date: TDate;
+  image: TImage;
+  owner: boolean;
+  isReaded: boolean;
 };
 
 export type TDialogue = {
-	user: {
-		name: string
-		avatarSrc: TImage
-	}
-	lastMessage: {
-		text: string
-		image: TImage
-		date: TDate
-		owner: boolean
-	}
-	newMessagesCount: number | null
+  user: {
+    name: string;
+    avatarSrc: TImage;
+  };
+  lastMessage: {
+    text: string;
+    image: TImage;
+    date: TDate;
+    owner: boolean;
+  };
+  newMessagesCount: number | null;
 };
 
 export type TAuth = TInput[];
 
 export type TInput = {
-	id: string
-	label: string
-	name: string
-	inputType: string
-	value?: string
-	placeholder?: string
-	errMessage?: string
-	disabled?: boolean
+  id: string;
+  labelText: string;
+  name: string;
+  inputType: string;
+  labelClass: string;
+  inputClass: string;
+  value?: string;
+  placeholder?: string;
+  errMessage?: string;
+  disabled?: boolean;
 };
 
 export type TProfile = {
-	inputs: { fields: TInput[] }
-	passwords: { fields: TInput[] }
-	shortFormat: {
-		avatarSrc: TImage
-		email: string
-		login: string
-		first_name: string
-		second_name: string
-		display_name: string
-		phone: string
-		oldPassword: string
-		newPassword: string
-	}
+  fields: TInput[];
+  passwords: TInput[];
+  shortFormat: {
+    avatarSrc: TImage;
+    email: string;
+    login: string;
+    first_name: string;
+    second_name: string;
+    display_name: string;
+    phone: string;
+    oldPassword: string;
+    newPassword: string;
+  };
 };
