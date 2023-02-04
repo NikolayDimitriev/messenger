@@ -15,18 +15,6 @@ export default class ProfilePage extends Block<TProps> {
   }
 
   init() {
-    this.children.button = new Button({
-      value: 'Сохранить',
-    });
-
-    this.children.link = new Link({
-      value: 'Выйти',
-      attr: {
-        href: '/chats',
-        class: 'profile-wrapper__btn profile-wrapper__btn--red',
-      },
-    });
-
     this.children.fields = user.fields.map(
       (input) =>
         new Input({
@@ -43,6 +31,61 @@ export default class ProfilePage extends Block<TProps> {
           },
         })
     );
+
+    this.children.passwords = user.passwords.map(
+      (input) =>
+        new Input({
+          id: input.id,
+          labelText: input.labelText,
+          name: input.name,
+          inputType: input.inputType,
+          value: input.value,
+          disabled: input.disabled,
+          inputClass: input.inputClass,
+          labelClass: input.labelClass,
+          attr: {
+            class: 'profile-field',
+          },
+        })
+    );
+
+    this.children.changeUserInfoBtn = new Button({
+      value: 'Изменить данные',
+      attr: {
+        class: 'profile-wrapper__btn profile-wrapper__btn--primary',
+      },
+      events: {
+        click: changeUserInfo,
+      },
+    });
+
+    this.children.changePasswordBtn = new Button({
+      value: 'Изменить пароль',
+      attr: {
+        class: 'profile-wrapper__btn profile-wrapper__btn--primary',
+      },
+      events: {
+        click: changePassword,
+      },
+    });
+
+    this.children.link = new Link({
+      value: 'Выйти',
+      attr: {
+        href: '/chats',
+        class: 'profile-wrapper__btn profile-wrapper__btn--red',
+      },
+    });
+
+    this.children.buttonSave = new Button({
+      value: 'Сохранить',
+      attr: {
+        class: 'main-btn',
+      },
+      events: {
+        click: saveInfo,
+      },
+    });
   }
 
   render() {
@@ -53,61 +96,48 @@ export default class ProfilePage extends Block<TProps> {
   }
 }
 
-// export default () => {
-// 	return tpl({
-// 		fields: profileInputs({ data: user.inputs }),
-// 		passwords: profileInputs({ data: user.passwords }),
-// 		button: button({
-// 			value: 'Сохранить',
-// 			onClick: 'saveInfo()',
-// 		}),
-// 	});
-// };
+function changeUserInfo() {
+  const inputs = document.querySelectorAll('.profile-field__input');
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__actions'
+  ).style.display = 'none';
+  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
+    'block';
 
-// const changeUserInfo = () => {
-// 	const inputs = document.querySelectorAll('.profile-field__input');
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__actions'
-// 	).style.display = 'none';
-// 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-// 		'block';
+  inputs.forEach((input) => {
+    input.removeAttribute('disabled');
+  });
+}
 
-// 	inputs.forEach((input) => {
-// 		input.removeAttribute('disabled');
-// 	});
-// };
+function saveInfo() {
+  const inputs = document.querySelectorAll('.profile-field__input');
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__fields'
+  ).style.display = 'block';
+  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
+    'none';
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__passwords'
+  ).style.display = 'none';
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__actions'
+  ).style.display = 'flex';
 
-// const saveInfo = () => {
-// 	const inputs = document.querySelectorAll('.profile-field__input');
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__fields'
-// 	).style.display = 'block';
-// 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-// 		'none';
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__passwords'
-// 	).style.display = 'none';
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__actions'
-// 	).style.display = 'flex';
+  inputs.forEach((input) => {
+    input.setAttribute('disabled', '');
+  });
+}
 
-// 	inputs.forEach((input) => {
-// 		input.setAttribute('disabled', '');
-// 	});
-// };
-
-// const changePassword = () => {
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__fields'
-// 	).style.display = 'none';
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__passwords'
-// 	).style.display = 'block';
-// 	document.querySelector<HTMLElement>(
-// 		'.profile-wrapper__actions'
-// 	).style.display = 'none';
-// 	document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
-// 		'block';
-// };
-
-//
+function changePassword() {
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__fields'
+  ).style.display = 'none';
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__passwords'
+  ).style.display = 'block';
+  document.querySelector<HTMLElement>(
+    '.profile-wrapper__actions'
+  ).style.display = 'none';
+  document.querySelector<HTMLElement>('.profile-wrapper__save').style.display =
+    'block';
+}
