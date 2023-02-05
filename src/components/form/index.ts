@@ -12,6 +12,8 @@ type TFormProps = TProps & {
   buttonValue?: string;
   linkValue?: string;
   linkHref?: string;
+  inputBlockClass?: string;
+  disabled?: boolean;
 };
 
 export default class Form extends Block<TFormProps> {
@@ -33,28 +35,34 @@ export default class Form extends Block<TFormProps> {
           labelClass: input.labelClass,
           inputClass: input.inputClass,
           errMessage: input.errMessage,
+          value: input.value,
+          disabled: this.props.disabled,
           isError: input.isError,
           attr: {
-            class: 'field',
+            class: this.props.inputBlockClass || 'field',
           },
         })
     );
 
-    this.children.button = new Button({
-      value: this.props.buttonValue as string,
-      attr: {
-        class: 'main-btn',
-        type: 'submit',
-      },
-    });
+    if (this.props.buttonValue) {
+      this.children.button = new Button({
+        value: this.props.buttonValue as string,
+        attr: {
+          class: 'main-btn',
+          type: 'submit',
+        },
+      });
+    }
 
-    this.children.link = new Link({
-      value: this.props.linkValue as string,
-      attr: {
-        class: 'form-link',
-        href: this.props.linkHref as string,
-      },
-    });
+    if (this.props.linkValue) {
+      this.children.link = new Link({
+        value: this.props.linkValue as string,
+        attr: {
+          class: 'form-link',
+          href: this.props.linkHref as string,
+        },
+      });
+    }
   }
 
   render() {

@@ -6,10 +6,12 @@ import ChatForm from '../components/chatForm';
 const rules: Record<string, RegExp> = {
   first_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
   second_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
+  display_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
   login: /^(?!\d+$)^[\w-]{3,20}$/i,
   email: /^\w*@\w+\.[a-z]{2,6}$/,
   password: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
-  'password-two': /([A-Z])\w+/g,
+  password_two: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
+  password_three: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
   phone: /^(?=.{10,15}$)^\+?\d*$/,
   message: /^.+$/,
 };

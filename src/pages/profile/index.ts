@@ -1,7 +1,7 @@
 import Block, { TProps } from '../../utils/Block';
 import Link from '../../components/link';
 import Button from '../../components/button';
-import Input from '../../components/InputsBlock';
+import Form from '../../components/form';
 import tpl from './tpl.hbs';
 
 import avatar from '../../../static/avatar.svg';
@@ -15,39 +15,14 @@ export default class ProfilePage extends Block<TProps> {
   }
 
   init() {
-    this.children.fields = user.fields.map(
-      (input) =>
-        new Input({
-          id: input.id,
-          labelText: input.labelText,
-          name: input.name,
-          inputType: input.inputType,
-          value: input.value,
-          disabled: input.disabled,
-          inputClass: input.inputClass,
-          labelClass: input.labelClass,
-          attr: {
-            class: 'profile-field',
-          },
-        })
-    );
-
-    this.children.passwords = user.passwords.map(
-      (input) =>
-        new Input({
-          id: input.id,
-          labelText: input.labelText,
-          name: input.name,
-          inputType: input.inputType,
-          value: input.value,
-          disabled: input.disabled,
-          inputClass: input.inputClass,
-          labelClass: input.labelClass,
-          attr: {
-            class: 'profile-field',
-          },
-        })
-    );
+    this.children.form = new Form({
+      data: user.fields,
+      inputBlockClass: 'profile-field',
+      disabled: true,
+      attr: {
+        class: 'profile-wrapper__fields',
+      },
+    });
 
     this.children.changeUserInfoBtn = new Button({
       value: 'Изменить данные',
@@ -55,7 +30,7 @@ export default class ProfilePage extends Block<TProps> {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
       events: {
-        click: changeUserInfo,
+        click: changeUserInfo.bind(this),
       },
     });
 
@@ -65,7 +40,7 @@ export default class ProfilePage extends Block<TProps> {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
       events: {
-        click: changePassword,
+        click: changePassword.bind(this),
       },
     });
 
@@ -74,16 +49,6 @@ export default class ProfilePage extends Block<TProps> {
       attr: {
         href: '/chats',
         class: 'profile-wrapper__btn profile-wrapper__btn--red',
-      },
-    });
-
-    this.children.buttonSave = new Button({
-      value: 'Сохранить',
-      attr: {
-        class: 'main-btn',
-      },
-      events: {
-        click: saveInfo,
       },
     });
   }
@@ -96,64 +61,54 @@ export default class ProfilePage extends Block<TProps> {
   }
 }
 
-function changeUserInfo() {
-  const inputs = document.querySelectorAll('.profile-field__input');
+function changeUserInfo(this: ProfilePage) {
+  this.children.form = new Form({
+    data: user.fields,
+    inputBlockClass: 'profile-field',
+    disabled: false,
+    button: new Button({
+      value: 'Сохранить',
+      attr: {
+        class: 'main-btn',
+        type: 'submit',
+      },
+    }),
+    attr: {
+      class: 'profile-wrapper__fields',
+    },
+  });
+
   const actions = document.querySelector<HTMLElement>(
     '.profile-wrapper__actions'
   );
-  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
 
-  if (actions && saveBtn) {
+  if (actions) {
     actions.style.display = 'none';
-    saveBtn.style.display = 'block';
   }
-
-  inputs.forEach((input) => {
-    input.removeAttribute('disabled');
-  });
 }
 
-function saveInfo() {
-  const inputs = document.querySelectorAll('.profile-field__input');
-  const fields = document.querySelector<HTMLElement>(
-    '.profile-wrapper__fields'
-  );
-  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
-  const passwordBlock = document.querySelector<HTMLElement>(
-    '.profile-wrapper__passwords'
-  );
+function changePassword(this: ProfilePage) {
+  this.children.form = new Form({
+    data: user.passwords,
+    inputBlockClass: 'profile-field',
+    disabled: false,
+    button: new Button({
+      value: 'Сохранить',
+      attr: {
+        class: 'main-btn',
+        type: 'submit',
+      },
+    }),
+    attr: {
+      class: 'profile-wrapper__fields',
+    },
+  });
+
   const actions = document.querySelector<HTMLElement>(
     '.profile-wrapper__actions'
   );
 
-  if (fields && saveBtn && passwordBlock && actions) {
-    fields.style.display = 'block';
-    saveBtn.style.display = 'none';
-    passwordBlock.style.display = 'none';
-    actions.style.display = 'flex';
-  }
-
-  inputs.forEach((input) => {
-    input.setAttribute('disabled', '');
-  });
-}
-
-function changePassword() {
-  const fields = document.querySelector<HTMLElement>(
-    '.profile-wrapper__fields'
-  );
-  const saveBtn = document.querySelector<HTMLElement>('.profile-wrapper__save');
-  const passwordBlock = document.querySelector<HTMLElement>(
-    '.profile-wrapper__passwords'
-  );
-  const actions = document.querySelector<HTMLElement>(
-    '.profile-wrapper__actions'
-  );
-
-  if (fields && saveBtn && passwordBlock && actions) {
-    fields.style.display = 'none';
-    saveBtn.style.display = 'block';
-    passwordBlock.style.display = 'block';
+  if (actions) {
     actions.style.display = 'none';
   }
 }

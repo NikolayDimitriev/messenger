@@ -36,7 +36,7 @@ export default abstract class Block<T extends TProps> {
       props,
     };
 
-    this.children = children;
+    this.children = this._makePropsProxy(children as T);
 
     this.props = this._makePropsProxy(props);
 
@@ -145,6 +145,7 @@ export default abstract class Block<T extends TProps> {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: T, newProps: T) {
     // console.log(oldProps, newProps);
     return true;
@@ -200,10 +201,12 @@ export default abstract class Block<T extends TProps> {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target: T, prop: string, value) => {
-        const oldTarget = { ...target };
-        target[prop as keyof T] = value;
+        const oldValue = { ...target };
+        if (target[prop] !== value) {
+          target[prop as keyof T] = value;
+          this.eventBus().emit(EVENTS.FLOW_CDU, oldValue, this.props);
+        }
 
-        this.eventBus().emit(EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {

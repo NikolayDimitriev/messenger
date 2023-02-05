@@ -41,7 +41,7 @@ export type TInput = {
   inputClass: string;
   isError: boolean;
   errMessage?: string;
-  value?: string;
+  value?: string | number;
   placeholder?: string;
   disabled?: boolean;
 };
@@ -56,7 +56,7 @@ export type TProfile = {
     first_name: string;
     second_name: string;
     display_name: string;
-    phone: string;
+    phone: string | number;
     oldPassword: string;
     newPassword: string;
   };
