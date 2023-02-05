@@ -1,0 +1,61 @@
+@import "../../styles/variables";
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  &__label {
+    color: $gray;
+    font-size: 9px;
+    line-height: 9px;
+  }
+
+  &__input {
+    padding: 7px 0;
+    border-bottom: 1px solid $primary;
+  }
+}
+
+.input {
+  &__label {
+    display: none;
+
+    &--error {
+      display: block;
+      color: $error;
+    }
+  }
+}
+
+.profile {
+  &-field {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid $br-color;
+
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    &__label {
+      flex-basis: 50%;
+      flex-shrink: 0;
+      font-size: 13px;
+      line-height: 13px;
+    }
+
+    &__input {
+      flex-basis: 50%;
+      flex-shrink: 0;
+      text-align: right;
+      font-size: 13px;
+      line-height: 13px;
+    }
+  }
+}

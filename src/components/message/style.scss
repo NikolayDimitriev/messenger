@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+
+.message {
+  &__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  &__date {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    align-self: flex-end;
+    color: $gray;
+    font-size: 9px;
+    line-height: 9px;
+
+    &--owner {
+      color: $primary;
+
+      &::before {
+        display: inline-block;
+        width: 15px;
+        height: 6px;
+        content: "";
+        background-image: url("/static/readed.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+}

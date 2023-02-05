@@ -1,8 +1,8 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables";
 
 .form-link {
-	font-size: 11px;
-	line-height: 11px;
-	color: $primary;
-	text-align: center;
+  text-align: center;
+  color: $primary;
+  font-size: 11px;
+  line-height: 11px;
 }
