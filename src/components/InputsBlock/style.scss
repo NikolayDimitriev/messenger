@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .field {
   display: flex;
@@ -20,6 +20,7 @@
 .input {
   &__label {
     display: none;
+
     &--error {
       display: block;
       color: $error;
@@ -31,11 +32,11 @@
   &-field {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
     padding: 10px 0;
     border-bottom: 1px solid $br-color;
-    flex-wrap: wrap;
 
     &:last-child {
       margin-bottom: 0;
@@ -43,18 +44,18 @@
     }
 
     &__label {
-      font-size: 13px;
-      line-height: 13px;
       flex-basis: 50%;
       flex-shrink: 0;
+      font-size: 13px;
+      line-height: 13px;
     }
 
     &__input {
+      flex-basis: 50%;
+      flex-shrink: 0;
       text-align: right;
       font-size: 13px;
       line-height: 13px;
-      flex-shrink: 0;
-      flex-basis: 50%;
     }
   }
 }
