@@ -7,10 +7,10 @@ import MessagesBlock from '../../components/messagesBlock';
 import { dialogues } from '../../data';
 import { messages } from '../../data';
 
-import attach from '../../../static/attach.svg';
 import chatMenuDots from '../../../static/chat-menu-dots.svg';
 
 import './style.scss';
+import ChatForm from '../../components/chatForm';
 
 export default class Chat extends Block<TProps> {
   constructor(props: TProps) {
@@ -49,11 +49,16 @@ export default class Chat extends Block<TProps> {
           },
         })
     );
+
+    this.children.chatForm = new ChatForm({
+      attr: {
+        class: 'chat-right__form',
+      },
+    });
   }
 
   render() {
     return this.compile(tpl, {
-      attach,
       chatMenuDots,
     });
   }

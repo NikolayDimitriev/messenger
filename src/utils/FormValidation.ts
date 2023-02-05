@@ -1,6 +1,7 @@
 import Form from '../components/form';
 import Input from '../components/input';
 import InputsBlock from '../components/InputsBlock';
+import ChatForm from '../components/chatForm';
 
 const rules: Record<string, RegExp> = {
   first_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
@@ -38,29 +39,44 @@ export default class FormValidation {
       },
     });
 
-    // * Вещаю event`s на каждый инпут
-    // ! form -> InputBlock[] -> Input
-    Object.entries(this._form.children).forEach(([key, children]) => {
-      if (key !== 'inputs') {
-        return;
-      }
-
-      children.forEach((inputBlock: InputsBlock) => {
-        const input: Input = inputBlock.children.input;
-
-        const name = input.props.name as string;
-
-        input.setProps({
-          events: {
-            focus: () => this.isValid(name),
-            blur: () => this.isValid(name),
-          },
-        });
-
-        this._inputs.push(input);
-        this._inputsBlock[name] = inputBlock;
+    if (this._form instanceof ChatForm) {
+      const input = this._form.children.inputs;
+      const name = this._form.children.inputs.props.name;
+      input.setProps({
+        events: {
+          focus: () => this.isValidChatForm(name),
+          blur: () => this.isValidChatForm(name),
+        },
       });
-    });
+      this._inputs.push(input);
+    }
+    if (this._form instanceof Form) {
+      // * Вещаю event`s на каждый инпут
+      // ! form -> InputBlock[] -> Input
+      Object.entries(this._form.children).forEach(([key, children]) => {
+        if (key !== 'inputs') {
+          return;
+        }
+
+        const arr = Array.isArray(children) ? children : [children];
+
+        arr.forEach((inputBlock: InputsBlock) => {
+          const input: Input = inputBlock.children.input;
+
+          const name = input.props.name as string;
+
+          input.setProps({
+            events: {
+              focus: () => this.isValid(name),
+              blur: () => this.isValid(name),
+            },
+          });
+
+          this._inputs.push(input);
+          this._inputsBlock[name] = inputBlock;
+        });
+      });
+    }
   }
 
   isValid(inputName: string): boolean {
@@ -98,6 +114,27 @@ export default class FormValidation {
     return true;
   }
 
+  isValidChatForm(inputName: string) {
+    const regExp = rules[inputName];
+
+    if (!regExp) {
+      return false;
+    }
+
+    const value = (this._inputs[0].getContent() as HTMLInputElement).value;
+    const errorLabel = this._form.children.errorLabel;
+
+    if (!regExp.test(value)) {
+      errorLabel.setProps({ attr: { class: 'input__label--error' } });
+
+      return false;
+    }
+
+    errorLabel.setProps({ attr: { class: 'input__label' } });
+
+    return true;
+  }
+
   onSubmit(e?: Event) {
     e?.preventDefault();
 
@@ -109,8 +146,14 @@ export default class FormValidation {
         input.getContent() as HTMLInputElement
       ).value;
 
-      if (!this.isValid(input.props.name as string)) {
-        isValidAllInputs = false;
+      if (this._form instanceof ChatForm) {
+        if (!this.isValidChatForm(input.props.name as string)) {
+          isValidAllInputs = false;
+        }
+      } else {
+        if (!this.isValid(input.props.name as string)) {
+          isValidAllInputs = false;
+        }
       }
     });
 

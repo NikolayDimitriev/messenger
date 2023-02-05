@@ -1,9 +1,10 @@
 import Block, { TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
+import Image from '../image';
 
 type TButtonProps = TProps & {
-  value: string;
+  value: string | Image;
 };
 
 export default class Button extends Block<TButtonProps> {
