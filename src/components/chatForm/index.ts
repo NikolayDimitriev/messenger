@@ -1,14 +1,14 @@
-import Block, { TProps } from '../../utils/Block';
-import Button from '../button';
+import { Block, TProps } from '../../utils/Block';
+import { Button } from '../button';
 import tpl from './tpl.hbs';
 import attach from '../../../static/attach.svg';
-import Image from '../image';
-import Input from '../input';
-import FormValidation from '../../utils/FormValidation';
-import ErrorLabel from '../errorLabel';
+import { Image } from '../image';
+import { Input } from '../input';
+import { FormValidation } from '../../utils/FormValidation';
+import { ErrorLabel } from '../errorLabel';
 
-export default class ChatForm extends Block<TProps> {
-  _formValidation: FormValidation;
+export class ChatForm extends Block<TProps> {
+  private _formValidation: FormValidation;
   constructor(props: TProps) {
     super('form', props);
     this._formValidation = new FormValidation(this);

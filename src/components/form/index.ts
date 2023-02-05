@@ -1,11 +1,11 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
-import InputsBlock from '../InputsBlock';
-import Button from '../button';
-import Link from '../link';
+import { InputsBlock } from '../InputsBlock';
+import { Button } from '../button';
+import { Link } from '../link';
 import { TAuth } from '../../data/data.props';
-import FormValidation from '../../utils/FormValidation';
+import { FormValidation } from '../../utils/FormValidation';
 
 type TFormProps = TProps & {
   data?: TAuth;
@@ -16,8 +16,8 @@ type TFormProps = TProps & {
   disabled?: boolean;
 };
 
-export default class Form extends Block<TFormProps> {
-  _formValidation: FormValidation;
+export class Form extends Block<TFormProps> {
+  private _formValidation: FormValidation;
 
   constructor(props: TFormProps) {
     super('form', props);
@@ -46,7 +46,7 @@ export default class Form extends Block<TFormProps> {
 
     if (this.props.buttonValue) {
       this.children.button = new Button({
-        value: this.props.buttonValue as string,
+        value: this.props.buttonValue,
         attr: {
           class: 'main-btn',
           type: 'submit',
@@ -54,12 +54,12 @@ export default class Form extends Block<TFormProps> {
       });
     }
 
-    if (this.props.linkValue) {
+    if (this.props.linkValue && this.props.linkHref) {
       this.children.link = new Link({
-        value: this.props.linkValue as string,
+        value: this.props.linkValue,
         attr: {
           class: 'form-link',
-          href: this.props.linkHref as string,
+          href: this.props.linkHref,
         },
       });
     }

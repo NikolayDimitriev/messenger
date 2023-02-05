@@ -1,8 +1,9 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
-import Link from '../../components/link';
-import Dialogue from '../../components/dialogues';
-import MessagesBlock from '../../components/messagesBlock';
+import { Link } from '../../components/link';
+import { Dialogue } from '../../components/dialogues';
+import { MessagesBlock } from '../../components/messagesBlock';
+import { ChatForm } from '../../components/chatForm';
 
 import { dialogues } from '../../data';
 import { messages } from '../../data';
@@ -10,9 +11,8 @@ import { messages } from '../../data';
 import chatMenuDots from '../../../static/chat-menu-dots.svg';
 
 import './style.scss';
-import ChatForm from '../../components/chatForm';
 
-export default class Chat extends Block<TProps> {
+export class Chat extends Block<TProps> {
   constructor(props: TProps) {
     super('div', props);
   }

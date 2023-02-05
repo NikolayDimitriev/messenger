@@ -1,5 +1,5 @@
-import Block, { TProps } from '../../utils/Block';
-import Message from '../message';
+import { Block, TProps } from '../../utils/Block';
+import { Message } from '../message';
 import { TMessageBlock } from '../../data/data.props';
 
 import tpl from './tpl.hbs';
@@ -7,7 +7,7 @@ import './style.scss';
 
 type TMessageBlockProps = Partial<TMessageBlock> & TProps;
 
-export default class MessagesBlock extends Block<TMessageBlockProps> {
+export class MessagesBlock extends Block<TMessageBlockProps> {
   constructor(props: TMessageBlockProps) {
     super('div', props);
   }

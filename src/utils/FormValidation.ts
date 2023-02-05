@@ -1,7 +1,7 @@
-import Form from '../components/form';
-import Input from '../components/input';
-import InputsBlock from '../components/InputsBlock';
-import ChatForm from '../components/chatForm';
+import {Form} from '../components/form';
+import {Input} from '../components/input';
+import {InputsBlock} from '../components/InputsBlock';
+import {ChatForm} from '../components/chatForm';
 
 const rules: Record<string, RegExp> = {
   first_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
@@ -16,13 +16,13 @@ const rules: Record<string, RegExp> = {
   message: /^.+$/,
 };
 
-export default class FormValidation {
-  private _form: Form;
+export class FormValidation {
+  private _form: Form | ChatForm;
   private _inputsBlock: Record<string, InputsBlock>;
   private _inputs: Input[];
   private _firstPass: string;
 
-  constructor(form: Form) {
+  constructor(form: Form | ChatForm) {
     this._form = form;
     this._inputsBlock = {};
     this._inputs = [];

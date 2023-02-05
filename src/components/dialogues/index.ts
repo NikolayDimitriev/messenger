@@ -1,4 +1,4 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { TDate } from '../../data/data.props';
@@ -11,7 +11,7 @@ type TDialogueProps = TProps & {
   count: number | null;
 };
 
-export default class Dialogue extends Block<TDialogueProps> {
+export class Dialogue extends Block<TDialogueProps> {
   constructor(props: TDialogueProps) {
     super('div', props);
   }

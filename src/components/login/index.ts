@@ -1,5 +1,5 @@
-import Block, { TProps } from '../../utils/Block';
-import Form from '../form';
+import { Block, TProps } from '../../utils/Block';
+import { Form } from '../form';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { TAuth } from '../../data/data.props';
@@ -12,7 +12,7 @@ export type TLoginProps = TProps & {
   linkHref?: string;
 };
 
-export default class Login extends Block<TLoginProps> {
+export class Login extends Block<TLoginProps> {
   constructor(props: TLoginProps) {
     super('div', props);
   }

@@ -1,9 +1,9 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
-import Login from '../../components/login';
+import { Login } from '../../components/login';
 import { signUp } from '../../data';
 
-export default class RegistrationPage extends Block<TProps> {
+export class RegistrationPage extends Block<TProps> {
   constructor(props: TProps) {
     super('div', props);
   }
