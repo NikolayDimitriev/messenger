@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .login {
   display: flex;
@@ -13,7 +13,6 @@
     flex-direction: column;
     width: 340px;
     min-height: 450px;
-    max-height: 615px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 6px $shadowLogIn;

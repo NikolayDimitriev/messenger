@@ -17,6 +17,16 @@
   }
 }
 
+.input {
+  &__label {
+    display: none;
+    &--error {
+      display: block;
+      color: $error;
+    }
+  }
+}
+
 .profile {
   &-field {
     display: flex;

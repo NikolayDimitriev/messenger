@@ -5,7 +5,7 @@ import InputsBlock from '../InputsBlock';
 import Button from '../button';
 import Link from '../link';
 import { TAuth } from '../../data/data.props';
-import { onSubmit } from '../../utils/validation';
+import FormValidation from '../../utils/FormValidation';
 
 type TFormProps = TProps & {
   data?: TAuth;
@@ -15,18 +15,11 @@ type TFormProps = TProps & {
 };
 
 export default class Form extends Block<TFormProps> {
+  _formValidation: FormValidation;
+
   constructor(props: TFormProps) {
     super('form', props);
-  }
-
-  override addEvents(): void {
-    super.addEvents();
-    this.element?.addEventListener('submit', onSubmit);
-  }
-
-  override removeEvents(): void {
-    super.removeEvents();
-    this.element?.removeEventListener('submit', onSubmit);
+    this._formValidation = new FormValidation(this);
   }
 
   init() {
@@ -39,6 +32,7 @@ export default class Form extends Block<TFormProps> {
           inputType: input.inputType,
           labelClass: input.labelClass,
           inputClass: input.inputClass,
+          errMessage: input.errMessage,
           isError: input.isError,
           attr: {
             class: 'field',
@@ -51,11 +45,6 @@ export default class Form extends Block<TFormProps> {
       attr: {
         class: 'main-btn',
         type: 'submit',
-      },
-      events: {
-        submit: (e?: Event) => {
-          e?.preventDefault();
-        },
       },
     });
 

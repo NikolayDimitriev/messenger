@@ -183,7 +183,7 @@ export const signUp: TAuth = [
     id: 'password-registration-two',
     placeholder: 'Пароль (ещё раз)',
     labelText: 'Пароль (ещё раз)',
-    name: 'password',
+    name: 'password-two',
     inputType: 'password',
     errMessage: 'Пароли не совпадают!',
     labelClass: 'field__label',

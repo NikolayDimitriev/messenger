@@ -23,8 +23,8 @@ export default abstract class Block<T extends TProps> {
   private _meta: { tagName: string; props: T };
   private eventBus: () => EventBus;
 
-  protected children: TChildren;
-  protected props: T;
+  public children: TChildren;
+  public props: T;
 
   constructor(tagName = 'div', propsWithChildren: T = {} as T) {
     const eventBus = new EventBus();
@@ -146,7 +146,7 @@ export default abstract class Block<T extends TProps> {
   }
 
   protected componentDidUpdate(oldProps: T, newProps: T) {
-    console.log(oldProps, newProps);
+    // console.log(oldProps, newProps);
     return true;
   }
 
