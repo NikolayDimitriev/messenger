@@ -1,13 +1,13 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
-import Image from '../image';
+import { Image } from '../image';
 
 type TButtonProps = TProps & {
   value: string | Image;
 };
 
-export default class Button extends Block<TButtonProps> {
+export class Button extends Block<TButtonProps> {
   constructor(props: TButtonProps) {
     super('button', props);
   }

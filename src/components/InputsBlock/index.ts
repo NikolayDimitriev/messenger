@@ -1,6 +1,6 @@
-import Block, { TProps } from '../../utils/Block';
-import Input from '../input';
-import ErrorLabel from '../errorLabel';
+import { Block, TProps } from '../../utils/Block';
+import { Input } from '../input';
+import { ErrorLabel } from '../errorLabel';
 import tpl from './tpl.hbs';
 
 import { TInput } from '../../data/data.props';
@@ -8,7 +8,7 @@ import './style.scss';
 
 type TInputsBlockProps = Partial<TInput> & TProps;
 
-export default class InputsBlock extends Block<TInputsBlockProps> {
+export class InputsBlock extends Block<TInputsBlockProps> {
   constructor(props: TInputsBlockProps) {
     super('div', props);
   }

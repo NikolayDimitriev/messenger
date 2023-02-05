@@ -1,7 +1,7 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
 
-export default class Navigation extends Block<TProps> {
+export class Navigation extends Block<TProps> {
   constructor(props: TProps) {
     super('nav', props);
   }

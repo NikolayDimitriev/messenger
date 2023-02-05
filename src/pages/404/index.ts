@@ -1,8 +1,8 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import tpl from './tpl.hbs';
-import Error from '../../components/error';
+import { Error } from '../../components/error';
 
-export default class Page404 extends Block<TProps> {
+export class Page404 extends Block<TProps> {
   constructor(props: TProps) {
     super('div', props);
   }

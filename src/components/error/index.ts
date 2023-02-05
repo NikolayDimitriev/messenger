@@ -1,5 +1,5 @@
-import Block, { TProps } from '../../utils/Block';
-import Link from '../link';
+import { Block, TProps } from '../../utils/Block';
+import { Link } from '../link';
 import tpl from './tpl.hbs';
 import './style.scss';
 
@@ -8,7 +8,7 @@ type TErrorProps = TProps & {
   errorText: string;
 };
 
-export default class Error extends Block<TErrorProps> {
+export class Error extends Block<TErrorProps> {
   constructor(props: TErrorProps) {
     super('div', props);
   }

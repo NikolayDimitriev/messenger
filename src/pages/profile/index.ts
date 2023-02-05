@@ -1,7 +1,7 @@
-import Block, { TProps } from '../../utils/Block';
-import Link from '../../components/link';
-import Button from '../../components/button';
-import Form from '../../components/form';
+import { Block, TProps } from '../../utils/Block';
+import { Link } from '../../components/link';
+import { Button } from '../../components/button';
+import { Form } from '../../components/form';
 import tpl from './tpl.hbs';
 
 import avatar from '../../../static/avatar.svg';
@@ -9,7 +9,7 @@ import { user } from '../../data';
 
 import './style.scss';
 
-export default class ProfilePage extends Block<TProps> {
+export class ProfilePage extends Block<TProps> {
   constructor(props: TProps) {
     super('div', props);
   }

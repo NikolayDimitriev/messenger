@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import EventBus from './EventBus';
+import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
 
 export type TProps = {
@@ -17,7 +17,7 @@ enum EVENTS {
 
 type TChildren = Record<string, any>;
 
-export default abstract class Block<T extends TProps> {
+export abstract class Block<T extends TProps> {
   public id: string = nanoid(6);
   private _element: HTMLElement | null = null;
   private _meta: { tagName: string; props: T };

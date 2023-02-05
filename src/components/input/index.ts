@@ -1,10 +1,10 @@
-import Block, { TProps } from '../../utils/Block';
+import { Block, TProps } from '../../utils/Block';
 import { TInput } from '../../data/data.props';
 import tpl from './tpl.hbs';
 
 type TInputsBlockProps = Partial<TInput> & TProps;
 
-export default class Input extends Block<TInputsBlockProps> {
+export class Input extends Block<TInputsBlockProps> {
   constructor(props: TInputsBlockProps) {
     super('input', props);
   }

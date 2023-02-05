@@ -1,14 +1,14 @@
-import AuthPage from './pages/auth';
-import RegistrationPage from './pages/registration';
-import ProfilePage from './pages/profile';
-import Chat from './pages/chats';
-import Page404 from './pages/404';
-import Page500 from './pages/500';
-import Navigation from './pages/navigation';
+import { AuthPage } from './pages/auth';
+import { RegistrationPage } from './pages/registration';
+import { ProfilePage } from './pages/profile';
+import { Chat } from './pages/chats';
+import { Page404 } from './pages/404';
+import { Page500 } from './pages/500';
+import { Navigation } from './pages/navigation';
 
-import Layout from './components/layout';
+import { Layout } from './components/layout';
 
-import render from './utils/render';
+import { render } from './utils/render';
 
 const routes = [
   { path: '/', Page: Navigation },
