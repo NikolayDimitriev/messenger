@@ -1,11 +1,11 @@
-import { Block, TProps } from '../../utils/Block';
-import tpl from './tpl.hbs';
-import './style.scss';
+import { Block, TProps } from '../../core/Block';
+import { FormValidation } from '../../core/FormValidation';
 import { InputsBlock } from '../InputsBlock';
 import { Button } from '../button';
 import { Link } from '../link';
 import { TAuth } from '../../data/data.props';
-import { FormValidation } from '../../utils/FormValidation';
+import tpl from './tpl.hbs';
+import './style.scss';
 
 type TFormProps = TProps & {
   data?: TAuth;

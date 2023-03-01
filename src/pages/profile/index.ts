@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { Form } from '../../components/form';

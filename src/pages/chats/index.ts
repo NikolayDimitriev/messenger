@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Link } from '../../components/link';
 import { Dialogue } from '../../components/dialogues';

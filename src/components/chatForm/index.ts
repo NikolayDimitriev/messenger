@@ -1,10 +1,10 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { Button } from '../button';
 import tpl from './tpl.hbs';
 import attach from '../../../static/attach.svg';
 import { Image } from '../image';
 import { Input } from '../input';
-import { FormValidation } from '../../utils/FormValidation';
+import { FormValidation } from '../../core/FormValidation';
 import { ErrorLabel } from '../errorLabel';
 
 export class ChatForm extends Block<TProps> {

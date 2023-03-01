@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { Link } from '../link';
 import tpl from './tpl.hbs';
 import './style.scss';

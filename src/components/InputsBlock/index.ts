@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { Input } from '../input';
 import { ErrorLabel } from '../errorLabel';
 import tpl from './tpl.hbs';

@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { TInput } from '../../data/data.props';
 import tpl from './tpl.hbs';
 

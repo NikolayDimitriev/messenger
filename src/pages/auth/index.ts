@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
 import { logIn } from '../../data';

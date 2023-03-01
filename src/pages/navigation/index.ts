@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 
 export class Navigation extends Block<TProps> {

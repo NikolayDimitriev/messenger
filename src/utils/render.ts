@@ -1,4 +1,4 @@
-import { Block, TProps } from './Block';
+import { Block, TProps } from '../core/Block';
 
 export function render(query: string, block: Block<TProps>) {
   const root: HTMLElement | null = document.querySelector(query) as HTMLElement;

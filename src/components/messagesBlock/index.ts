@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import { Message } from '../message';
 import { TMessageBlock } from '../../data/data.props';
 

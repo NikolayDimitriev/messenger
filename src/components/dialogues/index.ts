@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../utils/Block';
+import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { TDate } from '../../data/data.props';
