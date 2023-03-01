@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
+import { isEqual } from '../utils/isEqual';
 
 export type TProps = {
   events?: Record<string, (e?: Event) => void>;
@@ -145,10 +146,8 @@ export abstract class Block<T extends TProps> {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: T, newProps: T) {
-    // console.log(oldProps, newProps);
-    return true;
+    return isEqual(oldProps, newProps);
   }
 
   public setProps = (nextProps: T) => {
@@ -252,5 +251,13 @@ export abstract class Block<T extends TProps> {
     });
 
     return temp.content;
+  }
+
+  show(): void {
+    this._element!.style.display = 'flex';
+  }
+
+  hide(): void {
+    this._element!.style.display = 'none';
   }
 }
