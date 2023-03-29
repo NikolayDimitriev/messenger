@@ -1,63 +1,71 @@
-// import { Route } from './Route';
-// import { Block, TProps } from './Block';
+import { Route } from './Route';
+import { Block } from './Block';
 
-// export class Router {
-//   private router: Array<Route>;
-//   private history: History;
-//   private _currentRoute: Route | null;
-//   private rootQuery: string;
+class Router {
+  private static __instance: Router;
+  private _routes: Route[] = [];
+  private _history: History = window.history;
+  private _currentRoute: Route | null = null;
 
-//   constructor(rootQuery = "#root") {
-//     this.routes = [];
-//     this.history = window.history;
-//     this._currentRoute = null;
-//     this._rootQuery = rootQuery;
-//   }
+  constructor(private readonly rootQuery: string = '#root') {
+    if (Router.__instance) {
+      return Router.__instance;
+    }
 
-//   use(pathname:string, block: Block<TProps>) {
-//     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+    this._routes = [];
 
-//     this.routes.push(route);
+    Router.__instance = this;
+  }
 
-//     return this;
-//   }
+  public use(pathname: string, block: typeof Block) {
+    const route = new Route(pathname, block, this.rootQuery);
 
-//   start() {
-//     window.onpopstate = ((event: PopStateEvent) => {
-//       this._onRoute(event.currentTarget?.location.pathname);
-//     }).bind(this);
+    this._routes.push(route);
 
-//     this._onRoute(window.location.pathname);
-//   }
+    return this;
+  }
 
-//   _onRoute(pathname) {
-//     const route = this.getRoute(pathname);
-//     if (!route) {
-//       return;
-//     }
+  public start() {
+    window.onpopstate = (event: PopStateEvent) => {
+      const target = event.currentTarget as Window;
 
-//     if (this._currentRoute && this._currentRoute !== route) {
-//       this._currentRoute.leave();
-//     }
+      this._onRoute(target.location.pathname);
+    };
 
-//     this._currentRoute = route;
-//     route.render(route, pathname);
-//   }
+    this._onRoute(window.location.pathname);
+  }
 
-//   go(pathname) {
-//     this.history.pushState({}, '', pathname);
-//     this._onRoute(pathname);
-//   }
+  private _onRoute(pathname: string) {
+    const route = this.getRoute(pathname);
 
-//   back() {
-//     this.history.back();
-//   }
+    if (!route) {
+      return;
+    }
 
-//   forward() {
-//     this.history.forward();
-//   }
+    if (this._currentRoute && this._currentRoute !== route) {
+      this._currentRoute.leave();
+    }
 
-//   getRoute(pathname) {
-//     return this.routes.find((route) => route.match(pathname));
-//   }
-// }
+    this._currentRoute = route;
+    route.render();
+  }
+
+  go(pathname: string) {
+    this._history.pushState({}, '', pathname);
+    this._onRoute(pathname);
+  }
+
+  back() {
+    this._history.back();
+  }
+
+  forward() {
+    this._history.forward();
+  }
+
+  getRoute(pathname: string) {
+    return this._routes.find((route) => route.match(pathname));
+  }
+}
+
+export default new Router('#root');

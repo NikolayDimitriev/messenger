@@ -1,11 +1,11 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
 import { signUp } from '../../data';
 
-export class RegistrationPage extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+export class RegistrationPage extends Block {
+  constructor() {
+    super({});
   }
 
   init() {
@@ -15,9 +15,6 @@ export class RegistrationPage extends Block<TProps> {
       buttonValue: 'Зарегистрироваться',
       linkValue: 'Войти',
       linkHref: '/auth',
-      attr: {
-        class: 'login',
-      },
     });
   }
 

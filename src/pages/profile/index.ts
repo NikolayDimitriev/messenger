@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { Form } from '../../components/form';
@@ -9,9 +9,9 @@ import { user } from '../../data';
 
 import './style.scss';
 
-export class ProfilePage extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+export class ProfilePage extends Block {
+  constructor() {
+    super({});
   }
 
   init() {

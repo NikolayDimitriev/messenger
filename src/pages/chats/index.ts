@@ -1,4 +1,4 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Link } from '../../components/link';
 import { Dialogue } from '../../components/dialogues';
@@ -12,17 +12,15 @@ import chatMenuDots from '../../../static/chat-menu-dots.svg';
 
 import './style.scss';
 
-export class Chat extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+export class ChatPage extends Block {
+  constructor() {
+    super({});
   }
 
   init() {
     this.children.link = new Link({
       value: 'Профиль >',
-      attr: {
-        href: '/profile',
-      },
+      to: '/profile',
     });
 
     this.children.dialogues = dialogues.map(
@@ -33,9 +31,6 @@ export class Chat extends Block<TProps> {
           text: dialogue.lastMessage.text,
           date: dialogue.lastMessage.date,
           count: dialogue.newMessagesCount,
-          attr: {
-            class: 'dialogue',
-          },
         })
     );
 
@@ -44,17 +39,10 @@ export class Chat extends Block<TProps> {
         new MessagesBlock({
           date: messageBlock.date,
           messages: messageBlock.messages,
-          attr: {
-            class: 'messages',
-          },
         })
     );
 
-    this.children.chatForm = new ChatForm({
-      attr: {
-        class: 'chat-right__form',
-      },
-    });
+    this.children.chatForm = new ChatForm({});
   }
 
   render() {

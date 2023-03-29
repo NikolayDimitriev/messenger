@@ -1,46 +1,41 @@
-import { Block, TProps } from './Block';
+import { Block } from './Block';
 import { render } from '../utils/render';
-
-type TRouteProps = TProps & {
-  rootQuery: string;
-};
+import { Layout } from '../components/layout';
 
 export class Route {
-  private _pathname: string;
-  private _blockConstructor: Block<TProps>;
-  private _block: Block<TProps> | null;
-  private _props: TRouteProps;
-  constructor(pathname: string, view: Block<TProps>, props: TRouteProps) {
-    this._pathname = pathname;
-    this._blockConstructor = view;
-    this._block = null;
-    this._props = props;
-  }
+  private block: Block | null = null;
+
+  constructor(
+    private pathname: string,
+    private readonly blockConstructor: typeof Block,
+    private readonly query: string
+  ) {}
 
   navigate(pathname: string) {
     if (this.match(pathname)) {
-      this._pathname = pathname;
+      this.pathname = pathname;
       this.render();
     }
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
+    if (this.block) {
+      this.block = null;
     }
   }
 
   match(pathname: string) {
-    return pathname === this._pathname;
+    return pathname === this.pathname;
   }
 
   render() {
-    if (!this._block) {
-      this._block = new this._blockConstructor();
-      render(this._props.rootQuery, this._block);
+    if (!this.block) {
+      this.block = new Layout({
+        page: new this.blockConstructor({}),
+      });
+
+      render(this.query, this.block);
       return;
     }
-
-    this._block.show();
   }
 }

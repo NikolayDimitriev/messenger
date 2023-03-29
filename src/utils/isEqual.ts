@@ -1,8 +1,6 @@
-type PlainObject<T = unknown> = {
-  [k in string]: T;
-};
+import { Indexed } from './typing';
 
-function isPlainObject(value: unknown): value is PlainObject {
+function isPlainObject(value: unknown): value is Indexed {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -15,11 +13,11 @@ function isArray(value: unknown): value is [] {
   return Array.isArray(value);
 }
 
-function isArrayOrObject(value: unknown): value is [] | PlainObject {
+function isArrayOrObject(value: unknown): value is [] | Indexed {
   return isPlainObject(value) || isArray(value);
 }
 
-export function isEqual(lhs: PlainObject, rhs: PlainObject) {
+export function isEqual(lhs: Indexed, rhs: Indexed) {
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -27,7 +25,7 @@ export function isEqual(lhs: PlainObject, rhs: PlainObject) {
   for (const [key, value] of Object.entries(lhs)) {
     const rightValue = rhs[key];
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      if (isEqual(value as PlainObject, rightValue as PlainObject)) {
+      if (isEqual(value as Indexed, rightValue as Indexed)) {
         continue;
       }
       return false;
@@ -40,4 +38,3 @@ export function isEqual(lhs: PlainObject, rhs: PlainObject) {
 
   return true;
 }
-
