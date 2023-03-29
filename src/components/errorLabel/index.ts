@@ -7,7 +7,7 @@ type TErrorLabelProps = {
 
 export class ErrorLabel extends Block<TErrorLabelProps> {
   constructor(props: TErrorLabelProps) {
-    super('label', props);
+    super(props);
   }
 
   render() {

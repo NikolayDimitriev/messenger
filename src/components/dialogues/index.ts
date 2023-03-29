@@ -13,7 +13,7 @@ type TDialogueProps = TProps & {
 
 export class Dialogue extends Block<TDialogueProps> {
   constructor(props: TDialogueProps) {
-    super('div', props);
+    super(props);
   }
 
   render() {

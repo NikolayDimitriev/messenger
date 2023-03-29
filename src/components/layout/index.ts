@@ -1,9 +1,9 @@
 import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 
-export class Layout extends Block<TProps> {
+export class Layout extends Block {
   constructor(props: TProps) {
-    super('div', props);
+    super(props);
   }
 
   render() {

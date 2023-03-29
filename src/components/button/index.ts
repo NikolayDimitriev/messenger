@@ -3,13 +3,13 @@ import tpl from './tpl.hbs';
 import './style.scss';
 import { Image } from '../image';
 
-type TButtonProps = TProps & {
+type TButtonProps = {
   value: string | Image;
-};
+} & TProps;
 
 export class Button extends Block<TButtonProps> {
   constructor(props: TButtonProps) {
-    super('button', props);
+    super(props);
   }
 
   render() {

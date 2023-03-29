@@ -10,7 +10,7 @@ import { ErrorLabel } from '../errorLabel';
 export class ChatForm extends Block<TProps> {
   private _formValidation: FormValidation;
   constructor(props: TProps) {
-    super('form', props);
+    super(props);
     this._formValidation = new FormValidation(this);
   }
 

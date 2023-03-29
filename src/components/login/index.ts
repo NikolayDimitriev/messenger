@@ -14,7 +14,7 @@ export type TLoginProps = TProps & {
 
 export class Login extends Block<TLoginProps> {
   constructor(props: TLoginProps) {
-    super('div', props);
+    super(props);
   }
 
   init() {

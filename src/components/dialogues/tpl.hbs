@@ -1,16 +1,18 @@
-<div class='dialogue__avatar'></div>
-<div class='dialogue__about'>
-  <div class='dialogue__name'>{{name}}</div>
-  <div class='dialogue__text'>
-    {{#if owner}}
-      <span class='dialogue__owner'>Вы:</span>
-    {{/if}}
-    {{text}}
+<div>
+  <div class='dialogue__avatar'></div>
+  <div class='dialogue__about'>
+    <div class='dialogue__name'>{{name}}</div>
+    <div class='dialogue__text'>
+      {{#if owner}}
+        <span class='dialogue__owner'>Вы:</span>
+      {{/if}}
+      {{text}}
+    </div>
   </div>
-</div>
-<div class='dialogue__info'>
-  <span class='dialogue__date'>{{date}}</span>
-  {{#if count}}
-    <div class='dialogue__count'>{{count}}</div>
-  {{/if}}
+  <div class='dialogue__info'>
+    <span class='dialogue__date'>{{date}}</span>
+    {{#if count}}
+      <div class='dialogue__count'>{{count}}</div>
+    {{/if}}
+  </div>
 </div>

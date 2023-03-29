@@ -7,7 +7,7 @@ type TMessageProps = TMessage & TProps;
 
 export class Message extends Block<TMessageProps> {
   constructor(props: TMessageProps) {
-    super('div', props);
+    super(props);
   }
 
   render() {

@@ -8,7 +8,7 @@ type TLinkProps = TProps & {
 
 export class Link extends Block<TLinkProps> {
   constructor(props: TLinkProps) {
-    super('a', props);
+    super(props);
   }
 
   render() {

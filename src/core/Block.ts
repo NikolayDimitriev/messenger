@@ -6,7 +6,7 @@ import { isEqual } from '../utils/isEqual';
 export type TProps = {
   events?: Record<string, (e?: Event) => void>;
   attr?: Record<string, string>;
-  page?: Block<TProps>;
+  page?: Block;
 } & Record<string, any>;
 
 enum EVENTS {
@@ -16,26 +16,19 @@ enum EVENTS {
   FLOW_RENDER = 'flow:render',
 }
 
-type TChildren = Record<string, any>;
+type TChildren = Record<string, Block | Block[]>;
 
-export abstract class Block<T extends TProps> {
+export class Block<T extends TProps = any> {
   public id: string = nanoid(6);
-  private _element: HTMLElement | null = null;
-  private _meta: { tagName: string; props: T };
-  private eventBus: () => EventBus;
-
-  public children: TChildren;
   public props: T;
+  public children: TChildren;
+  private eventBus: () => EventBus;
+  private _element: HTMLElement | null = null;
 
-  constructor(tagName = 'div', propsWithChildren: T = {} as T) {
+  constructor(propsWithChildren: T) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
-
-    this._meta = {
-      tagName,
-      props,
-    };
 
     this.children = this._makePropsProxy(children as T);
 
@@ -51,7 +44,7 @@ export abstract class Block<T extends TProps> {
     props: T;
     children: TChildren;
   } {
-    const props: T = {} as T;
+    const props: Record<string, unknown> = {};
     const children: TChildren = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
@@ -62,7 +55,7 @@ export abstract class Block<T extends TProps> {
       ) {
         children[key] = value;
       } else {
-        props[key as keyof T] = value;
+        props[key] = value;
       }
     });
 
@@ -100,14 +93,7 @@ export abstract class Block<T extends TProps> {
     eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  private _createResources(): void {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
-  }
-
   private _init(): void {
-    this._createResources();
-
     this.init();
 
     this.eventBus().emit(EVENTS.FLOW_RENDER);
@@ -119,6 +105,7 @@ export abstract class Block<T extends TProps> {
 
   private _componentDidMount(): void {
     this.componentDidMount();
+
     if (this._element) {
       Object.values(this._element).forEach((child) => {
         child.dispatchComponentDidMount();
@@ -175,17 +162,20 @@ export abstract class Block<T extends TProps> {
 
     this.removeEvents();
 
-    if (this._element) {
-      this._element.innerHTML = '';
-      this._element.append(block);
+    const newElement = block.firstElementChild as HTMLElement;
+
+    if (this._element && newElement) {
+      this._element.replaceWith(newElement);
     }
+
+    this._element = newElement;
 
     this.addEvents();
 
     this.addAttribute();
   }
 
-  protected render(): DocumentFragment {
+  protected render() {
     return new DocumentFragment();
   }
 
@@ -212,10 +202,6 @@ export abstract class Block<T extends TProps> {
         throw new Error('Нет доступа');
       },
     });
-  }
-
-  private _createDocumentElement(tagName: string): HTMLElement {
-    return document.createElement(tagName);
   }
 
   protected compile(
@@ -246,18 +232,10 @@ export abstract class Block<T extends TProps> {
         if (!stub) {
           return;
         }
-        stub.replaceWith(child.getContent());
+        stub.replaceWith(child.getContent()!);
       });
     });
 
     return temp.content;
-  }
-
-  show(): void {
-    this._element!.style.display = 'flex';
-  }
-
-  hide(): void {
-    this._element!.style.display = 'none';
   }
 }

@@ -20,29 +20,31 @@ export class Form extends Block<TFormProps> {
   private _formValidation: FormValidation;
 
   constructor(props: TFormProps) {
-    super('form', props);
+    super(props);
     this._formValidation = new FormValidation(this);
   }
 
   init() {
-    this.children.inputs = this.props.data?.map(
-      (input) =>
-        new InputsBlock({
-          id: input.id,
-          labelText: input.labelText,
-          name: input.name,
-          inputType: input.inputType,
-          labelClass: input.labelClass,
-          inputClass: input.inputClass,
-          errMessage: input.errMessage,
-          value: input.value,
-          disabled: this.props.disabled,
-          isError: input.isError,
-          attr: {
-            class: this.props.inputBlockClass || 'field',
-          },
-        })
-    );
+    if (this.props.data) {
+      this.children.inputs = this.props.data.map(
+        (input) =>
+          new InputsBlock({
+            id: input.id,
+            labelText: input.labelText,
+            name: input.name,
+            inputType: input.inputType,
+            labelClass: input.labelClass,
+            inputClass: input.inputClass,
+            errMessage: input.errMessage,
+            value: input.value,
+            disabled: this.props.disabled,
+            isError: input.isError,
+            attr: {
+              class: this.props.inputBlockClass || 'field',
+            },
+          })
+      );
+    }
 
     if (this.props.buttonValue) {
       this.children.button = new Button({

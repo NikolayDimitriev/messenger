@@ -10,7 +10,7 @@ type TErrorProps = TProps & {
 
 export class Error extends Block<TErrorProps> {
   constructor(props: TErrorProps) {
-    super('div', props);
+    super(props);
   }
 
   init() {

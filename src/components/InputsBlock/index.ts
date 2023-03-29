@@ -10,7 +10,7 @@ type TInputsBlockProps = Partial<TInput> & TProps;
 
 export class InputsBlock extends Block<TInputsBlockProps> {
   constructor(props: TInputsBlockProps) {
-    super('div', props);
+    super(props);
   }
 
   init() {

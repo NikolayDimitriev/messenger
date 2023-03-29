@@ -6,7 +6,7 @@ type TInputsBlockProps = Partial<TInput> & TProps;
 
 export class Input extends Block<TInputsBlockProps> {
   constructor(props: TInputsBlockProps) {
-    super('input', props);
+    super(props);
   }
 
   override addAttribute(): void {
