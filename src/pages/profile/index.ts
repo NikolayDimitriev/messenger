@@ -13,8 +13,6 @@ import AuthController from '../../controllers/AuthController';
 
 class ProfilePageBase extends Block {
   init() {
-    AuthController.getUser();
-
     this.children.form = new Form({
       data: user.fields,
       inputBlockClass: 'profile-field',
@@ -46,7 +44,7 @@ class ProfilePageBase extends Block {
 
     this.children.link = new Link({
       value: 'Выйти',
-      to: '/chats',
+      to: '/',
       attr: {
         class: 'profile-wrapper__btn profile-wrapper__btn--red',
       },
@@ -54,6 +52,14 @@ class ProfilePageBase extends Block {
         click: () => {
           AuthController.logout();
         },
+      },
+    });
+
+    this.children.linkBack = new Link({
+      value: '',
+      to: '/chats',
+      attr: {
+        class: 'profile-sidebar__link',
       },
     });
   }
