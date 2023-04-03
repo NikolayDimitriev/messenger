@@ -2,7 +2,7 @@ import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 
 type TErrorLabelProps = {
-  errMessage: string;
+  errMessage?: string;
 } & TProps;
 
 export class ErrorLabel extends Block<TErrorLabelProps> {

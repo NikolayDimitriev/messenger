@@ -7,21 +7,23 @@ import { TAuth } from '../../data/data.props';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TFormProps = TProps & {
+type TFormProps = {
+  onSubmit?: (data: any) => void;
   data?: TAuth;
   buttonValue?: string;
   linkValue?: string;
   linkHref?: string;
   inputBlockClass?: string;
   disabled?: boolean;
-};
+} & TProps;
 
 export class Form extends Block<TFormProps> {
   private _formValidation: FormValidation;
 
   constructor(props: TFormProps) {
     super(props);
-    this._formValidation = new FormValidation(this);
+
+    this._formValidation = new FormValidation(this, this.props.onSubmit!);
   }
 
   init() {
@@ -59,9 +61,9 @@ export class Form extends Block<TFormProps> {
     if (this.props.linkValue && this.props.linkHref) {
       this.children.link = new Link({
         value: this.props.linkValue,
+        to: this.props.linkHref,
         attr: {
           class: 'form-link',
-          href: this.props.linkHref,
         },
       });
     }

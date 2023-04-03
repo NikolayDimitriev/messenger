@@ -128,7 +128,7 @@ export class Block<T extends TProps = any> {
 
   private _componentDidUpdate(oldProps: any, newProps: any): void {
     const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
+    if (!response) {
       this.eventBus().emit(EVENTS.FLOW_RENDER);
     }
   }

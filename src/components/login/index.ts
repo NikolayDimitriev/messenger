@@ -6,7 +6,8 @@ import { TAuth } from '../../data/data.props';
 
 export type TLoginProps = TProps & {
   title: string;
-  data?: TAuth;
+  onSubmit: (data: any) => void;
+  dataInputs?: TAuth;
   buttonValue?: string;
   linkValue?: string;
   linkHref?: string;
@@ -19,17 +20,17 @@ export class Login extends Block<TLoginProps> {
 
   init() {
     this.children.form = new Form({
-      data: this.props.data,
+      data: this.props.dataInputs,
       buttonValue: this.props.buttonValue,
       linkValue: this.props.linkValue,
       linkHref: this.props.linkHref,
-      attr: { class: 'form' },
+      onSubmit: this.props.onSubmit,
     });
   }
 
   render() {
     return this.compile(tpl, {
-      title: this.props.title,
+      ...this.props,
     });
   }
 }

@@ -8,13 +8,13 @@ import avatar from '../../../static/avatar.svg';
 import { user } from '../../data';
 
 import './style.scss';
+import { withStore } from '../../core/Store';
+import AuthController from '../../controllers/AuthController';
 
-export class ProfilePage extends Block {
-  constructor() {
-    super({});
-  }
-
+class ProfilePageBase extends Block {
   init() {
+    AuthController.getUser();
+
     this.children.form = new Form({
       data: user.fields,
       inputBlockClass: 'profile-field',
@@ -29,9 +29,9 @@ export class ProfilePage extends Block {
       attr: {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
-      events: {
-        click: changeUserInfo.bind(this),
-      },
+      // events: {
+      //   click: changeUserInfo.bind(this),
+      // },
     });
 
     this.children.changePasswordBtn = new Button({
@@ -39,16 +39,21 @@ export class ProfilePage extends Block {
       attr: {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
-      events: {
-        click: changePassword.bind(this),
-      },
+      // events: {
+      //   click: changePassword.bind(this),
+      // },
     });
 
     this.children.link = new Link({
       value: 'Выйти',
+      to: '/chats',
       attr: {
-        href: '/chats',
         class: 'profile-wrapper__btn profile-wrapper__btn--red',
+      },
+      events: {
+        click: () => {
+          AuthController.logout();
+        },
       },
     });
   }
@@ -61,54 +66,58 @@ export class ProfilePage extends Block {
   }
 }
 
-function changeUserInfo(this: ProfilePage) {
-  this.children.form = new Form({
-    data: user.fields,
-    inputBlockClass: 'profile-field',
-    disabled: false,
-    button: new Button({
-      value: 'Сохранить',
-      attr: {
-        class: 'main-btn',
-        type: 'submit',
-      },
-    }),
-    attr: {
-      class: 'profile-wrapper__fields',
-    },
-  });
+// function changeUserInfo(this: typeof ProfilePageBase) {
+//   this.children.form = new Form({
+//     data: user.fields,
+//     inputBlockClass: 'profile-field',
+//     disabled: false,
+//     button: new Button({
+//       value: 'Сохранить',
+//       attr: {
+//         class: 'main-btn',
+//         type: 'submit',
+//       },
+//     }),
+//     attr: {
+//       class: 'profile-wrapper__fields',
+//     },
+//   });
 
-  const actions = document.querySelector<HTMLElement>(
-    '.profile-wrapper__actions'
-  );
+//   const actions = document.querySelector<HTMLElement>(
+//     '.profile-wrapper__actions'
+//   );
 
-  if (actions) {
-    actions.style.display = 'none';
-  }
-}
+//   if (actions) {
+//     actions.style.display = 'none';
+//   }
+// }
 
-function changePassword(this: ProfilePage) {
-  this.children.form = new Form({
-    data: user.passwords,
-    inputBlockClass: 'profile-field',
-    disabled: false,
-    button: new Button({
-      value: 'Сохранить',
-      attr: {
-        class: 'main-btn',
-        type: 'submit',
-      },
-    }),
-    attr: {
-      class: 'profile-wrapper__fields',
-    },
-  });
+// function changePassword(this: typeof ProfilePageBase) {
+//   this.children.form = new Form({
+//     data: user.passwords,
+//     inputBlockClass: 'profile-field',
+//     disabled: false,
+//     button: new Button({
+//       value: 'Сохранить',
+//       attr: {
+//         class: 'main-btn',
+//         type: 'submit',
+//       },
+//     }),
+//     attr: {
+//       class: 'profile-wrapper__fields',
+//     },
+//   });
 
-  const actions = document.querySelector<HTMLElement>(
-    '.profile-wrapper__actions'
-  );
+//   const actions = document.querySelector<HTMLElement>(
+//     '.profile-wrapper__actions'
+//   );
 
-  if (actions) {
-    actions.style.display = 'none';
-  }
-}
+//   if (actions) {
+//     actions.style.display = 'none';
+//   }
+// }
+
+const withUser = withStore((state) => ({ ...state.user }));
+
+export const ProfilePage = withUser(ProfilePageBase);

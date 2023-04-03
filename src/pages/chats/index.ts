@@ -4,6 +4,7 @@ import { Link } from '../../components/link';
 import { Dialogue } from '../../components/dialogues';
 import { MessagesBlock } from '../../components/messagesBlock';
 import { ChatForm } from '../../components/chatForm';
+import { withStore } from '../../core/Store';
 
 import { dialogues } from '../../data';
 import { messages } from '../../data';
@@ -51,3 +52,10 @@ export class ChatPage extends Block {
     });
   }
 }
+
+const withChat = withStore((state) => ({
+  user: state.user,
+  chat: state.chat,
+}));
+
+export const Chats = withChat(ChatPage);

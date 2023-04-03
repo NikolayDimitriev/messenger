@@ -1,9 +1,9 @@
-import { Block } from '../../core/Block';
+import { Block, TProps } from '../../core/Block';
 import tpl from './tpl.hbs';
 
-export class Image extends Block {
-  constructor() {
-    super({});
+export class Image extends Block<TProps> {
+  constructor(props: TProps) {
+    super(props);
   }
 
   render() {

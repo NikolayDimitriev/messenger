@@ -1,11 +1,11 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
 import { Message } from '../message';
 import { TMessageBlock } from '../../data/data.props';
 
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TMessageBlockProps = Partial<TMessageBlock> & TProps;
+type TMessageBlockProps = Partial<TMessageBlock>;
 
 export class MessagesBlock extends Block<TMessageBlockProps> {
   constructor(props: TMessageBlockProps) {

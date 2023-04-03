@@ -1,7 +1,9 @@
-import {Form} from '../components/form';
-import {Input} from '../components/input';
-import {InputsBlock} from '../components/InputsBlock';
-import {ChatForm} from '../components/chatForm';
+import { Form } from '../components/form';
+import { Input } from '../components/input';
+import { ErrorLabel } from '../components/errorLabel';
+import { InputsBlock } from '../components/InputsBlock';
+import { ChatForm } from '../components/chatForm';
+import { TSignUpData, TSignInData } from '../api/AuthAPI';
 
 const rules: Record<string, RegExp> = {
   first_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
@@ -17,16 +19,18 @@ const rules: Record<string, RegExp> = {
 };
 
 export class FormValidation {
-  private _form: Form | ChatForm;
   private _inputsBlock: Record<string, InputsBlock>;
   private _inputs: Input[];
   private _firstPass: string;
 
-  constructor(form: Form | ChatForm) {
-    this._form = form;
+  constructor(
+    private _form: Form | ChatForm,
+    private _callAuthController: (data: TSignUpData | TSignInData) => void
+  ) {
     this._inputsBlock = {};
     this._inputs = [];
     this._firstPass = '';
+
     this.init();
   }
 
@@ -42,8 +46,8 @@ export class FormValidation {
     });
 
     if (this._form instanceof ChatForm) {
-      const input = this._form.children.inputs;
-      const name = this._form.children.inputs.props.name;
+      const input = this._form.children.inputs as Input;
+      const name = input.props.name as string;
       input.setProps({
         events: {
           focus: () => this.isValidChatForm(name),
@@ -52,6 +56,7 @@ export class FormValidation {
       });
       this._inputs.push(input);
     }
+
     if (this._form instanceof Form) {
       // * Вещаю event`s на каждый инпут
       // ! form -> InputBlock[] -> Input
@@ -60,10 +65,12 @@ export class FormValidation {
           return;
         }
 
-        const arr = Array.isArray(children) ? children : [children];
+        const arr = Array.isArray(children)
+          ? (children as InputsBlock[])
+          : ([children] as InputsBlock[]);
 
         arr.forEach((inputBlock: InputsBlock) => {
-          const input: Input = inputBlock.children.input;
+          const input = inputBlock.children.input as Input;
 
           const name = input.props.name as string;
 
@@ -90,7 +97,7 @@ export class FormValidation {
 
     const { input, errorLabel } = this._inputsBlock[inputName].children;
 
-    const value = (input.getContent() as HTMLInputElement).value;
+    const value = ((input as Input).getContent() as HTMLInputElement).value;
 
     if (inputName === 'password') {
       this._firstPass = value;
@@ -98,20 +105,24 @@ export class FormValidation {
 
     if (inputName === 'password-two') {
       if (this._firstPass !== value) {
-        errorLabel.setProps({ attr: { class: 'input__label--error' } });
+        (errorLabel as ErrorLabel).setProps({
+          attr: { class: 'input__label--error' },
+        });
         return false;
       }
-      errorLabel.setProps({ attr: { class: 'input__label' } });
+      (errorLabel as ErrorLabel).setProps({ attr: { class: 'input__label' } });
       return true;
     }
 
     if (!regExp.test(value)) {
-      errorLabel.setProps({ attr: { class: 'input__label--error' } });
+      (errorLabel as ErrorLabel).setProps({
+        attr: { class: 'input__label--error' },
+      });
 
       return false;
     }
 
-    errorLabel.setProps({ attr: { class: 'input__label' } });
+    (errorLabel as ErrorLabel).setProps({ attr: { class: 'input__label' } });
 
     return true;
   }
@@ -127,12 +138,14 @@ export class FormValidation {
     const errorLabel = this._form.children.errorLabel;
 
     if (!regExp.test(value)) {
-      errorLabel.setProps({ attr: { class: 'input__label--error' } });
+      (errorLabel as ErrorLabel).setProps({
+        attr: { class: 'input__label--error' },
+      });
 
       return false;
     }
 
-    errorLabel.setProps({ attr: { class: 'input__label' } });
+    (errorLabel as ErrorLabel).setProps({ attr: { class: 'input__label' } });
 
     return true;
   }
@@ -144,9 +157,11 @@ export class FormValidation {
 
     let isValidAllInputs = true;
     this._inputs.forEach((input) => {
-      result[input.props.name as string] = (
-        input.getContent() as HTMLInputElement
-      ).value;
+      if (input.props.name !== 'password_two') {
+        result[input.props.name as string] = (
+          input.getContent() as HTMLInputElement
+        ).value;
+      }
 
       if (this._form instanceof ChatForm) {
         if (!this.isValidChatForm(input.props.name as string)) {
@@ -160,6 +175,11 @@ export class FormValidation {
     });
 
     if (isValidAllInputs) {
+      if (Object.keys(result).length > 2) {
+        this._callAuthController(result as TSignUpData);
+      } else {
+        this._callAuthController(result as TSignInData);
+      }
       console.log(result);
     }
   }

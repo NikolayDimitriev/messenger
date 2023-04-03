@@ -1,9 +1,9 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { TDate } from '../../data/data.props';
 
-type TDialogueProps = TProps & {
+type TDialogueProps = {
   name: string;
   owner: boolean;
   text: string;

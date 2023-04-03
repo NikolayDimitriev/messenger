@@ -1,6 +1,8 @@
 import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
+import { TSignUpData } from '../../api/AuthAPI';
+import AuthController from '../../controllers/AuthController';
 import { signUp } from '../../data';
 
 export class RegistrationPage extends Block {
@@ -11,10 +13,13 @@ export class RegistrationPage extends Block {
   init() {
     this.children.login = new Login({
       title: 'Регистрация',
-      data: signUp,
+      dataInputs: signUp,
       buttonValue: 'Зарегистрироваться',
       linkValue: 'Войти',
       linkHref: '/auth',
+      onSubmit: (data: TSignUpData) => {
+        AuthController.signup(data);
+      },
     });
   }
 

@@ -1,6 +1,5 @@
 import { Block } from './Block';
 import { render } from '../utils/render';
-import { Layout } from '../components/layout';
 
 export class Route {
   private block: Block | null = null;
@@ -30,9 +29,7 @@ export class Route {
 
   render() {
     if (!this.block) {
-      this.block = new Layout({
-        page: new this.blockConstructor({}),
-      });
+      this.block = new this.blockConstructor({});
 
       render(this.query, this.block);
       return;
