@@ -1,6 +1,8 @@
-import API, { AuthAPI, TSignUpData, TSignInData } from '../api/AuthAPI';
+import API, { AuthAPI } from '../api/AuthAPI';
+import MessagesController from './MessagesController';
 import router from '../core/Router';
 import store from '../core/Store';
+import { TSignUpData, TSignInData } from '../typing';
 
 class AuthController {
   private _api: AuthAPI;
@@ -35,6 +37,8 @@ class AuthController {
 
   async logout() {
     try {
+      MessagesController.closeAll();
+
       await this._api.logout();
 
       store.set('user.data', null);

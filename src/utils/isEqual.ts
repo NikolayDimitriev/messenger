@@ -1,4 +1,4 @@
-import { Indexed } from './typing';
+import { Indexed } from '../typing/';
 
 function isPlainObject(value: unknown): value is Indexed {
   return (

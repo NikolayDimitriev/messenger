@@ -3,12 +3,6 @@ import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
 import { isEqual } from '../utils/isEqual';
 
-export type TProps = {
-  events?: Record<string, (e?: Event) => void>;
-  attr?: Record<string, string>;
-  page?: Block;
-} & Record<string, any>;
-
 enum EVENTS {
   INIT = 'init',
   FLOW_CDM = 'flow:component-did-mount',
@@ -18,7 +12,7 @@ enum EVENTS {
 
 type TChildren = Record<string, Block | Block[]>;
 
-export class Block<T extends TProps = any> {
+export class Block<T extends Record<string, any> = any> {
   public id: string = nanoid(6);
   public props: T;
   public children: TChildren;
@@ -81,7 +75,7 @@ export class Block<T extends TProps = any> {
   protected addAttribute(): void {
     const { attr = {} } = this.props;
 
-    Object.entries(attr).forEach(([key, value]) => {
+    Object.entries(attr as Record<string, string>).forEach(([key, value]) => {
       this._element?.setAttribute(key, value);
     });
   }

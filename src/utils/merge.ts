@@ -1,4 +1,4 @@
-import { Indexed } from './typing';
+import { Indexed } from '../typing/';
 
 export function merge(lhs: Indexed, rhs: Indexed): Indexed {
   for (const p in rhs) {

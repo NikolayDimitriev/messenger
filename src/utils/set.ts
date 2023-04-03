@@ -1,5 +1,5 @@
 import { merge } from './merge';
-import { Indexed } from './typing';
+import { Indexed } from '../typing/';
 
 export function set(
   object: Indexed | unknown,
