@@ -1,6 +1,6 @@
 import { Block } from '../../core/Block';
 import { Message } from '../message';
-import { TMessageBlock } from '../../data/data.props';
+import { TMessageBlock } from '../../mock/mock.props';
 
 import tpl from './tpl.hbs';
 import './style.scss';

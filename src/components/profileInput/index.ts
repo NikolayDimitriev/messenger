@@ -1,16 +1,20 @@
 import { Block } from '../../core/Block';
-import { TProps } from '../../typing';
 import { Input } from '../input';
 import { ErrorLabel } from '../errorLabel';
-import { TInputBlock } from '../../mock/mock.props';
 import tpl from './tpl.hbs';
 
-import './style.scss';
+type TProfileInputProps = {
+  label: string;
+  id: string;
+  value: string;
+  type: string;
+  name: string;
+  disabled: string;
+  errMessage?: string;
+};
 
-type TInputsBlockProps = TInputBlock & TProps;
-
-export class InputsBlock extends Block<TInputsBlockProps> {
-  constructor(props: TInputsBlockProps) {
+export class ProfileInput extends Block {
+  constructor(props: TProfileInputProps) {
     super(props);
   }
 
@@ -18,7 +22,7 @@ export class InputsBlock extends Block<TInputsBlockProps> {
     this.children.input = new Input({
       attr: {
         id: this.props.id,
-        class: this.props.class ?? 'field__input',
+        class: 'profile-field__input',
         name: this.props.name,
         type: this.props.type,
         value: this.props.value,
@@ -27,17 +31,15 @@ export class InputsBlock extends Block<TInputsBlockProps> {
     });
 
     this.children.errorLabel = new ErrorLabel({
-      errMessage: this.props.errMessage as string,
+      errMessage: this.props.errMessage,
       attr: {
-        id: this.props.id as string,
+        for: this.props.id,
         class: 'input__label',
       },
     });
   }
 
   render() {
-    return this.compile(tpl, {
-      ...this.props,
-    });
+    return this.compile(tpl, { ...this.props });
   }
 }

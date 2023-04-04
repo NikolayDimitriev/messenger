@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TDate } from '../../data/data.props';
+import { TDate } from '../../mock/mock.props';
 
 type TDialogueProps = {
   name: string;

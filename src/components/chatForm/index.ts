@@ -36,11 +36,11 @@ export class ChatForm extends Block<TChatFormProps> {
 
     const id: string = Date.now().toString();
     this.children.inputs = new Input({
-      id,
-      type: 'text',
-      name: 'message',
-      placeholder: 'Сообщение',
       attr: {
+        id,
+        type: 'text',
+        name: 'message',
+        placeholder: 'Сообщение',
         class: 'chat-right__input',
       },
     });
@@ -48,7 +48,7 @@ export class ChatForm extends Block<TChatFormProps> {
     this.children.errorLabel = new ErrorLabel({
       errMessage: 'Не должно быть пустым!',
       attr: {
-        id,
+        for: id,
         class: 'input__label',
       },
     });

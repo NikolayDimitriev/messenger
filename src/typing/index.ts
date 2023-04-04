@@ -1,4 +1,8 @@
 export type TUser = {
+  data: TUserProps;
+};
+
+export type TUserProps = {
   id: number;
   first_name: string;
   second_name: string;
@@ -36,6 +40,20 @@ export type TChatInfo = {
     time: string;
     content: string;
   };
+};
+
+export type TChangeProfileData = {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  email: string;
+  phone: string;
+};
+
+export type TChangePassword = {
+  oldPassword: string;
+  newPassword: string;
 };
 
 export type TSignUpData = {

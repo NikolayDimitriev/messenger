@@ -3,9 +3,9 @@ import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
 import { TSignUpData } from '../../typing';
 import AuthController from '../../controllers/AuthController';
-import { signUp } from '../../data';
+import { signUp } from '../../mock';
 
-export class RegistrationPage extends Block {
+export class SignUpPage extends Block {
   constructor() {
     super({});
   }
@@ -16,7 +16,7 @@ export class RegistrationPage extends Block {
       dataInputs: signUp,
       buttonValue: 'Зарегистрироваться',
       linkValue: 'Войти',
-      linkHref: '/auth',
+      linkHref: '/',
       onSubmit: (data: TSignUpData) => {
         AuthController.signup(data);
       },

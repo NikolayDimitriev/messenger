@@ -2,7 +2,7 @@ import { Block } from './Block';
 import { render } from '../utils/render';
 
 export class Route {
-  private block: Block | null = null;
+  private _block: Block | null = null;
 
   constructor(
     private pathname: string,
@@ -18,8 +18,8 @@ export class Route {
   }
 
   leave() {
-    if (this.block) {
-      this.block = null;
+    if (this._block) {
+      this._block = null;
     }
   }
 
@@ -28,10 +28,10 @@ export class Route {
   }
 
   render() {
-    if (!this.block) {
-      this.block = new this.blockConstructor({});
+    if (!this._block) {
+      this._block = new this.blockConstructor({});
 
-      render(this.query, this.block);
+      render(this.query, this._block);
       return;
     }
   }

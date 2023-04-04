@@ -6,8 +6,8 @@ import { MessagesBlock } from '../../components/messagesBlock';
 import { ChatForm } from '../../components/chatForm';
 import { withStore } from '../../core/Store';
 
-import { dialogues } from '../../data';
-import { messages } from '../../data';
+import { dialogues } from '../../mock';
+import { messages } from '../../mock';
 
 import chatMenuDots from '../../../static/chat-menu-dots.svg';
 

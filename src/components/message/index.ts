@@ -1,5 +1,5 @@
 import { Block, TProps } from '../../core/Block';
-import { TMessage } from '../../data/data.props';
+import { TMessage } from '../../mock/mock.props';
 import tpl from './tpl.hbs';
 import './style.scss';
 

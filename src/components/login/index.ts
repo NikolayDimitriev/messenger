@@ -3,15 +3,15 @@ import { TProps } from '../../typing';
 import { Form } from '../form';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TAuth } from '../../data/data.props';
+import { TInputBlock } from '../../mock/mock.props';
 
 export type TLoginProps = TProps & {
   title: string;
+  dataInputs: TInputBlock[];
+  buttonValue: string;
+  linkValue: string;
+  linkHref: string;
   onSubmit: (data: any) => void;
-  dataInputs?: TAuth;
-  buttonValue?: string;
-  linkValue?: string;
-  linkHref?: string;
 };
 
 export class Login extends Block<TLoginProps> {

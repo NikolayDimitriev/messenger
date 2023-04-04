@@ -3,7 +3,7 @@ import { TSignInData } from '../../typing';
 import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
-import { logIn } from '../../data';
+import { logIn } from '../../mock';
 
 export class AuthPage extends Block {
   constructor() {
@@ -16,7 +16,7 @@ export class AuthPage extends Block {
       dataInputs: logIn,
       buttonValue: 'Авторизоваться',
       linkValue: 'Нет аккаунта?',
-      linkHref: '/registration',
+      linkHref: '/sign-up',
       onSubmit: (data: TSignInData) => {
         AuthController.signin(data);
       },

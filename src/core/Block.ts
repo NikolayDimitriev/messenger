@@ -2,6 +2,7 @@
 import { EventBus } from './EventBus';
 import { nanoid } from 'nanoid';
 import { isEqual } from '../utils/isEqual';
+import { TProps } from '../typing';
 
 enum EVENTS {
   INIT = 'init',
@@ -77,6 +78,9 @@ export class Block<T extends Record<string, any> = any> {
 
     Object.entries(attr as Record<string, string>).forEach(([key, value]) => {
       this._element?.setAttribute(key, value);
+      if (key === 'disabled' && value === 'false') {
+        this.element?.removeAttribute(key);
+      }
     });
   }
 
@@ -145,6 +149,16 @@ export class Block<T extends Record<string, any> = any> {
     if (Object.values(props).length) {
       Object.assign(this.props, props);
     }
+  };
+
+  public addNewEvents = (newProps: TProps) => {
+    if (!newProps) {
+      return;
+    }
+
+    Object.assign(this.props, newProps);
+
+    this.addEvents();
   };
 
   get element() {
