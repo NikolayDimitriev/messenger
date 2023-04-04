@@ -57,7 +57,7 @@ class ProfilePageBase extends Block {
 
     this.children.linkBack = new Link({
       value: '',
-      to: '/chats',
+      to: '/messenger',
       attr: {
         class: 'profile-sidebar__link',
       },

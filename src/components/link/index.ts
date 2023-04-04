@@ -1,12 +1,13 @@
-import { Block, TProps } from '../../core/Block';
-import { withRouter } from '../../hoc/withRouter';
+import { Block } from '../../core/Block';
+import { withRouter, PropsWithRouter } from '../../hoc/withRouter';
 import tpl from './tpl.hbs';
 import './style.scss';
+import { TProps } from '../../typing';
 
-type TLinkProps = TProps & {
-  value: string;
+type TLinkProps = PropsWithRouter & {
   to: string;
-};
+  label: string;
+} & TProps;
 
 class BaseLink extends Block<TLinkProps> {
   constructor(props: TLinkProps) {

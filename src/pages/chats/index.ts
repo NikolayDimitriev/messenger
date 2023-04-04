@@ -13,15 +13,11 @@ import chatMenuDots from '../../../static/chat-menu-dots.svg';
 
 import './style.scss';
 
-export class ChatPage extends Block {
-  constructor() {
-    super({});
-  }
-
+class ChatPageBase extends Block {
   init() {
     this.children.link = new Link({
       value: 'Профиль >',
-      to: '/profile',
+      to: '/settings',
     });
 
     this.children.dialogues = dialogues.map(
@@ -55,7 +51,6 @@ export class ChatPage extends Block {
 
 const withChat = withStore((state) => ({
   user: state.user,
-  chat: state.chat,
 }));
 
-export const Chats = withChat(ChatPage);
+export const Chats = withChat(ChatPageBase);

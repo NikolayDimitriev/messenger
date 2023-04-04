@@ -1,7 +1,7 @@
 import { AuthPage } from './pages/auth';
 import { ProfilePage } from './pages/profile';
 import { RegistrationPage } from './pages/registration';
-import { ChatPage } from './pages/chats';
+import { Chats } from './pages/chats';
 // import { Page404 } from './pages/404';
 // import { Page500 } from './pages/500';
 
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Index, AuthPage)
     .use(Routes.Profile, ProfilePage)
     .use(Routes.Register, RegistrationPage)
-    .use(Routes.Chats, ChatPage);
+    .use(Routes.Chats, Chats);
   // .use(Routes.Error404, Page404)
   // .use(Routes.Error500, Page500);
 

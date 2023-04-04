@@ -1,4 +1,5 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
+import { TProps } from '../../typing';
 import { Button } from '../button';
 import tpl from './tpl.hbs';
 import attach from '../../../static/attach.svg';
@@ -7,9 +8,13 @@ import { Input } from '../input';
 import { FormValidation } from '../../core/FormValidation';
 import { ErrorLabel } from '../errorLabel';
 
-export class ChatForm extends Block<TProps> {
+type TChatFormProps = TProps & {
+  onSubmit?: (data: any) => void;
+};
+
+export class ChatForm extends Block<TChatFormProps> {
   private _formValidation: FormValidation;
-  constructor(props: TProps) {
+  constructor(props: TChatFormProps) {
     super(props);
     this._formValidation = new FormValidation(this, (data: unknown) => {
       this.props.onSubmit!(data);

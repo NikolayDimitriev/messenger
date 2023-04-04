@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
-import { TSignUpData } from '../../api/AuthAPI';
+import { TSignUpData } from '../../typing';
 import AuthController from '../../controllers/AuthController';
 import { signUp } from '../../data';
 

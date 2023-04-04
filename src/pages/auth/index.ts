@@ -1,5 +1,5 @@
 import AuthController from '../../controllers/AuthController';
-import { TSignInData } from '../../api/AuthAPI';
+import { TSignInData } from '../../typing';
 import { Block } from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';

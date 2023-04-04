@@ -1,4 +1,5 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
+import { TProps } from '../../typing';
 import { Form } from '../form';
 import tpl from './tpl.hbs';
 import './style.scss';

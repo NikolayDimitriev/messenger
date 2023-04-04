@@ -1,9 +1,10 @@
-import { Block, TProps } from '../../core/Block';
+import { Block } from '../../core/Block';
+
 import { Link } from '../link';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TErrorProps = TProps & {
+type TErrorProps = {
   errorCode: string;
   errorText: string;
 };
@@ -17,7 +18,7 @@ export class Error extends Block<TErrorProps> {
     this.children.link = new Link({
       value: 'Назад к чатам',
       attr: {
-        href: '/chats',
+        href: '/messenger',
         class: 'form-link',
       },
     });
