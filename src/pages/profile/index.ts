@@ -14,6 +14,7 @@ class ProfilePageBase extends Block {
     this.children.form = new ProfileForm({
       ...this.props,
       isEditData: false,
+      isEditPass: false,
     });
 
     this.children.changeUserInfoLink = new Link({

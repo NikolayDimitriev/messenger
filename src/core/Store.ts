@@ -23,7 +23,7 @@ export class Store extends EventBus {
     this.emit(StoreEvents.Updated, this.getState());
   }
 
-  public getState() {
+  public getState(): TState {
     return this._state;
   }
 }

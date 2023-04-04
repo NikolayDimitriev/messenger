@@ -1,5 +1,6 @@
 // import { TMessages, TDialogue, TAuth } from './mock.props';
 import { TInputBlock } from './mock.props';
+
 // export const messages: TMessages = [
 //   {
 //     date: '17 июня',
@@ -200,57 +201,3 @@ export const signUp: TInputBlock[] = [
     isError: false,
   },
 ];
-
-// export const user: TProfile = {
-
-//   passwords: [
-//     {
-//       id: 'old-password-profile',
-//       labelText: 'Старый пароль',
-//       name: 'password',
-//       inputType: 'password',
-//       value: '',
-//       errMessage: 'Длина 8-40 символов. Хотя бы одна заглавная буква и цифра!',
-//       disabled: false,
-//       inputClass: 'profile-field__input',
-//       labelClass: 'profile-field__label',
-//       isError: false,
-//     },
-//     {
-//       id: 'new-password-profile',
-//       labelText: 'Новый пароль',
-//       name: 'password_two',
-//       inputType: 'password',
-//       value: '',
-//       errMessage: 'Длина 8-40 символов. Хотя бы одна заглавная буква и цифра!',
-//       disabled: false,
-//       inputClass: 'profile-field__input',
-//       labelClass: 'profile-field__label',
-//       isError: false,
-//     },
-//     {
-//       id: 'new-password-profile-two',
-//       labelText: 'Повторите новый пароль',
-//       name: 'password_three',
-//       inputType: 'password',
-//       value: '',
-//       errMessage: 'Пароли не совпадают!',
-//       disabled: false,
-//       inputClass: 'profile-field__input',
-//       labelClass: 'profile-field__label',
-//       isError: false,
-//     },
-//   ],
-
-//   shortFormat: {
-//     avatarSrc: null,
-//     email: 'pochta@yandex.ru',
-//     login: 'ivanivanov',
-//     first_name: 'Иван',
-//     second_name: 'Иванов',
-//     display_name: 'Иван',
-//     phone: '+7 999 999 99 99',
-//     oldPassword: '1234',
-//     newPassword: '123456',
-//   },
-// };

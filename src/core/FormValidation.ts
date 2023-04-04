@@ -17,6 +17,9 @@ const rules: Record<string, RegExp> = {
   display_name: /^[A-ZА-Я][A-Za-zА-Яа-яЁё-]*$/,
   login: /^(?!\d+$)^[\w-]{3,20}$/i,
   email: /^\w*@\w+\.[a-z]{2,6}$/,
+  oldPassword: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
+  newPassword: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
+  newPasswordTwo: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
   password: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
   password_two: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
   password_three: /^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,40}$/,
@@ -130,7 +133,6 @@ export class FormValidation {
 
   isValid(inputName: string): boolean {
     const regExp = rules[inputName];
-
     if (!regExp) {
       return false;
     }
@@ -139,11 +141,11 @@ export class FormValidation {
 
     const value = ((input as Input).getContent() as HTMLInputElement).value;
 
-    if (inputName === 'password') {
+    if (inputName === 'password' || inputName === 'newPassword') {
       this._firstPass = value;
     }
 
-    if (inputName === 'password-two') {
+    if (inputName === 'password-two' || inputName === 'newPasswordTwo') {
       if (this._firstPass !== value) {
         (errorLabel as ErrorLabel).setProps({
           attr: { class: 'input__label--error' },
@@ -197,7 +199,10 @@ export class FormValidation {
 
     let isValidAllInputs = true;
     this._inputs.forEach((input) => {
-      if (input.props.attr.name !== 'password_two') {
+      if (
+        input.props.attr.name !== 'password_two' &&
+        input.props.attr.name !== 'newPasswordTwo'
+      ) {
         result[input.props.attr.name as string] = (
           input.getContent() as HTMLInputElement
         ).value;
@@ -215,10 +220,18 @@ export class FormValidation {
     });
 
     if (isValidAllInputs) {
-      if (Object.keys(result).length > 2) {
-        this._callAuthController(result as TSignUpData);
-      } else {
-        this._callAuthController(result as TSignInData);
+      if (this._form instanceof ProfileForm) {
+        if (Object.keys(result).length > 2) {
+          this._callAuthController(result as TChangeProfileData);
+        } else {
+          this._callAuthController(result as TChangePassword);
+        }
+      } else if (this._form instanceof Form) {
+        if (Object.keys(result).length > 2) {
+          this._callAuthController(result as TSignUpData);
+        } else {
+          this._callAuthController(result as TSignInData);
+        }
       }
       console.log(result);
     }

@@ -4,14 +4,16 @@ import tpl from './tpl.hbs';
 import { TChangeProfileData } from '../../typing';
 import UserController from '../../controllers/UserController';
 
-import { withStore } from '../../core/Store';
+import store, { withStore } from '../../core/Store';
 import { ProfileForm } from '../../components/profileForm';
+import { isEqual } from '../../utils/isEqual';
 
 class EditDataPageBase extends Block {
   init() {
     this.children.form = new ProfileForm({
       ...this.props,
       isEditData: true,
+      isEditPass: false,
       onSubmit: this.onSubmit,
     });
 
@@ -25,7 +27,13 @@ class EditDataPageBase extends Block {
   }
 
   onSubmit(data: TChangeProfileData) {
-    UserController.changeProfileData(data);
+    // отфильтровал данные для проверки
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { avatar, id, ...userData } = store.getState().user.data;
+
+    if (!isEqual(data, userData)) {
+      UserController.changeProfileData(data);
+    }
   }
 
   render() {

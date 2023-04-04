@@ -2,6 +2,7 @@ import { AuthPage } from './pages/auth';
 import { ProfilePage } from './pages/profile';
 import { SignUpPage } from './pages/signUp';
 import { EditDataPage } from './pages/editData';
+import { EditPassPage } from './pages/editPass';
 import { Chats } from './pages/chats';
 // import { Page404 } from './pages/404';
 // import { Page500 } from './pages/500';
@@ -26,9 +27,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.SignIn, AuthPage)
     .use(Routes.Profile, ProfilePage)
     .use(Routes.EditData, EditDataPage)
+    .use(Routes.EditPass, EditPassPage)
     .use(Routes.SignUp, SignUpPage)
     .use(Routes.Chats, Chats);
-  // .use(Routes.EditPass, ProfilePage)
   // .use(Routes.Error404, Page404)
   // .use(Routes.Error500, Page500);
 

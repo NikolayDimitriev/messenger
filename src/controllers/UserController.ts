@@ -26,8 +26,6 @@ class UserController {
       const newUserData = await this._api.changeProfileData(data);
 
       store.set('user.data', newUserData);
-
-      Router.go('/settings');
     } catch (e) {
       console.error(e);
     }

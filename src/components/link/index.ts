@@ -1,8 +1,10 @@
 import { Block } from '../../core/Block';
+import { TProps } from '../../typing';
+
 import { withRouter, PropsWithRouter } from '../../hoc/withRouter';
+
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TProps } from '../../typing';
 
 type TLinkProps = PropsWithRouter & {
   to: string;
