@@ -65,6 +65,8 @@ export class HTTPTransport {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      
       xhr.open(method, url);
 
       xhr.onreadystatechange = () => {
@@ -81,13 +83,16 @@ export class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' });
       xhr.ontimeout = () => reject({ reason: 'timeout' });
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
+      if (!(data instanceof FormData)) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
+      }
 
-      xhr.withCredentials = true;
       xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
       } else {
         xhr.send(JSON.stringify(data));
       }

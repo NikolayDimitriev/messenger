@@ -2,8 +2,9 @@ import { Block } from '../../core/Block';
 
 import tpl from './tpl.hbs';
 import './style.scss';
+import { TProps } from '../../typing';
 
-type TAvatarProps = {
+type TAvatarProps = TProps & {
   avatarSrc: string;
   name: string;
 };

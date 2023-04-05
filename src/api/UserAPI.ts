@@ -6,7 +6,7 @@ export class UserAPI extends BaseAPI {
     super('/user');
   }
 
-  changeAvatar(data: any): Promise<TUserProps> {
+  changeAvatar(data: FormData): Promise<TUserProps> {
     return this.http.put('/profile/avatar', data);
   }
 

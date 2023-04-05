@@ -1,12 +1,9 @@
 import { Block } from '../../core/Block';
+import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 
-type TInputProps = {
-  attr: Record<string, string>;
-};
-
-export class Input extends Block<TInputProps> {
-  constructor(props: TInputProps) {
+export class Input extends Block<TProps> {
+  constructor(props: TProps) {
     super(props);
   }
 

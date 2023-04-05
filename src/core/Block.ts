@@ -151,6 +151,14 @@ export class Block<T extends Record<string, any> = any> {
     }
   };
 
+  public updateProps = (newProps: Partial<T>) => {
+    if (!newProps) {
+      return;
+    }
+
+    Object.assign(this.props, newProps);
+  };
+
   public addNewEvents = (newProps: TProps) => {
     if (!newProps) {
       return;
@@ -187,7 +195,7 @@ export class Block<T extends Record<string, any> = any> {
     return new DocumentFragment();
   }
 
-  getContent() {
+  public getContent() {
     return this.element;
   }
 
