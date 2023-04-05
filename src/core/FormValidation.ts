@@ -31,7 +31,8 @@ type TDataController =
   | TSignUpData
   | TSignInData
   | TChangePassword
-  | TChangeProfileData;
+  | TChangeProfileData
+  | string;
 
 export class FormValidation {
   private _inputsBlock: Record<string, InputsBlock>;
@@ -73,7 +74,7 @@ export class FormValidation {
         arr.forEach((inputBlock: InputsBlock) => {
           const input = inputBlock.children.input as Input;
 
-          const name = input.props.attr.name as string;
+          const name = input.props.attr?.name as string;
 
           input.addNewEvents({
             events: {
@@ -90,7 +91,7 @@ export class FormValidation {
 
     if (this._form instanceof ChatForm) {
       const input = this._form.children.inputs as Input;
-      const name = input.props.attr.name as string;
+      const name = input.props.attr?.name as string;
       input.addNewEvents({
         events: {
           focus: () => this.isValidChatForm(name),
@@ -115,7 +116,7 @@ export class FormValidation {
         arr.forEach((inputBlock: InputsBlock) => {
           const input = inputBlock.children.input as Input;
 
-          const name = input.props.attr.name as string;
+          const name = input.props.attr?.name as string;
 
           input.addNewEvents({
             events: {
@@ -200,20 +201,20 @@ export class FormValidation {
     let isValidAllInputs = true;
     this._inputs.forEach((input) => {
       if (
-        input.props.attr.name !== 'password_two' &&
-        input.props.attr.name !== 'newPasswordTwo'
+        input.props.attr?.name !== 'password_two' &&
+        input.props.attr?.name !== 'newPasswordTwo'
       ) {
-        result[input.props.attr.name as string] = (
+        result[input.props.attr?.name as string] = (
           input.getContent() as HTMLInputElement
         ).value;
       }
 
       if (this._form instanceof ChatForm) {
-        if (!this.isValidChatForm(input.props.attr.name as string)) {
+        if (!this.isValidChatForm(input.props.attr?.name as string)) {
           isValidAllInputs = false;
         }
       } else {
-        if (!this.isValid(input.props.attr.name as string)) {
+        if (!this.isValid(input.props.attr?.name as string)) {
           isValidAllInputs = false;
         }
       }
@@ -232,6 +233,8 @@ export class FormValidation {
         } else {
           this._callAuthController(result as TSignInData);
         }
+      } else if (this._form instanceof ChatForm) {
+        this._callAuthController(result.message);
       }
       console.log(result);
     }

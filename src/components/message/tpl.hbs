@@ -1,4 +1,4 @@
 <div>
-  <p class="message__text{{#if owner}} message__text--owner{{/if}}">{{text}}</p>
-  <span class="message__date{{#if owner}} message__date--owner{{#if isReaded}} message__date--readed{{/if}}{{/if}}">{{date}}</span>
+  <p class="message__text{{#if isMine}} message__text--owner{{/if}}">{{content}}</p>
+  <span class="message__date{{#if isMine}} message__date--owner{{/if}}">{{time}}</span>
 </div>

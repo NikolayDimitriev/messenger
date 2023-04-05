@@ -1,15 +1,13 @@
 import { Block } from '../../core/Block';
+import { TProps, TChatInfo } from '../../typing';
 
-import { TMessage } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TMessageProps = TMessage & {
-  isMine: boolean;
-};
+type TDialogueProps = TProps & TChatInfo;
 
-export class Message extends Block<TMessageProps> {
-  constructor(props: TMessageProps) {
+export class Dialogue extends Block<TDialogueProps> {
+  constructor(props: TDialogueProps) {
     super(props);
   }
 

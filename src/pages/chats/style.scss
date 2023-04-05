@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .chat {
   display: flex;
@@ -12,6 +12,7 @@
     max-width: 310px;
     padding: 21px 10px 0;
     border-right: 1px solid $br-color;
+    background-color: $gray-bg;
 
     &__profile {
       display: flex;
@@ -35,7 +36,7 @@
       width: 20px;
       height: 20px;
       border-radius: 5px;
-      background-image: url("/static/icon_search.svg");
+      background-image: url('/static/icon_search.svg');
     }
 
     &__input {
@@ -53,6 +54,9 @@
   &-right {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    vertical-align: middle;
     flex-grow: 1;
     height: 100vh;
 
@@ -130,9 +134,19 @@
       transform: rotate(180deg);
       border-radius: 50%;
       background-color: $primary;
-      background-image: url("/static/arrow-left-sidebar.svg");
+      background-image: url('/static/arrow-left-sidebar.svg');
       background-repeat: no-repeat;
       background-position: center;
+    }
+
+    &__clear {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 12px;
+      line-height: 12px;
+      color: $gray;
     }
   }
 }
