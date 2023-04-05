@@ -3,14 +3,21 @@ import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { ProfileForm } from '../../components/profileForm';
+import { Avatar } from '../../components/avatar';
 
 import { withStore } from '../../core/Store';
 
+import avatarStatic from '../../../static/avatar.svg';
 import './style.scss';
 import tpl from './tpl.hbs';
 
 class ProfilePageBase extends Block {
   init() {
+    this.children.avatar = new Avatar({
+      avatarSrc: this.props.avatar ?? avatarStatic,
+      name: this.props.display_name ?? this.props.first_name,
+    });
+
     this.children.form = new ProfileForm({
       ...this.props,
       isEditData: false,

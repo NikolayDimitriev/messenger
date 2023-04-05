@@ -1,15 +1,23 @@
+import UserController from '../../controllers/UserController';
+import store, { withStore } from '../../core/Store';
 import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
-import tpl from './tpl.hbs';
-import { TChangeProfileData } from '../../typing';
-import UserController from '../../controllers/UserController';
-
-import store, { withStore } from '../../core/Store';
 import { ProfileForm } from '../../components/profileForm';
+import { Avatar } from '../../components/avatar';
+
+import avatarStatic from '../../../static/avatar.svg';
+import tpl from './tpl.hbs';
+
 import { isEqual } from '../../utils/isEqual';
+import { TChangeProfileData } from '../../typing';
 
 class EditDataPageBase extends Block {
   init() {
+    this.children.avatar = new Avatar({
+      avatarSrc: this.props.avatar ?? avatarStatic,
+      name: this.props.display_name ?? this.props.first_name,
+    });
+
     this.children.form = new ProfileForm({
       ...this.props,
       isEditData: true,
