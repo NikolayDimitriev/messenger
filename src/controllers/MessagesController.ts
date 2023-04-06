@@ -1,6 +1,7 @@
 import store from '../core/Store';
 import WSTransport, { WSTransportEvents } from '../core/WSTransport';
 import { TMessage } from '../typing';
+import ChatsController from './ChatsController';
 
 class MessagesController {
   private _sockets: Map<number, WSTransport> = new Map();
@@ -33,6 +34,8 @@ class MessagesController {
     }
 
     wsTransport.send({ type: 'message', content: message });
+
+    ChatsController.getChats();
   }
 
   getOldMessages(id: number) {

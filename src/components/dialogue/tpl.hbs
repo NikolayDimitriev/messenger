@@ -7,16 +7,16 @@
   <div class='dialogue__about'>
     <div class='dialogue__name'>{{title}}</div>
     {{#if last_message}}
-    <div class='dialogue__text'>
-      {{#if owner}}
-        <span class='dialogue__owner'>Вы:</span>
-      {{/if}}
-      {{last_message.content}}
-    </div>
+      <div class='dialogue__text'>
+        {{#if owner}}
+          <span class='dialogue__owner'>Вы:</span>
+        {{/if}}
+        {{last_message.content}}
+      </div>
     {{/if}}
   </div>
   <div class='dialogue__info'>
-    <span class='dialogue__date'>{{last_message.time}}</span>
+    <span class='dialogue__date'>{{time}}</span>
     {{#if unread_count}}
       <div class='dialogue__count'>{{unread_count}}</div>
     {{/if}}

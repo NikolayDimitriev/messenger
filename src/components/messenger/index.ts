@@ -7,6 +7,7 @@ import { ChatForm } from '../chatForm';
 import { TMessage } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
+import { isEqual } from '../../utils/isEqual';
 
 type TMessagePageProps = {
   selectedChat: number | undefined;
@@ -23,6 +24,15 @@ class MessengerBase extends Block {
         MessagesController.sendMessage(this.props.selectedChat!, data);
       },
     });
+  }
+
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    const response = !isEqual(oldProps, newProps);
+    if (response) {
+      this.children.messages = this._createMessages(newProps);
+    }
+
+    return response;
   }
 
   private _createMessages(props: TMessagePageProps) {
@@ -49,7 +59,6 @@ const withSelectedChatMessages = withStore((state) => {
       userId: state.user.data.id,
     };
   }
-
   return {
     messages: (state.messages || {})[selectedChatId] || [],
     selectedChat: state.selectedChat,

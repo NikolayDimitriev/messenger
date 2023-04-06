@@ -25,7 +25,7 @@ export class Block<T extends Record<string, any> = any> {
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
-    this.children = this._makePropsProxy(children as T);
+    this.children = children;
 
     this.props = this._makePropsProxy(props);
 
@@ -44,11 +44,13 @@ export class Block<T extends Record<string, any> = any> {
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
       if (
-        value instanceof Block ||
-        (Array.isArray(childrenAndProps) &&
-          childrenAndProps[key].every((block: any) => block instanceof Block))
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every((v) => v instanceof Block)
       ) {
-        children[key] = value;
+        children[key as string] = value;
+      } else if (value instanceof Block) {
+        children[key as string] = value;
       } else {
         props[key] = value;
       }
@@ -103,12 +105,6 @@ export class Block<T extends Record<string, any> = any> {
 
   private _componentDidMount(): void {
     this.componentDidMount();
-
-    if (this._element) {
-      Object.values(this._element).forEach((child) => {
-        child.dispatchComponentDidMount();
-      });
-    }
   }
 
   protected componentDidMount(): void {
@@ -117,46 +113,34 @@ export class Block<T extends Record<string, any> = any> {
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(EVENTS.FLOW_CDM);
-    if (this._element) {
-      if (Object.keys(this._element).length) {
-        this.eventBus().emit(EVENTS.FLOW_RENDER);
+
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((ch) => ch.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
       }
-    }
+    });
   }
 
-  private _componentDidUpdate(oldProps: any, newProps: any): void {
+  private _componentDidUpdate(oldProps: T, newProps: T): void {
     const response = this.componentDidUpdate(oldProps, newProps);
-    if (!response) {
+
+    if (response) {
       this.eventBus().emit(EVENTS.FLOW_RENDER);
     }
   }
 
   protected componentDidUpdate(oldProps: T, newProps: T) {
-    return isEqual(oldProps, newProps);
+    return !isEqual(oldProps, newProps);
   }
 
-  public setProps = (nextProps: T) => {
+  public setProps = (nextProps: Partial<T>) => {
     if (!nextProps) {
       return;
     }
 
-    const { children, props } = this._getChildrenAndProps(nextProps);
-
-    if (Object.values(children).length) {
-      Object.assign(this.children, children);
-    }
-
-    if (Object.values(props).length) {
-      Object.assign(this.props, props);
-    }
-  };
-
-  public updateProps = (newProps: Partial<T>) => {
-    if (!newProps) {
-      return;
-    }
-
-    Object.assign(this.props, newProps);
+    Object.assign(this.props, nextProps);
   };
 
   public addNewEvents = (newProps: TProps) => {

@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .message {
   position: relative;
@@ -8,8 +8,10 @@
   padding: 15px;
   border-radius: 0 12px 12px;
   background-color: $bg-message;
+  text-align: left;
 
   &--owner {
+    display: flex;
     align-self: flex-end;
     justify-content: flex-end;
     border-radius: 12px 12px 0;

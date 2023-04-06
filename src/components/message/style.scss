@@ -1,9 +1,11 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .message {
   &__text {
     font-size: 12px;
     line-height: 15px;
+    max-width: 360px;
+    word-wrap: break-word;
   }
 
   &__date {
@@ -22,8 +24,8 @@
         display: inline-block;
         width: 15px;
         height: 6px;
-        content: "";
-        background-image: url("/static/readed.svg");
+        content: '';
+        background-image: url('/static/readed.svg');
         background-repeat: no-repeat;
         background-position: center;
       }

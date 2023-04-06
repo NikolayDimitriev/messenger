@@ -53,7 +53,6 @@ export class ChatPage extends Block {
       },
     });
 
-    // this.children.messenger = new Messenger({});
   }
 
   render() {

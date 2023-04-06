@@ -195,7 +195,6 @@ export class FormValidation {
 
   onSubmit(e?: Event) {
     e?.preventDefault();
-
     const result: Record<string, string> = {};
 
     let isValidAllInputs = true;
