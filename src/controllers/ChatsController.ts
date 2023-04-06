@@ -32,7 +32,14 @@ class ChatsController {
   }
 
   async delete(id: number) {
-    return this._api.delete(id);
+    await this._api.delete(id);
+
+    store.set(
+      'chats',
+      store.getState().chats.filter((chat) => chat.id !== id)
+    );
+
+    store.set('selectedChat', undefined);
   }
 
   getToken(id: number) {

@@ -235,7 +235,6 @@ export class FormValidation {
       } else if (this._form instanceof ChatForm) {
         this._callAuthController(result.message);
       }
-      console.log(result);
     }
   }
 }

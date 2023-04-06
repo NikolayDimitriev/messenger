@@ -9,11 +9,11 @@
   border-radius: 0 12px 12px;
   background-color: $bg-message;
   text-align: left;
+  display: flex;
+  align-self: flex-start;
 
   &--owner {
-    display: flex;
     align-self: flex-end;
-    justify-content: flex-end;
     border-radius: 12px 12px 0;
     background-color: $focused;
   }

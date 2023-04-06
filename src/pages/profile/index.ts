@@ -107,13 +107,13 @@ class ProfilePageBase extends Block {
 
         fileName = files[0].name;
 
-        (this.children.modalAvatar as ModalAvatar).updateProps({
+        (this.children.modalAvatar as ModalAvatar).setProps({
           title: 'Файл загружен',
         });
 
         (
           (this.children.modalAvatar as ModalAvatar).children.form as ModalForm
-        ).updateProps({
+        ).setProps({
           fileName,
         });
       },

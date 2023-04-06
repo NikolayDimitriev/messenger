@@ -17,7 +17,7 @@ class AuthController {
 
       await this.getUser();
 
-      router.go('/settings');
+      router.go('/messenger');
     } catch (e) {
       store.set('user.errorMessage', (e as Error).message);
     }
@@ -29,7 +29,7 @@ class AuthController {
 
       await this.getUser();
 
-      router.go('/settings');
+      router.go('/messenger');
     } catch (e) {
       store.set('user.errorMessage', (e as Error).message);
     }

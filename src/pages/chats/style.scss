@@ -71,11 +71,29 @@
       justify-content: space-between;
       padding: 10px 0;
       border-bottom: 1px solid $br-color;
+      position: relative;
     }
 
     &__about {
       display: flex;
       align-items: center;
+    }
+
+    &__menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $bg-dots-menu;
+
+        .chat-right__menu img {
+          fill: $primary;
+        }
+      }
     }
 
     &__avatar {
