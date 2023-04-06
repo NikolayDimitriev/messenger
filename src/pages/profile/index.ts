@@ -17,7 +17,9 @@ import { ModalForm } from '../../components/modalForm';
 class ProfilePageBase extends Block {
   init() {
     this.children.avatar = new Avatar({
-      avatarSrc: this.props.avatar ?? avatarStatic,
+      avatarSrc: this.props.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}`
+        : avatarStatic,
       name: this.props.display_name ?? this.props.first_name,
       events: {
         click: (e) => {
@@ -97,7 +99,6 @@ class ProfilePageBase extends Block {
         if (!target) {
           return;
         }
-
         const files = target.files;
 
         if (!files || !files.length) {

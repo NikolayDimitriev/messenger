@@ -7,15 +7,15 @@ export class ChatsAPI extends BaseAPI {
   }
 
   create(title: string) {
-    return this.http.post('/', { title });
+    return this.http.post('', { title });
   }
 
   delete(id: number): Promise<unknown> {
-    return this.http.delete('/', { chatId: id });
+    return this.http.delete('', { chatId: id });
   }
 
   read(): Promise<TChatInfo[]> {
-    return this.http.get('/');
+    return this.http.get('');
   }
 
   getUsers(id: number): Promise<Array<TUser & { role: string }>> {
