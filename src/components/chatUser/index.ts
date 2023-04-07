@@ -1,17 +1,20 @@
+import ChatsController from '../../controllers/ChatsController';
 import Block from '../../core/Block';
 import { Button } from '../button';
 import { Image } from '../image';
 
+import addIcon from '../../../static/addIcon.svg';
 import deleteIcon from '../../../static/deleteIcon.svg';
 import crown from '../../../static/crown.svg';
 import { TUserProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
-import ChatsController from '../../controllers/ChatsController';
 
 type TChatUserProps = TUserProps & {
   role: string;
   selectedChatId: number;
+  isAdd: boolean;
+  onAdded?: () => void;
 };
 
 export class ChatUser extends Block {
@@ -28,6 +31,43 @@ export class ChatUser extends Block {
       },
     });
 
+    this.children.btnAddUser = new Button({
+      value: new Image({
+        attr: {
+          src: addIcon,
+          alt: 'Добавить',
+        },
+      }),
+      attr: {
+        class: 'list-user__btn',
+      },
+      events: {
+        click: (e?) => {
+          e?.stopPropagation();
+
+          const addedUser: TUserProps & { role: string } = {
+            id: this.props.id,
+            first_name: this.props.first_name,
+            second_name: this.props.second_name,
+            display_name: this.props.display_name,
+            login: this.props.login,
+            email: this.props.email,
+            phone: this.props.phone,
+            avatar: this.props.avatar,
+            role: 'regular',
+          };
+
+          ChatsController.addUserToChat(
+            this.props.selectedChatId,
+            this.props.id,
+            addedUser
+          );
+
+          this.props.onAdded();
+        },
+      },
+    });
+
     this.children.btnDeleteUser = new Button({
       value: new Image({
         attr: {
@@ -39,7 +79,8 @@ export class ChatUser extends Block {
         class: 'list-user__btn',
       },
       events: {
-        click: () => {
+        click: (e) => {
+          e?.stopPropagation();
           ChatsController.removeUserFromChat(
             this.props.selectedChatId,
             this.props.id

@@ -8,6 +8,7 @@ import { TProps } from '../../typing';
 type TModalAvatarProps = TProps & {
   title: string;
   fileName: string;
+  isOpen: boolean;
   onSubmit: (e: Event) => void;
   onChange: (e: Event) => void;
 };

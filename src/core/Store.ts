@@ -14,6 +14,7 @@ type TState = {
   messages: Record<number, TMessage[]>;
   selectedChat?: number;
   usersSelectedChat?: Array<TUserProps & { role: string }>;
+  searchedUsers?: TUserProps[];
 };
 
 export class Store extends EventBus {

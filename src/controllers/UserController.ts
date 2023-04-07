@@ -14,7 +14,6 @@ class UserController {
   async changeAvatar(data: any) {
     try {
       const newUserData = await this._api.changeAvatar(data);
-
       store.set('user.data', newUserData);
     } catch (e) {
       console.error(e);
@@ -41,11 +40,11 @@ class UserController {
     }
   }
 
-  async getUser(id: number) {
+  async searchUsers(data: string) {
     try {
-      await this._api.getUser(id).then((data) => {
-        return data.avatar;
-      });
+      const searchedUsers = await this._api.search(data);
+
+      store.set('searchedUsers', searchedUsers);
     } catch (e) {
       console.error(e);
     }

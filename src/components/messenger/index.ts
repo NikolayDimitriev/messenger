@@ -6,6 +6,11 @@ import { withStore } from '../../core/Store';
 
 import { Message } from '../message';
 import { ChatForm } from '../chatForm';
+import { UserListChatModal, UserListChatModalBase } from '../userListChatModal';
+import {
+  AddToChatUsersModal,
+  AddToChatUsersModalBase,
+} from '../addToChatUsersModal';
 import { SettingChatModal } from '../settingChatModal';
 import { Image } from '../image';
 
@@ -55,6 +60,16 @@ class MessengerBase extends Block {
       onRemoveChat: () => {
         ChatsController.delete(this.props.selectedChat);
       },
+      onOpenListUser: () => {
+        (this.children.userListChatModal as UserListChatModalBase).setProps({
+          isOpen: true,
+        });
+      },
+      onOpenAddUsersModal: () => {
+        (this.children.addToChatUsersModal as UserListChatModalBase).setProps({
+          isOpen: true,
+        });
+      },
     });
 
     this.children.messages = this._createMessages(this.props);
@@ -69,10 +84,45 @@ class MessengerBase extends Block {
         ).value = '';
       },
     });
+
+    this.children.userListChatModal = new UserListChatModal({
+      isOpen: false,
+      events: {
+        click: (e?: Event | undefined) => {
+          const target = e?.target as HTMLElement;
+          if (target && target.classList.contains('chat-list__modal--active')) {
+            target.classList.remove('chat-list__modal--active');
+            (this.children.userListChatModal as UserListChatModalBase).setProps(
+              {
+                isOpen: false,
+              }
+            );
+          }
+        },
+      },
+    });
+
+    this.children.addToChatUsersModal = new AddToChatUsersModal({
+      isOpen: false,
+      events: {
+        click: (e?: Event | undefined) => {
+          const target = e?.target as HTMLElement;
+          if (target && target.classList.contains('chat-add__modal--active')) {
+            target.classList.remove('chat-add__modal--active');
+            (
+              this.children.addToChatUsersModal as AddToChatUsersModalBase
+            ).setProps({
+              isOpen: false,
+            });
+          }
+        },
+      },
+    });
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
     const response = !isEqual(oldProps, newProps);
+
     if (response && newProps.messages) {
       this.children.messages = this._createMessages(newProps);
     }

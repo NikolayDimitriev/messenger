@@ -26,7 +26,11 @@
     </div>
   </div>
   {{#if role}}
-    {{{admin}}}
+    {{#if isAdd}}
+      {{{btnAddUser}}}
+    {{else}}
+      {{{admin}}}
+    {{/if}}
   {{else}}
     {{{btnDeleteUser}}}
   {{/if}}

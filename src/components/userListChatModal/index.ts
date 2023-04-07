@@ -3,17 +3,17 @@ import { withStore } from '../../core/Store';
 import { ChatUser } from '../chatUser';
 
 import { isEqual } from '../../utils/isEqual';
-import { TUserProps } from '../../typing';
+import { TProps, TUserProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-interface TUserListChatModalProps {
+type TUserListChatModalProps = TProps & {
   users: Array<TUserProps & { role: string }> | undefined;
   isOpen: boolean;
   selectedChatId: number | undefined;
-}
+};
 
-class UserListChatModalBase extends Block<TUserListChatModalProps> {
+export class UserListChatModalBase extends Block<TUserListChatModalProps> {
   constructor(props: TUserListChatModalProps) {
     super(props);
   }
@@ -45,6 +45,7 @@ class UserListChatModalBase extends Block<TUserListChatModalProps> {
             ? `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
             : '',
           role: user.role === 'admin' ? user.role : '',
+          isAdd: false,
           selectedChatId: this.props.selectedChatId!,
         })
     );

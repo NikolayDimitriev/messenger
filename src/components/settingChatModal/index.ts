@@ -1,6 +1,5 @@
 import Block from '../../core/Block';
 import { TProps } from '../../typing';
-import { UserListChatModal } from '../userListChatModal';
 
 import tpl from './tpl.hbs';
 import './style.scss';
@@ -9,6 +8,8 @@ import { Button } from '../button';
 type TSettingChatModalProps = TProps & {
   isOpen: boolean;
   onRemoveChat: () => void;
+  onOpenListUser: () => void;
+  onOpenAddUsersModal: () => void;
 };
 
 export class SettingChatModal extends Block {
@@ -25,9 +26,20 @@ export class SettingChatModal extends Block {
       events: {
         click: () => {
           this.setProps({ isOpen: false });
-          // this.children.userListChatModal).setProps({
-          //   isOpen: true,
-          // });
+          this.props.onOpenListUser();
+        },
+      },
+    });
+
+    this.children.addUsers = new Button({
+      value: 'Добавить пользователя',
+      attr: {
+        class: 'chat-modal__btn',
+      },
+      events: {
+        click: () => {
+          this.setProps({ isOpen: false });
+          this.props.onOpenAddUsersModal();
         },
       },
     });
@@ -43,10 +55,6 @@ export class SettingChatModal extends Block {
           this.setProps({ isOpen: false });
         },
       },
-    });
-
-    this.children.userListChatModal = new UserListChatModal({
-      isOpen: false,
     });
   }
 

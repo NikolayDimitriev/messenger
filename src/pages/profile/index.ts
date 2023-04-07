@@ -1,36 +1,28 @@
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
 import Block from '../../core/Block';
+
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { ProfileForm } from '../../components/profileForm';
 import { ProfileAvatar } from '../../components/profileAvatar';
+import { ModalAvatar } from '../../components/modalAvatar';
+import { ModalForm } from '../../components/modalForm';
 
 import { withStore } from '../../core/Store';
 
 import './style.scss';
 import tpl from './tpl.hbs';
-import { ModalAvatar } from '../../components/modalAvatar';
-import { ModalForm } from '../../components/modalForm';
+import { TUserProps } from '../../typing';
+import { isEqual } from '../../utils/isEqual';
 
-class ProfilePageBase extends Block {
+class ProfilePageBase extends Block<TUserProps> {
+  constructor(props: TUserProps) {
+    super(props);
+  }
+
   init() {
-    this.children.avatar = new ProfileAvatar({
-      avatarSrc: this.props.avatar
-        ? `https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}`
-        : null,
-      name: this.props.display_name ?? this.props.first_name,
-      events: {
-        click: (e) => {
-          const target = e?.target as HTMLDivElement;
-          if (target && target.closest('.profile-wrapper__avatar')) {
-            (this.children.modalAvatar as ModalAvatar)
-              .getContent()
-              ?.classList.add('modal--active');
-          }
-        },
-      },
-    });
+    this.children.avatar = this._createAvatar(this.props);
 
     this.children.form = new ProfileForm({
       ...this.props,
@@ -78,6 +70,7 @@ class ProfilePageBase extends Block {
     this.children.modalAvatar = new ModalAvatar({
       title: 'Загрузите файл',
       fileName: 'Выбрать файл на компьютере',
+      isOpen: false,
       onSubmit: (e: Event) => {
         e.preventDefault();
         if (e.target) {
@@ -89,6 +82,20 @@ class ProfilePageBase extends Block {
             const file = input.files[0];
             formData.append('avatar', file);
             UserController.changeAvatar(formData);
+
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: false,
+            });
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              title: 'Загрузите файл',
+            });
+
+            (
+              (this.children.modalAvatar as ModalAvatar).children
+                .form as ModalForm
+            ).setProps({
+              fileName: 'Выбрать файл на компьютере',
+            });
           }
         }
       },
@@ -119,10 +126,41 @@ class ProfilePageBase extends Block {
       events: {
         click: (e) => {
           const target = e?.target as HTMLElement;
-          if (target && !target.closest('.modal-dialog')) {
-            (this.children.modalAvatar as ModalAvatar)
-              .getContent()
-              ?.classList.remove('modal--active');
+          if (target && target.classList.contains('modal--active')) {
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: false,
+            });
+          }
+        },
+      },
+    });
+  }
+
+  protected componentDidUpdate(
+    oldProps: TUserProps,
+    newProps: TUserProps
+  ): boolean {
+    const response = !isEqual(oldProps, newProps);
+    if (response) {
+      this.children.avatar = this._createAvatar(newProps);
+    }
+
+    return response;
+  }
+
+  private _createAvatar(props: TUserProps) {
+    return new ProfileAvatar({
+      avatarSrc: props.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources/${props.avatar}`
+        : null,
+      name: props.display_name ?? props.first_name,
+      events: {
+        click: (e) => {
+          const target = e?.target as HTMLDivElement;
+          if (target && target.closest('.profile-wrapper__avatar')) {
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: true,
+            });
           }
         },
       },
@@ -130,10 +168,10 @@ class ProfilePageBase extends Block {
   }
 
   render() {
-    return this.compile(tpl, {});
+    return this.compile(tpl, { ...this.props });
   }
 }
 
 const withUser = withStore((state) => ({ ...state.user.data }));
 
-export const ProfilePage = withUser(ProfilePageBase);
+export const ProfilePage = withUser(ProfilePageBase as unknown as typeof Block);

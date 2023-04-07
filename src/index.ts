@@ -4,8 +4,8 @@ import { SignUpPage } from './pages/signUp';
 import { EditDataPage } from './pages/editData';
 import { EditPassPage } from './pages/editPass';
 import { ChatPage } from './pages/chats';
-// import { Page404 } from './pages/404';
-// import { Page500 } from './pages/500';
+import { Page404 } from './pages/404';
+import { Page500 } from './pages/500';
 
 import router from './core/Router';
 
@@ -30,9 +30,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.EditData, EditDataPage)
     .use(Routes.EditPass, EditPassPage)
     .use(Routes.SignUp, SignUpPage)
-    .use(Routes.Chats, ChatPage);
-  // .use(Routes.Error404, Page404)
-  // .use(Routes.Error500, Page500);
+    .use(Routes.Chats, ChatPage)
+    .use(Routes.Error404, Page404)
+    .use(Routes.Error500, Page500);
 
   let isProtectedRoute = true;
   switch (window.location.pathname) {

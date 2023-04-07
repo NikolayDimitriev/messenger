@@ -1,5 +1,6 @@
 import API, { ChatsAPI } from '../api/ChatsAPI';
 import store from '../core/Store';
+import { TUserProps } from '../typing';
 import MessagesController from './MessagesController';
 
 class ChatsController {
@@ -35,8 +36,17 @@ class ChatsController {
     store.set('usersSelectedChat', users);
   }
 
-  addUserToChat(id: number, userId: number) {
+  addUserToChat(
+    id: number,
+    userId: number,
+    user: TUserProps & { role: string }
+  ) {
     this._api.addUsers(id, [userId]);
+
+    const usersOfSelectedChat = store.getState().usersSelectedChat;
+    usersOfSelectedChat?.push(user);
+
+    store.set('usersSelectedChat', usersOfSelectedChat);
   }
 
   removeUserFromChat(id: number, userId: number) {
