@@ -181,10 +181,6 @@ export class FormValidation {
     const errorLabel = this._form.children.errorLabel;
 
     if (!regExp.test(value)) {
-      (errorLabel as ErrorLabel).setProps({
-        attr: { class: 'input__label--error' },
-      });
-
       return false;
     }
 
