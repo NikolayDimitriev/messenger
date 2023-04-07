@@ -68,8 +68,9 @@ export class AddToChatUsersModalBase extends Block<TAddToChatUsersModalProps> {
         new ChatUser({
           ...user,
           avatar: user.avatar
-            ? `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
+            ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}`
             : '',
+          initialAvatar: user.avatar,
           role: 'delete',
           isAdd: true,
           selectedChatId: this.props.selectedChatId!,

@@ -14,6 +14,7 @@ type TChatUserProps = TUserProps & {
   role: string;
   selectedChatId: number;
   isAdd: boolean;
+  initialAvatar: string;
   onAdded?: () => void;
 };
 
@@ -53,10 +54,10 @@ export class ChatUser extends Block {
             login: this.props.login,
             email: this.props.email,
             phone: this.props.phone,
-            avatar: this.props.avatar,
+            avatar: this.props.initialAvatar,
             role: 'regular',
           };
-
+          debugger;
           ChatsController.addUserToChat(
             this.props.selectedChatId,
             this.props.id,
