@@ -50,17 +50,6 @@
       height: 100%;
       border-radius: 50%;
     }
-
-    &:hover {
-      background-color: $hoverAvatar;
-
-      .profile-avatar {
-        &__text {
-          display: block;
-          max-width: 64px;
-        }
-      }
-    }
   }
 
   &-wrapper {
@@ -78,6 +67,17 @@
       margin-bottom: 20px;
       border-radius: 50%;
       background-color: $empty-avatar;
+
+      &:hover {
+        background-color: $hoverAvatar;
+
+        .profile-avatar {
+          &__text {
+            display: block;
+            max-width: 64px;
+          }
+        }
+      }
     }
 
     &__name {

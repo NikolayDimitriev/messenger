@@ -1,5 +1,5 @@
 import { BaseAPI } from './BaseAPI';
-import { TChatInfo, TUser } from '../typing';
+import { TChatInfo, TUserProps } from '../typing';
 
 export class ChatsAPI extends BaseAPI {
   constructor() {
@@ -18,12 +18,16 @@ export class ChatsAPI extends BaseAPI {
     return this.http.get('');
   }
 
-  getUsers(id: number): Promise<Array<TUser & { role: string }>> {
+  getUsers(id: number): Promise<Array<TUserProps & { role: string }>> {
     return this.http.get(`/${id}/users`);
   }
 
   addUsers(id: number, users: number[]): Promise<unknown> {
     return this.http.put('/users', { users, chatId: id });
+  }
+
+  removeUsers(id: number, users: number[]): Promise<unknown> {
+    return this.http.delete('/users', { users, chatId: id });
   }
 
   async getToken(id: number): Promise<string> {

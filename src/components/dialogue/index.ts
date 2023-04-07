@@ -7,6 +7,7 @@ import './style.scss';
 type TDialogueProps = TProps &
   TChatInfo & {
     time: string;
+    isSelected: boolean;
   };
 
 export class Dialogue extends Block<TDialogueProps> {

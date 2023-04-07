@@ -1,12 +1,13 @@
 import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
 import { ChatsList } from '../../components/chatList';
+import { Messenger } from '../../components/messenger';
 import { ChatModal } from '../../components/chatModal';
+import { Button } from '../../components/button';
+import { Input } from '../../components/input';
 
 import tpl from './tpl.hbs';
 import './style.scss';
-import { Button } from '../../components/button';
-import { Messenger } from '../../components/messenger';
 
 export class ChatPage extends Block {
   constructor() {
@@ -36,6 +37,12 @@ export class ChatPage extends Block {
               .getContent()
               ?.classList.add('modal--active');
           }
+
+          (
+            (
+              (this.children.chatModal as ChatModal).children.input as Input
+            ).getContent() as HTMLInputElement
+          ).value = '';
         },
       },
     });
@@ -52,7 +59,6 @@ export class ChatPage extends Block {
         },
       },
     });
-
   }
 
   render() {

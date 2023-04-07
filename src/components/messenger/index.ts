@@ -1,24 +1,29 @@
 import MessagesController from '../../controllers/MessagesController';
 import ChatsController from '../../controllers/ChatsController';
+
 import { Block } from '../../core/Block';
 import { withStore } from '../../core/Store';
+
 import { Message } from '../message';
 import { ChatForm } from '../chatForm';
+import { SettingChatModal } from '../settingChatModal';
+import { UserListChatModal } from '../userListChatModal';
+import { Image } from '../image';
+
+import { Input } from '../input';
+import { Button } from '../button';
 
 import { isEqual } from '../../utils/isEqual';
-import { TMessage } from '../../typing';
+import { TChatInfo, TMessage } from '../../typing';
 
 import chatMenuDots from '../../../static/chat-menu-dots.svg';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { Input } from '../input';
-import { Button } from '../button';
-import { Image } from '../image';
-import { AddUserModal } from '../addUserModal';
 
 type TMessagePageProps = {
   selectedChat: number | undefined;
   messages: TMessage[];
+  chat: TChatInfo | undefined;
   userId: number;
 };
 
@@ -36,16 +41,17 @@ class MessengerBase extends Block {
       },
       events: {
         click: () => {
-          const isOpen = (this.children.modalAddRemoveUser as AddUserModal)
+          const isOpen = (this.children.modalSettingChat as SettingChatModal)
             .props.isOpen;
-          (this.children.modalAddRemoveUser as AddUserModal).setProps({
+
+          (this.children.modalSettingChat as SettingChatModal).setProps({
             isOpen: !isOpen,
           });
         },
       },
     });
 
-    this.children.modalAddRemoveUser = new AddUserModal({
+    this.children.modalSettingChat = new SettingChatModal({
       isOpen: false,
       onRemoveChat: () => {
         ChatsController.delete(this.props.selectedChat);
@@ -63,6 +69,10 @@ class MessengerBase extends Block {
           ).getContent() as HTMLInputElement
         ).value = '';
       },
+    });
+
+    this.children.userListChatModal = new UserListChatModal({
+      isOpen: true,
     });
   }
 
@@ -96,12 +106,15 @@ const withSelectedChatMessages = withStore((state) => {
     return {
       messages: [],
       selectedChat: undefined,
+      chat: undefined,
       userId: state.user.data.id,
     };
   }
+
   return {
     messages: (state.messages || {})[selectedChatId] || [],
     selectedChat: state.selectedChat,
+    chat: state.chats.filter((chat) => chat.id === state.selectedChat)[0],
     userId: state.user.data.id,
   };
 });

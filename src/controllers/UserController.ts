@@ -40,6 +40,16 @@ class UserController {
       console.error(e);
     }
   }
+
+  async getUser(id: number) {
+    try {
+      await this._api.getUser(id).then((data) => {
+        return data.avatar;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
 
 export default new UserController();

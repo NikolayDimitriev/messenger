@@ -22,6 +22,10 @@ export class UserAPI extends BaseAPI {
     return this.http.post('/search', { login });
   }
 
+  getUser(id:number): Promise<TUserProps> {
+    return this.http.get(`/${id}`);
+  }
+
   read = undefined;
   create = undefined;
   delete = undefined;

@@ -1,7 +1,9 @@
-<div class='avatar'>
+<div class='profile-avatar'>
   <button class='profile-wrapper__avatar profile-avatar'>
     <span class='profile-avatar__text'>Поменять аватар</span>
-    <img src='{{avatarSrc}}' alt='Аватар' class='profile-avatar__image' />
+    {{#if avatarSrc}}
+      <img src='{{avatarSrc}}' alt='Аватар' class='profile-avatar__image' />
+    {{/if}}
   </button>
   <h2 class='profile-wrapper__name'>{{name}}</h2>
 </div>

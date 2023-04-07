@@ -4,13 +4,13 @@ import tpl from './tpl.hbs';
 import './style.scss';
 import { TProps } from '../../typing';
 
-type TAvatarProps = TProps & {
-  avatarSrc: string;
+type TProfileAvatarProps = TProps & {
+  avatarSrc: string | null;
   name: string;
 };
 
-export class Avatar extends Block {
-  constructor(props: TAvatarProps) {
+export class ProfileAvatar extends Block<TProfileAvatarProps> {
+  constructor(props: TProfileAvatarProps) {
     super(props);
   }
 

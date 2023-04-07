@@ -9,6 +9,7 @@ import { isEqual } from '../../utils/isEqual';
 
 type TChatsListProps = {
   chats: TChatInfo[];
+  selectedChat: number | undefined;
 };
 
 class ChatsListBase extends Block {
@@ -43,6 +44,7 @@ class ChatsListBase extends Block {
       return new Dialogue({
         ...data,
         time,
+        isSelected: this.props.selectedChat === data.id,
         events: {
           click: () => {
             ChatsController.selectChat(data.id);
@@ -57,6 +59,9 @@ class ChatsListBase extends Block {
   }
 }
 
-const withChats = withStore((state) => ({ chats: [...(state.chats || [])] }));
+const withChats = withStore((state) => ({
+  chats: [...(state.chats || [])],
+  selectedChat: state.selectedChat,
+}));
 
 export const ChatsList = withChats(ChatsListBase);

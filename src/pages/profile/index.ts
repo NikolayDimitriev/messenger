@@ -4,11 +4,10 @@ import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { ProfileForm } from '../../components/profileForm';
-import { Avatar } from '../../components/avatar';
+import { ProfileAvatar } from '../../components/profileAvatar';
 
 import { withStore } from '../../core/Store';
 
-import avatarStatic from '../../../static/avatar.svg';
 import './style.scss';
 import tpl from './tpl.hbs';
 import { ModalAvatar } from '../../components/modalAvatar';
@@ -16,10 +15,10 @@ import { ModalForm } from '../../components/modalForm';
 
 class ProfilePageBase extends Block {
   init() {
-    this.children.avatar = new Avatar({
+    this.children.avatar = new ProfileAvatar({
       avatarSrc: this.props.avatar
         ? `https://ya-praktikum.tech/api/v2/resources/${this.props.avatar}`
-        : avatarStatic,
+        : null,
       name: this.props.display_name ?? this.props.first_name,
       events: {
         click: (e) => {

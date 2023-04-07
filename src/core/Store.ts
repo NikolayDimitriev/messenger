@@ -1,7 +1,7 @@
 import { set } from '../utils/set';
 import { EventBus } from './EventBus';
 import { Block } from './Block';
-import { TMessage, TUser, TChatInfo } from '../typing';
+import { TMessage, TUser, TChatInfo, TUserProps } from '../typing';
 
 export enum StoreEvents {
   Updated = 'updated',
@@ -12,6 +12,7 @@ type TState = {
   chats: TChatInfo[];
   messages: Record<number, TMessage[]>;
   selectedChat?: number;
+  usersSelectedChat?: Array<TUserProps & { role: string }>;
 };
 
 export class Store extends EventBus {
