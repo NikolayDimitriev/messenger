@@ -27,13 +27,14 @@ export class AddToChatUsersModalBase extends Block<TAddToChatUsersModalProps> {
     this.children.input = new Input({
       attr: {
         placeholder: 'Логин',
+        class: 'chat-add__input',
       },
     });
 
     this.children.btnSearch = new Button({
       value: 'Поиск',
       attr: {
-        class: '',
+        class: 'chat-add__search',
       },
       events: {
         click: () => {

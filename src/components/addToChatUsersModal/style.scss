@@ -50,6 +50,24 @@
       margin-bottom: 25px;
     }
 
+    &__form {
+      display: flex;
+      margin-bottom: 25px;
+    }
+
+    &__input {
+      border: 1px solid $primary;
+      padding: 5px;
+      border-radius: 5px 0 0 5px;
+    }
+
+    &__search {
+      background-color: $primary;
+      color: $white;
+      padding: 10px;
+      border-radius: 0 5px 5px 0;
+    }
+
     &__list {
       display: flex;
       flex-direction: column;
