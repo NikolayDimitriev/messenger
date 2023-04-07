@@ -33,7 +33,6 @@ class MessagesController {
     }
 
     wsTransport.send({ type: 'message', content: message });
-
   }
 
   getOldMessages(id: number) {
@@ -51,6 +50,10 @@ class MessagesController {
   }
 
   private _onMessage(id: number, messages: TMessage | TMessage[]) {
+    if (!Array.isArray(messages) && messages.type !== 'message') {
+      return;
+    }
+
     let messagesToAdd: TMessage[] = [];
 
     if (Array.isArray(messages)) {
