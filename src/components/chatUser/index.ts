@@ -57,7 +57,6 @@ export class ChatUser extends Block {
             avatar: this.props.initialAvatar,
             role: 'regular',
           };
-          debugger;
           ChatsController.addUserToChat(
             this.props.selectedChatId,
             this.props.id,

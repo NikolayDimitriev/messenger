@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .chat {
   display: flex;
@@ -36,7 +36,7 @@
       width: 20px;
       height: 20px;
       border-radius: 5px;
-      background-image: url('/static/icon_search.svg');
+      background-image: url("/static/icon_search.svg");
     }
 
     &__input {
@@ -90,10 +90,6 @@
 
       &:hover {
         background-color: $bg-dots-menu;
-
-        .chat-right__menu img {
-          fill: $primary;
-        }
       }
     }
 
@@ -153,7 +149,7 @@
       transform: rotate(180deg);
       border-radius: 50%;
       background-color: $primary;
-      background-image: url('/static/arrow-left-sidebar.svg');
+      background-image: url("/static/arrow-left-sidebar.svg");
       background-repeat: no-repeat;
       background-position: center;
     }

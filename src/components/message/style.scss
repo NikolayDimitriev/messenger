@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .message {
   &__text {
@@ -24,8 +24,8 @@
         display: inline-block;
         width: 15px;
         height: 6px;
-        content: '';
-        background-image: url('/static/readed.svg');
+        content: "";
+        background-image: url("/static/readed.svg");
         background-repeat: no-repeat;
         background-position: center;
       }

@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables";
 
 .chat {
   &-modal {
@@ -12,7 +12,7 @@
     pointer-events: none;
     transition: opacity 200ms ease-in;
     background: $white;
-    box-shadow: 0px 0px 6px $shadowLogIn;
+    box-shadow: 0 0 6px $shadowLogIn;
     border-radius: 12px;
     flex-direction: column;
     justify-content: flex-start;
