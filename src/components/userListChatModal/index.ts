@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
 import { ChatUser } from '../chatUser';
 
@@ -7,15 +7,15 @@ import { TUserProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TUserListChatModalProps = {
+interface TUserListChatModalProps {
   users: Array<TUserProps & { role: string }> | undefined;
   isOpen: boolean;
   selectedChatId: number | undefined;
-};
+}
 
 class UserListChatModalBase extends Block<TUserListChatModalProps> {
   constructor(props: TUserListChatModalProps) {
-    super({ ...props });
+    super(props);
   }
 
   init() {
@@ -24,10 +24,13 @@ class UserListChatModalBase extends Block<TUserListChatModalProps> {
     }
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+  protected componentDidUpdate(
+    oldProps: TUserListChatModalProps,
+    newProps: TUserListChatModalProps
+  ): boolean {
     const response = !isEqual(oldProps, newProps);
     if (response && this.props.users) {
-      this.children.users = this._createUsers(newProps.users);
+      this.children.users = this._createUsers(newProps.users!);
     }
 
     return response;
@@ -59,4 +62,6 @@ const withSelectedChatUsers = withStore((state) => {
   };
 });
 
-export const UserListChatModal = withSelectedChatUsers(UserListChatModalBase);
+export const UserListChatModal = withSelectedChatUsers(
+  UserListChatModalBase as unknown as typeof Block
+);

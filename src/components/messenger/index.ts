@@ -1,13 +1,12 @@
 import MessagesController from '../../controllers/MessagesController';
 import ChatsController from '../../controllers/ChatsController';
 
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
 
 import { Message } from '../message';
 import { ChatForm } from '../chatForm';
 import { SettingChatModal } from '../settingChatModal';
-import { UserListChatModal } from '../userListChatModal';
 import { Image } from '../image';
 
 import { Input } from '../input';
@@ -70,15 +69,11 @@ class MessengerBase extends Block {
         ).value = '';
       },
     });
-
-    this.children.userListChatModal = new UserListChatModal({
-      isOpen: true,
-    });
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
     const response = !isEqual(oldProps, newProps);
-    if (response) {
+    if (response && newProps.messages) {
       this.children.messages = this._createMessages(newProps);
     }
 
@@ -86,7 +81,7 @@ class MessengerBase extends Block {
   }
 
   private _createMessages(props: TMessagePageProps) {
-    return props.messages.map((data) => {
+    return props.messages?.map((data) => {
       return new Message({
         ...data,
         isMine: props.userId === Number(data.user_id),

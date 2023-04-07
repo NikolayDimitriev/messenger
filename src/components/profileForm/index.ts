@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { Button } from '../../components/button';
 import { ProfileInput } from '../profileInput';
 import { FormValidation } from '../../core/FormValidation';

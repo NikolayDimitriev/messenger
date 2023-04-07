@@ -1,6 +1,6 @@
 import UserController from '../../controllers/UserController';
 import store, { withStore } from '../../core/Store';
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { Link } from '../../components/link';
 import { ProfileForm } from '../../components/profileForm';
 

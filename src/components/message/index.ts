@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 
 import { TMessage } from '../../typing';
 import tpl from './tpl.hbs';

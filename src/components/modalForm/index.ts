@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { TProps } from '../../typing';
 import { Button } from '../button';
 import { Input } from '../input';

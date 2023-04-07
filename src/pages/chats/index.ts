@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { Link } from '../../components/link';
 import { ChatsList } from '../../components/chatList';
 import { Messenger } from '../../components/messenger';

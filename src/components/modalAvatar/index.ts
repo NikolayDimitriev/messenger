@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { ModalForm } from '../modalForm';
 
 import tpl from './tpl.hbs';

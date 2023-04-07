@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
 import { TSignUpData } from '../../typing';

@@ -1,5 +1,6 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { TProps } from '../../typing';
+import { UserListChatModal } from '../userListChatModal';
 
 import tpl from './tpl.hbs';
 import './style.scss';
@@ -24,6 +25,9 @@ export class SettingChatModal extends Block {
       events: {
         click: () => {
           this.setProps({ isOpen: false });
+          // this.children.userListChatModal).setProps({
+          //   isOpen: true,
+          // });
         },
       },
     });
@@ -39,6 +43,10 @@ export class SettingChatModal extends Block {
           this.setProps({ isOpen: false });
         },
       },
+    });
+
+    this.children.userListChatModal = new UserListChatModal({
+      isOpen: false,
     });
   }
 

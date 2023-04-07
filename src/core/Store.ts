@@ -1,6 +1,7 @@
-import { set } from '../utils/set';
+import Block from './Block';
 import { EventBus } from './EventBus';
-import { Block } from './Block';
+
+import { set } from '../utils/set';
 import { TMessage, TUser, TChatInfo, TUserProps } from '../typing';
 
 export enum StoreEvents {
@@ -31,13 +32,13 @@ export class Store extends EventBus {
 
 const store = new Store();
 
-export function withStore<SP>(mapStateToProps: (state: TState) => SP) {
-  return function wrap<T>(Component: typeof Block) {
+export function withStore(mapStateToProps: (state: TState) => any) {
+  return function wrap(Component: typeof Block) {
     return class WithStore extends Component {
-      constructor(props: Omit<T, keyof SP>) {
+      constructor(props: any) {
         let previousState = mapStateToProps(store.getState());
 
-        super({ ...(props as T), ...previousState });
+        super({ ...props, ...previousState });
 
         store.on(StoreEvents.Updated, () => {
           const stateProps = mapStateToProps(store.getState());

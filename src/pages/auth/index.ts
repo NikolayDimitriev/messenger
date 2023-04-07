@@ -1,9 +1,10 @@
 import AuthController from '../../controllers/AuthController';
-import { TSignInData } from '../../typing';
-import { Block } from '../../core/Block';
-import tpl from './tpl.hbs';
+import Block from '../../core/Block';
 import { Login } from '../../components/login';
+
+import { TSignInData } from '../../typing';
 import { logIn } from '../../mock';
+import tpl from './tpl.hbs';
 
 export class AuthPage extends Block {
   constructor() {

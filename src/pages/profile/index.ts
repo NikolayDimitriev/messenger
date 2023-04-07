@@ -1,6 +1,6 @@
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
 import { ProfileForm } from '../../components/profileForm';

@@ -1,10 +1,11 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 
 import { Link } from '../link';
 import tpl from './tpl.hbs';
 import './style.scss';
+import { TProps } from '../../typing';
 
-type TErrorProps = {
+type TErrorProps = TProps & {
   errorCode: string;
   errorText: string;
 };

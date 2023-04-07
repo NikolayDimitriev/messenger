@@ -1,4 +1,4 @@
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { Button } from '../button';
 import { Image } from '../image';
 
@@ -40,7 +40,6 @@ export class ChatUser extends Block {
       },
       events: {
         click: () => {
-          debugger;
           ChatsController.removeUserFromChat(
             this.props.selectedChatId,
             this.props.id

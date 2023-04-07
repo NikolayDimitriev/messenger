@@ -1,6 +1,6 @@
 import UserController from '../../controllers/UserController';
+import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
-import { Block } from '../../core/Block';
 import { Link } from '../../components/link';
 import { ProfileForm } from '../../components/profileForm';
 
@@ -10,8 +10,6 @@ import tpl from './tpl.hbs';
 
 export class EditPassPageBase extends Block {
   init() {
-
-
     this.children.form = new ProfileForm({
       isEditData: true,
       isEditPass: true,

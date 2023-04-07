@@ -1,4 +1,4 @@
-import { Block } from '../core/Block';
+import Block from '../core/Block';
 import Router from '../core/Router';
 
 export function withRouter(Component: typeof Block<any>) {

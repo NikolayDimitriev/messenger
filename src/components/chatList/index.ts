@@ -1,5 +1,5 @@
 import ChatsController from '../../controllers/ChatsController';
-import { Block } from '../../core/Block';
+import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
 import { Dialogue } from '../dialogue';
 

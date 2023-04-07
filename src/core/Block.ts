@@ -13,7 +13,7 @@ enum EVENTS {
 
 type TChildren = Record<string, Block | Block[]>;
 
-export class Block<T extends Record<string, any> = any> {
+class Block<T extends Record<string, any> = any> {
   public id: string = nanoid(6);
   public props: T;
   public children: TChildren;
@@ -239,3 +239,5 @@ export class Block<T extends Record<string, any> = any> {
     return temp.content;
   }
 }
+
+export default Block;
