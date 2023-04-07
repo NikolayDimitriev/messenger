@@ -10,7 +10,6 @@ import { Page500 } from './pages/500';
 import router from './core/Router';
 
 import AuthController from './controllers/AuthController';
-import ChatsController from './controllers/ChatsController';
 
 enum Routes {
   SignIn = '/',
@@ -44,7 +43,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     await AuthController.getUser();
-    await ChatsController.getChats();
 
     router.start();
 

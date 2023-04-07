@@ -27,10 +27,11 @@ export default class WSTransport extends EventBus {
     this._socket = new WebSocket(this._url);
 
     this._subscribe(this._socket);
+    
+    this._setupPing();
 
     return new Promise((resolve) => {
       this.on(WSTransportEvents.CONNECTED, () => {
-        this._setupPing();
         resolve();
       });
     });

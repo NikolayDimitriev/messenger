@@ -3,6 +3,7 @@ import MessagesController from './MessagesController';
 import router from '../core/Router';
 import store from '../core/Store';
 import { TSignUpData, TSignInData } from '../typing';
+import ChatsController from './ChatsController';
 
 class AuthController {
   private _api: AuthAPI;
@@ -41,9 +42,9 @@ class AuthController {
 
       await this._api.logout();
 
-      store.set('user.data', null);
-
       router.go('/');
+
+      store.set('user.data', undefined);
     } catch (e) {
       store.set('user.errorMessage', (e as Error).message);
     }
@@ -54,6 +55,8 @@ class AuthController {
       const user = await this._api.getUser();
 
       store.set('user.data', user);
+
+      await ChatsController.getChats();
     } catch (e) {
       store.set('user.errorMessage', (e as Error).message);
       throw new Error((e as Error).message);

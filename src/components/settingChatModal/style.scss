@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: flex-start;
     display: flex;
+    z-index: 1050;
 
     &--open {
       opacity: 1;
