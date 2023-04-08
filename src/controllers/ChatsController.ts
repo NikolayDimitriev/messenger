@@ -2,7 +2,7 @@ import API, { ChatsAPI } from '../api/ChatsAPI';
 import MessagesController from './MessagesController';
 import store from '../core/Store';
 
-import { TUser } from '../typing';
+import { TChatInfo, TUser } from '../typing';
 
 class ChatsController {
   private readonly _api: ChatsAPI;
@@ -20,7 +20,7 @@ class ChatsController {
   async getChats() {
     await MessagesController.closeAll();
 
-    const chats = await this._api.read();
+    const chats = await this._api.read<TChatInfo[]>();
 
     chats.map(async (chat) => {
       const token = await this.getToken(chat.id);

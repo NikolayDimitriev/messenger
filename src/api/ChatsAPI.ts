@@ -1,5 +1,5 @@
 import { BaseAPI } from './BaseAPI';
-import { TChatInfo, TUser } from '../typing';
+import { TUser } from '../typing';
 
 export class ChatsAPI extends BaseAPI {
   constructor() {
@@ -14,7 +14,7 @@ export class ChatsAPI extends BaseAPI {
     return this.http.delete('', { chatId: id });
   }
 
-  read(): Promise<TChatInfo[]> {
+  read<T>(): Promise<T> {
     return this.http.get('');
   }
 
