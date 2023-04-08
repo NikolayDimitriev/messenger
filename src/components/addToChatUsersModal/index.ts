@@ -1,18 +1,18 @@
 import Block from '../../core/Block';
+import UserController from '../../controllers/UserController';
 import store, { withStore } from '../../core/Store';
 import { ChatUser } from '../chatUser';
 import { Input } from '../input';
 
 import { isEqual } from '../../utils/isEqual';
-import { TProps, TUserProps } from '../../typing';
+import { TProps, TUser } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { Button } from '../button';
-import UserController from '../../controllers/UserController';
 
 type TAddToChatUsersModalProps = TProps & {
   isOpen: boolean;
-  users: TUserProps[];
+  users: TUser[];
   selectedChatId: number | undefined;
 };
 
@@ -37,14 +37,14 @@ export class AddToChatUsersModalBase extends Block<TAddToChatUsersModalProps> {
         class: 'chat-add__search',
       },
       events: {
-        click: () => {
+        click: async () => {
           const inputValue = (
             (this.children.input as Input).getContent() as HTMLInputElement
           ).value;
           if (inputValue === '') {
             return;
           }
-          UserController.searchUsers(inputValue);
+          await UserController.searchUsers(inputValue);
         },
       },
     });
@@ -62,7 +62,7 @@ export class AddToChatUsersModalBase extends Block<TAddToChatUsersModalProps> {
     return response;
   }
 
-  private _createUsers(props: TUserProps[]) {
+  private _createUsers(props: TUser[]) {
     return props.map(
       (user) =>
         new ChatUser({

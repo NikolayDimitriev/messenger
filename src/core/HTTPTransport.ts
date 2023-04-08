@@ -1,14 +1,16 @@
-enum METHODS {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
-}
+const METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE',
+} as const;
+
+type METHODS = typeof METHODS[keyof typeof METHODS];
 
 type Options = {
   method: METHODS;
-  data?: any;
+  data: unknown;
 };
 
 export class HTTPTransport {
@@ -59,14 +61,17 @@ export class HTTPTransport {
 
   private request<Response>(
     url: string,
-    options: Options = { method: METHODS.GET }
+    options: Options = {
+      method: METHODS.GET,
+      data: undefined,
+    }
   ): Promise<Response> {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
-      
+
       xhr.open(method, url);
 
       xhr.onreadystatechange = () => {

@@ -1,4 +1,5 @@
 import Block from '../../core/Block';
+
 import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 

@@ -6,11 +6,11 @@ import { Image } from '../image';
 import addIcon from '../../../static/addIcon.svg';
 import deleteIcon from '../../../static/deleteIcon.svg';
 import crown from '../../../static/crown.svg';
-import { TUserProps } from '../../typing';
+import { TUser } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
-type TChatUserProps = TUserProps & {
+type TChatUserProps = TUser & {
   role: string;
   selectedChatId: number;
   isAdd: boolean;
@@ -43,10 +43,10 @@ export class ChatUser extends Block {
         class: 'list-user__btn',
       },
       events: {
-        click: (e?) => {
+        click: async (e) => {
           e?.stopPropagation();
 
-          const addedUser: TUserProps & { role: string } = {
+          const addedUser: TUser & { role: string } = {
             id: this.props.id,
             first_name: this.props.first_name,
             second_name: this.props.second_name,
@@ -57,7 +57,7 @@ export class ChatUser extends Block {
             avatar: this.props.initialAvatar,
             role: 'regular',
           };
-          ChatsController.addUserToChat(
+          await ChatsController.addUserToChat(
             this.props.selectedChatId,
             this.props.id,
             addedUser

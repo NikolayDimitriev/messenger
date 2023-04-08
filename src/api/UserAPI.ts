@@ -1,4 +1,4 @@
-import { TChangePassword, TChangeProfileData, TUserProps } from '../typing';
+import { TChangePassword, TChangeProfileData, TUser } from '../typing';
 import { BaseAPI } from './BaseAPI';
 
 export class UserAPI extends BaseAPI {
@@ -6,11 +6,11 @@ export class UserAPI extends BaseAPI {
     super('/user');
   }
 
-  changeAvatar(data: FormData): Promise<TUserProps> {
+  changeAvatar(data: FormData): Promise<TUser> {
     return this.http.put('/profile/avatar', data);
   }
 
-  changeProfileData(data: TChangeProfileData): Promise<TUserProps> {
+  changeProfileData(data: TChangeProfileData): Promise<TUser> {
     return this.http.put('/profile', data);
   }
 
@@ -18,11 +18,11 @@ export class UserAPI extends BaseAPI {
     return this.http.put('/password', data);
   }
 
-  search(login: string): Promise<TUserProps[]> {
+  search(login: string): Promise<TUser[]> {
     return this.http.post('/search', { login });
   }
 
-  getUser(id:number): Promise<TUserProps> {
+  getUser(id: number): Promise<TUser> {
     return this.http.get(`/${id}`);
   }
 

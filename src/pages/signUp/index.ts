@@ -1,8 +1,8 @@
+import AuthController from '../../controllers/AuthController';
 import Block from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Login } from '../../components/login';
 import { TSignUpData } from '../../typing';
-import AuthController from '../../controllers/AuthController';
 import { signUp } from '../../mock';
 
 export class SignUpPage extends Block {
@@ -17,8 +17,8 @@ export class SignUpPage extends Block {
       buttonValue: 'Зарегистрироваться',
       linkValue: 'Войти',
       linkHref: '/',
-      onSubmit: (data: TSignUpData) => {
-        AuthController.signup(data);
+      onSubmit: async (data: TSignUpData) => {
+        await AuthController.signup(data);
       },
     });
   }

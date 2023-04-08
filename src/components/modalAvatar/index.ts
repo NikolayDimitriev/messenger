@@ -1,9 +1,9 @@
 import Block from '../../core/Block';
 import { ModalForm } from '../modalForm';
 
+import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TProps } from '../../typing';
 
 type TModalAvatarProps = TProps & {
   title: string;
@@ -26,6 +26,10 @@ export class ModalAvatar extends Block {
         submit: this.props.onSubmit,
       },
     });
+  }
+
+  public setFileNamePropsToForm(fileName: string) {
+    (this.children.form as ModalForm).setProps({ fileName });
   }
 
   render() {

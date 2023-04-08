@@ -4,10 +4,9 @@ import Block from '../../core/Block';
 import { Link } from '../../components/link';
 import { ProfileForm } from '../../components/profileForm';
 
-import tpl from './tpl.hbs';
-
 import { isEqual } from '../../utils/isEqual';
 import { TChangeProfileData } from '../../typing';
+import tpl from './tpl.hbs';
 
 class EditDataPageBase extends Block {
   init() {
@@ -27,13 +26,13 @@ class EditDataPageBase extends Block {
     });
   }
 
-  onSubmit(data: TChangeProfileData) {
+  async onSubmit(data: TChangeProfileData) {
     // отфильтровал данные для проверки
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { avatar, id, ...userData } = store.getState().user.data;
+    const { avatar, id, ...userData } = store.getState().user;
 
     if (!isEqual(data, userData)) {
-      UserController.changeProfileData(data);
+      await UserController.changeProfileData(data);
     }
   }
 
@@ -42,6 +41,6 @@ class EditDataPageBase extends Block {
   }
 }
 
-const withUser = withStore((state) => ({ ...state.user.data }));
+const withUser = withStore((state) => ({ ...state.user }));
 
 export const EditDataPage = withUser(EditDataPageBase);

@@ -14,7 +14,7 @@ class UserController {
   async changeAvatar(data: any) {
     try {
       const newUserData = await this._api.changeAvatar(data);
-      store.set('user.data', newUserData);
+      store.set('user', newUserData);
     } catch (e) {
       console.error(e);
     }
@@ -24,7 +24,7 @@ class UserController {
     try {
       const newUserData = await this._api.changeProfileData(data);
 
-      store.set('user.data', newUserData);
+      store.set('user', newUserData);
     } catch (e) {
       console.error(e);
     }

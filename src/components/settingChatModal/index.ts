@@ -1,9 +1,9 @@
 import Block from '../../core/Block';
-import { TProps } from '../../typing';
+import { Button } from '../button';
 
+import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { Button } from '../button';
 
 type TSettingChatModalProps = TProps & {
   isOpen: boolean;

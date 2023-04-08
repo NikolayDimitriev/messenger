@@ -2,6 +2,7 @@ import Block from '../../core/Block';
 import { TProps } from '../../typing';
 import { Input } from '../input';
 import { ErrorLabel } from '../errorLabel';
+
 import { TInputBlock } from '../../mock/mock.props';
 import tpl from './tpl.hbs';
 
@@ -18,7 +19,7 @@ export class InputsBlock extends Block<TInputsBlockProps> {
     this.children.input = new Input({
       attr: {
         id: this.props.id,
-        class: this.props.class ?? 'field__input',
+        class: this.props.inputClass,
         name: this.props.name,
         type: this.props.type,
         value: this.props.value,

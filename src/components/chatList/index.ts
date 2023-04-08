@@ -3,9 +3,9 @@ import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
 import { Dialogue } from '../dialogue';
 
+import { isEqual } from '../../utils/isEqual';
 import { TChatInfo } from '../../typing';
 import tpl from './tpl.hbs';
-import { isEqual } from '../../utils/isEqual';
 
 type TChatsListProps = {
   chats: TChatInfo[];
@@ -46,8 +46,8 @@ class ChatsListBase extends Block {
         time,
         isSelected: this.props.selectedChat === data.id,
         events: {
-          click: () => {
-            ChatsController.selectChat(data.id);
+          click: async () => {
+            await ChatsController.selectChat(data.id);
           },
         },
       });

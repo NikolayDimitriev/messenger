@@ -1,8 +1,9 @@
 import Block from '../../core/Block';
+import { Image } from '../image';
+
 import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { Image } from '../image';
 
 type TButtonProps = {
   value: string | Image;

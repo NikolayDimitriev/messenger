@@ -4,7 +4,6 @@ import { ChatsList } from '../../components/chatList';
 import { Messenger } from '../../components/messenger';
 import { ChatModal } from '../../components/chatModal';
 import { Button } from '../../components/button';
-import { Input } from '../../components/input';
 
 import tpl from './tpl.hbs';
 import './style.scss';
@@ -33,16 +32,10 @@ export class ChatPage extends Block {
         click: (e) => {
           const target = e?.target as HTMLDivElement;
           if (target && target.classList.contains('main-btn')) {
-            (this.children.chatModal as ChatModal)
-              .getContent()
-              ?.classList.add('modal--active');
+            (this.children.chatModal as ChatModal).openModal();
           }
 
-          (
-            (
-              (this.children.chatModal as ChatModal).children.input as Input
-            ).getContent() as HTMLInputElement
-          ).value = '';
+          (this.children.chatModal as ChatModal).setInputValue('');
         },
       },
     });
@@ -52,9 +45,7 @@ export class ChatPage extends Block {
         click: (e) => {
           const target = e?.target as HTMLElement;
           if (target && !target.closest('.modal-chat')) {
-            (this.children.chatModal as ChatModal)
-              .getContent()
-              ?.classList.remove('modal--active');
+            (this.children.chatModal as ChatModal).closeModal();
           }
         },
       },

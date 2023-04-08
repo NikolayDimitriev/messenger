@@ -3,9 +3,9 @@ import { Button } from '../../components/button';
 import { ProfileInput } from '../profileInput';
 import { FormValidation } from '../../core/FormValidation';
 import tpl from './tpl.hbs';
-import { TUserProps } from '../../typing';
+import { TUser } from '../../typing';
 
-type TProfileFormProps = Partial<TUserProps> & {
+type TProfileFormProps = Partial<TUser> & {
   isEditData: boolean;
   isEditPass: boolean;
   onSubmit?: (data: any) => void;

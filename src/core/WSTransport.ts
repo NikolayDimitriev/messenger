@@ -1,11 +1,14 @@
 import { EventBus } from './EventBus';
 
-export enum WSTransportEvents {
-  CONNECTED = 'connected',
-  MESSAGE = 'message',
-  CLOSE = 'close',
-  ERROR = 'error',
-}
+export const WSTransportEvents = {
+  CONNECTED: 'connected',
+  MESSAGE: 'message',
+  CLOSE: 'close',
+  ERROR: 'error',
+} as const;
+
+type WSTransportEvents =
+  (typeof WSTransportEvents)[keyof typeof WSTransportEvents];
 
 export default class WSTransport extends EventBus {
   private _socket: WebSocket | null = null;
@@ -27,7 +30,7 @@ export default class WSTransport extends EventBus {
     this._socket = new WebSocket(this._url);
 
     this._subscribe(this._socket);
-    
+
     this._setupPing();
 
     return new Promise((resolve) => {

@@ -1,7 +1,8 @@
 import API, { ChatsAPI } from '../api/ChatsAPI';
-import store from '../core/Store';
-import { TUserProps } from '../typing';
 import MessagesController from './MessagesController';
+import store from '../core/Store';
+
+import { TUser } from '../typing';
 
 class ChatsController {
   private readonly _api: ChatsAPI;
@@ -36,11 +37,7 @@ class ChatsController {
     store.set('usersSelectedChat', users);
   }
 
-  addUserToChat(
-    id: number,
-    userId: number,
-    user: TUserProps & { role: string }
-  ) {
+  addUserToChat(id: number, userId: number, user: TUser & { role: string }) {
     this._api.addUsers(id, [userId]);
 
     const usersOfSelectedChat = store.getState().usersSelectedChat;

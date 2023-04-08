@@ -1,9 +1,9 @@
 import Block from '../../core/Block';
-
 import { Link } from '../link';
+
+import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TProps } from '../../typing';
 
 type TErrorProps = TProps & {
   errorCode: string;

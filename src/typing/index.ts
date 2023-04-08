@@ -1,8 +1,4 @@
 export type TUser = {
-  data: TUserProps;
-};
-
-export type TUserProps = {
   id: number;
   first_name: string;
   second_name: string;
@@ -71,7 +67,7 @@ export type TSignInData = {
 };
 
 export type TProps = {
-  events?: Record<string, (e?: Event) => void>;
+  events?: Record<string, (e: Event) => void>;
   attr?: Record<string, string>;
 };
 

@@ -2,10 +2,10 @@ import ChatsController from '../../controllers/ChatsController';
 import Block from '../../core/Block';
 import { TProps } from '../../typing';
 import { Input } from '../input';
+import { Button } from '../button';
 
 import tpl from './tpl.hbs';
 import './style.scss';
-import { Button } from '../button';
 
 export class ChatModal extends Block<TProps> {
   constructor(props: TProps) {
@@ -26,7 +26,7 @@ export class ChatModal extends Block<TProps> {
         class: 'main-btn',
       },
       events: {
-        click: () => {
+        click: async () => {
           const text = (
             (this.children.input as Input).getContent() as HTMLInputElement
           )?.value;
@@ -35,12 +35,25 @@ export class ChatModal extends Block<TProps> {
             return;
           }
 
-          ChatsController.create(text);
+          await ChatsController.create(text);
 
-          this.getContent()?.classList.remove('modal--active');
+          this.closeModal();
         },
       },
     });
+  }
+
+  public openModal() {
+    this.getContent()?.classList.add('modal--active');
+  }
+
+  public closeModal() {
+    this.getContent()?.classList.remove('modal--active');
+  }
+
+  public setInputValue(value: string) {
+    ((this.children.input as Input).getContent() as HTMLInputElement).value =
+      value;
   }
 
   render() {

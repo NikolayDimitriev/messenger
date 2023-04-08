@@ -25,8 +25,8 @@ export class EditPassPageBase extends Block {
     });
   }
 
-  onSubmit(data: TChangePassword) {
-    UserController.changePassword(data);
+  async onSubmit(data: TChangePassword) {
+    await UserController.changePassword(data);
   }
 
   render() {
@@ -34,6 +34,6 @@ export class EditPassPageBase extends Block {
   }
 }
 
-const withUser = withStore((state) => ({ ...state.user.data }));
+const withUser = withStore((state) => ({ ...state.user }));
 
 export const EditPassPage = withUser(EditPassPageBase);

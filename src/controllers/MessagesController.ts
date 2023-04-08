@@ -10,7 +10,7 @@ class MessagesController {
       return;
     }
 
-    const userId = store.getState().user.data.id;
+    const userId = store.getState().user.id;
 
     const wsTransport = new WSTransport(
       `wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`

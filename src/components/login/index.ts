@@ -1,14 +1,12 @@
 import Block from '../../core/Block';
 import { Form } from '../form';
 
-import { TProps } from '../../typing';
-
 import tpl from './tpl.hbs';
 import './style.scss';
 
 import { TInputBlock } from '../../mock/mock.props';
 
-export type TLoginProps = TProps & {
+export type TLoginProps = {
   title: string;
   dataInputs: TInputBlock[];
   buttonValue: string;

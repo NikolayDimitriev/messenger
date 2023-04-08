@@ -4,6 +4,7 @@ import { InputsBlock } from '../InputsBlock';
 import { Button } from '../button';
 import { Link } from '../link';
 import { TInputBlock } from '../../mock/mock.props';
+
 import tpl from './tpl.hbs';
 import './style.scss';
 

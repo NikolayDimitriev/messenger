@@ -1,6 +1,5 @@
 import MessagesController from '../../controllers/MessagesController';
 import ChatsController from '../../controllers/ChatsController';
-
 import Block from '../../core/Block';
 import { withStore } from '../../core/Store';
 
@@ -13,11 +12,10 @@ import {
 } from '../addToChatUsersModal';
 import { SettingChatModal } from '../settingChatModal';
 import { Image } from '../image';
-
-import { Input } from '../input';
 import { Button } from '../button';
 
 import { isEqual } from '../../utils/isEqual';
+
 import { TChatInfo, TMessage } from '../../typing';
 
 import chatMenuDots from '../../../static/chat-menu-dots.svg';
@@ -75,13 +73,10 @@ class MessengerBase extends Block {
     this.children.messages = this._createMessages(this.props);
 
     this.children.chatForm = new ChatForm({
-      onSubmit: (data) => {
-        MessagesController.sendMessage(this.props.selectedChat!, data);
-        (
-          (
-            (this.children.chatForm as ChatForm).children.inputs as Input
-          ).getContent() as HTMLInputElement
-        ).value = '';
+      onSubmit: async (data) => {
+        await MessagesController.sendMessage(this.props.selectedChat!, data);
+
+        (this.children.chatForm as ChatForm).setInputValue('');
       },
     });
 
@@ -92,6 +87,7 @@ class MessengerBase extends Block {
           const target = e?.target as HTMLElement;
           if (target && target.classList.contains('chat-list__modal--active')) {
             target.classList.remove('chat-list__modal--active');
+
             (this.children.userListChatModal as UserListChatModalBase).setProps(
               {
                 isOpen: false,
@@ -152,7 +148,7 @@ const withSelectedChatMessages = withStore((state) => {
       messages: [],
       selectedChat: undefined,
       chat: undefined,
-      userId: state.user.data.id,
+      userId: state.user.id,
     };
   }
 
@@ -160,7 +156,7 @@ const withSelectedChatMessages = withStore((state) => {
     messages: (state.messages || {})[selectedChatId] || [],
     selectedChat: state.selectedChat,
     chat: state.chats.filter((chat) => chat.id === state.selectedChat)[0],
-    userId: state.user.data?.id,
+    userId: state.user?.id,
   };
 });
 

@@ -2,23 +2,25 @@ import Block from './Block';
 import { EventBus } from './EventBus';
 
 import { set } from '../utils/set';
-import { TMessage, TUser, TChatInfo, TUserProps } from '../typing';
+import { TMessage, TChatInfo, TUser } from '../typing';
 
-export enum StoreEvents {
-  Updated = 'updated',
-}
+const StoreEvents = {
+  Updated: 'updated',
+} as const;
+
+export type StoreEvents = (typeof StoreEvents)[keyof typeof StoreEvents];
 
 type TState = {
   user: TUser;
   chats: TChatInfo[];
   messages: Record<number, TMessage[]>;
   selectedChat?: number;
-  usersSelectedChat?: Array<TUserProps & { role: string }>;
-  searchedUsers?: TUserProps[];
+  usersSelectedChat?: Array<TUser & { role: string }>;
+  searchedUsers?: TUser[];
 };
 
 export class Store extends EventBus {
-  private _state: any = {};
+  private _state: TState = {} as TState;
 
   public set(keypath: string, data: unknown) {
     set(this._state, keypath, data);
