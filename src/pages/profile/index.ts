@@ -1,114 +1,172 @@
-import { Block, TProps } from '../../utils/Block';
+import AuthController from '../../controllers/AuthController';
+import UserController from '../../controllers/UserController';
+import Block from '../../core/Block';
+import { withStore } from '../../core/Store';
+
 import { Link } from '../../components/link';
 import { Button } from '../../components/button';
-import { Form } from '../../components/form';
+import { ProfileForm } from '../../components/profileForm';
+import { ProfileAvatar } from '../../components/profileAvatar';
+import { ModalAvatar } from '../../components/modalAvatar';
+
+import { isEqual } from '../../utils/isEqual';
+
+import { TUser } from '../../typing';
 import tpl from './tpl.hbs';
-
-import avatar from '../../../static/avatar.svg';
-import { user } from '../../data';
-
 import './style.scss';
 
-export class ProfilePage extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+class ProfilePageBase extends Block<TUser> {
+  constructor(props: TUser) {
+    super(props);
   }
 
   init() {
-    this.children.form = new Form({
-      data: user.fields,
-      inputBlockClass: 'profile-field',
-      disabled: true,
-      attr: {
-        class: 'profile-wrapper__fields',
-      },
+    this.children.avatar = this._createAvatar(this.props);
+
+    this.children.form = new ProfileForm({
+      ...this.props,
+      isEditData: false,
+      isEditPass: false,
     });
 
-    this.children.changeUserInfoBtn = new Button({
+    this.children.changeUserInfoLink = new Link({
       value: 'Изменить данные',
+      to: '/settings-edit-data',
       attr: {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
-      events: {
-        click: changeUserInfo.bind(this),
-      },
     });
 
-    this.children.changePasswordBtn = new Button({
+    this.children.changePasswordLink = new Link({
       value: 'Изменить пароль',
+      to: '/settings-edit-pass',
       attr: {
         class: 'profile-wrapper__btn profile-wrapper__btn--primary',
       },
-      events: {
-        click: changePassword.bind(this),
-      },
     });
 
-    this.children.link = new Link({
+    this.children.exitBtn = new Button({
       value: 'Выйти',
       attr: {
-        href: '/chats',
         class: 'profile-wrapper__btn profile-wrapper__btn--red',
+      },
+      events: {
+        click: async (e: Event) => {
+          e.preventDefault();
+          await AuthController.logout();
+        },
+      },
+    });
+
+    this.children.linkBack = new Link({
+      value: '',
+      to: '/messenger',
+      attr: {
+        class: 'profile-sidebar__link',
+      },
+    });
+
+    this.children.modalAvatar = new ModalAvatar({
+      title: 'Загрузите файл',
+      fileName: 'Выбрать файл на компьютере',
+      isOpen: false,
+      onSubmit: async (e: Event) => {
+        e.preventDefault();
+        if (e.target) {
+          const target = e.target as HTMLFormElement;
+          const formData = new FormData();
+          const input = target[0] as HTMLInputElement;
+
+          if (input.files?.length) {
+            const file = input.files[0];
+            formData.append('avatar', file);
+
+            await UserController.changeAvatar(formData);
+
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: false,
+            });
+
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              title: 'Загрузите файл',
+            });
+
+            (this.children.modalAvatar as ModalAvatar).setFileNamePropsToForm(
+              'Выбрать файл на компьютере'
+            );
+
+          }
+        }
+      },
+      onChange: (e: Event) => {
+        let fileName = 'Выбрать файл на компьютере';
+        const target = e.target as HTMLInputElement;
+        if (!target) {
+          return;
+        }
+        const files = target.files;
+
+        if (!files || !files.length) {
+          return;
+        }
+
+        fileName = files[0].name;
+
+        (this.children.modalAvatar as ModalAvatar).setProps({
+          title: 'Файл загружен',
+        });
+
+        (this.children.modalAvatar as ModalAvatar).setFileNamePropsToForm(
+          fileName
+        );
+      },
+
+      events: {
+        click: (e: Event) => {
+          const target = e?.target as HTMLElement;
+          if (target && target.classList.contains('modal--active')) {
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: false,
+            });
+          }
+        },
+      },
+    });
+  }
+
+  protected componentDidUpdate(oldProps: TUser, newProps: TUser): boolean {
+    const response = !isEqual(oldProps, newProps);
+    if (response) {
+      this.children.avatar = this._createAvatar(newProps);
+    }
+
+    return response;
+  }
+
+  private _createAvatar(props: TUser) {
+    return new ProfileAvatar({
+      avatarSrc: props.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources/${props.avatar}`
+        : null,
+      name: props.display_name ?? props.first_name,
+      events: {
+        click: (e) => {
+          const target = e.target as HTMLDivElement;
+          if (target && target.closest('.profile-wrapper__avatar')) {
+            (this.children.modalAvatar as ModalAvatar).setProps({
+              isOpen: true,
+            });
+          }
+        },
       },
     });
   }
 
   render() {
-    return this.compile(tpl, {
-      avatar,
-      name: user.shortFormat.first_name,
-    });
+    return this.compile(tpl, { ...this.props });
   }
 }
 
-function changeUserInfo(this: ProfilePage) {
-  this.children.form = new Form({
-    data: user.fields,
-    inputBlockClass: 'profile-field',
-    disabled: false,
-    button: new Button({
-      value: 'Сохранить',
-      attr: {
-        class: 'main-btn',
-        type: 'submit',
-      },
-    }),
-    attr: {
-      class: 'profile-wrapper__fields',
-    },
-  });
+const withUser = withStore((state) => ({ ...state.user }));
 
-  const actions = document.querySelector<HTMLElement>(
-    '.profile-wrapper__actions'
-  );
-
-  if (actions) {
-    actions.style.display = 'none';
-  }
-}
-
-function changePassword(this: ProfilePage) {
-  this.children.form = new Form({
-    data: user.passwords,
-    inputBlockClass: 'profile-field',
-    disabled: false,
-    button: new Button({
-      value: 'Сохранить',
-      attr: {
-        class: 'main-btn',
-        type: 'submit',
-      },
-    }),
-    attr: {
-      class: 'profile-wrapper__fields',
-    },
-  });
-
-  const actions = document.querySelector<HTMLElement>(
-    '.profile-wrapper__actions'
-  );
-
-  if (actions) {
-    actions.style.display = 'none';
-  }
-}
+export const ProfilePage = withUser(ProfilePageBase as unknown as typeof Block);

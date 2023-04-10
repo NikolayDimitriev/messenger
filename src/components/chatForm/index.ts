@@ -1,17 +1,25 @@
-import { Block, TProps } from '../../utils/Block';
+import Block from '../../core/Block';
 import { Button } from '../button';
-import tpl from './tpl.hbs';
-import attach from '../../../static/attach.svg';
 import { Image } from '../image';
 import { Input } from '../input';
-import { FormValidation } from '../../utils/FormValidation';
+import { FormValidation } from '../../core/FormValidation';
 import { ErrorLabel } from '../errorLabel';
 
-export class ChatForm extends Block<TProps> {
+import attach from '../../../static/attach.svg';
+import { TProps } from '../../typing';
+import tpl from './tpl.hbs';
+
+type TChatFormProps = TProps & {
+  onSubmit?: (data: any) => void;
+};
+
+export class ChatForm extends Block<TChatFormProps> {
   private _formValidation: FormValidation;
-  constructor(props: TProps) {
-    super('form', props);
-    this._formValidation = new FormValidation(this);
+  constructor(props: TChatFormProps) {
+    super(props);
+    this._formValidation = new FormValidation(this, (data: unknown) => {
+      this.props.onSubmit!(data);
+    });
   }
 
   init() {
@@ -29,11 +37,11 @@ export class ChatForm extends Block<TProps> {
 
     const id: string = Date.now().toString();
     this.children.inputs = new Input({
-      id,
-      type: 'text',
-      name: 'message',
-      placeholder: 'Сообщение',
       attr: {
+        id,
+        type: 'text',
+        name: 'message',
+        placeholder: 'Сообщение',
         class: 'chat-right__input',
       },
     });
@@ -41,7 +49,7 @@ export class ChatForm extends Block<TProps> {
     this.children.errorLabel = new ErrorLabel({
       errMessage: 'Не должно быть пустым!',
       attr: {
-        id,
+        for: id,
         class: 'input__label',
       },
     });
@@ -53,6 +61,11 @@ export class ChatForm extends Block<TProps> {
         class: 'chat-right__submit',
       },
     });
+  }
+
+  public setInputValue(value: string) {
+    ((this.children.inputs as Input).getContent() as HTMLInputElement).value =
+      value;
   }
 
   render() {

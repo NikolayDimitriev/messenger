@@ -1,35 +1,38 @@
-import { Block, TProps } from '../../utils/Block';
+import Block from '../../core/Block';
 import { Form } from '../form';
+
 import tpl from './tpl.hbs';
 import './style.scss';
-import { TAuth } from '../../data/data.props';
 
-export type TLoginProps = TProps & {
+import { TInputBlock } from '../../mock/mock.props';
+
+export type TLoginProps = {
   title: string;
-  data?: TAuth;
-  buttonValue?: string;
-  linkValue?: string;
-  linkHref?: string;
+  dataInputs: TInputBlock[];
+  buttonValue: string;
+  linkValue: string;
+  linkHref: string;
+  onSubmit: (data: any) => void;
 };
 
 export class Login extends Block<TLoginProps> {
   constructor(props: TLoginProps) {
-    super('div', props);
+    super(props);
   }
 
   init() {
     this.children.form = new Form({
-      data: this.props.data,
+      data: this.props.dataInputs,
       buttonValue: this.props.buttonValue,
       linkValue: this.props.linkValue,
       linkHref: this.props.linkHref,
-      attr: { class: 'form' },
+      onSubmit: this.props.onSubmit,
     });
   }
 
   render() {
     return this.compile(tpl, {
-      title: this.props.title,
+      ...this.props,
     });
   }
 }

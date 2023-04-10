@@ -1,15 +1,17 @@
-import { Block, TProps } from '../../utils/Block';
-import tpl from './tpl.hbs';
-import './style.scss';
+import Block from '../../core/Block';
 import { Image } from '../image';
 
-type TButtonProps = TProps & {
+import { TProps } from '../../typing';
+import tpl from './tpl.hbs';
+import './style.scss';
+
+type TButtonProps = {
   value: string | Image;
-};
+} & TProps;
 
 export class Button extends Block<TButtonProps> {
   constructor(props: TButtonProps) {
-    super('button', props);
+    super(props);
   }
 
   render() {

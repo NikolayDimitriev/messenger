@@ -1,0 +1,16 @@
+<div class='dialogue {{#if isSelected}}dialogue--focused{{/if}}'>
+  {{#if owner}}
+    <img src={{avatar}} class='dialogue__avatar' />
+  {{else}}
+    <div class='dialogue__avatar'></div>
+  {{/if}}
+  <div class='dialogue__about'>
+    <div class='dialogue__name'>{{title}}</div>
+  </div>
+  <div class='dialogue__info'>
+    <span class='dialogue__date'>{{time}}</span>
+    {{#if unread_count}}
+      <div class='dialogue__count'>{{unread_count}}</div>
+    {{/if}}
+  </div>
+</div>

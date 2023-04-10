@@ -1,22 +1,25 @@
-import { Block, TProps } from '../../utils/Block';
-import tpl from './tpl.hbs';
+import AuthController from '../../controllers/AuthController';
+import Block from '../../core/Block';
 import { Login } from '../../components/login';
-import { logIn } from '../../data';
 
-export class AuthPage extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+import { TSignInData } from '../../typing';
+import { logIn } from '../../mock';
+import tpl from './tpl.hbs';
+
+export class AuthPage extends Block {
+  constructor() {
+    super({});
   }
 
   init() {
     this.children.login = new Login({
       title: 'Вход',
-      data: logIn,
+      dataInputs: logIn,
       buttonValue: 'Авторизоваться',
       linkValue: 'Нет аккаунта?',
-      linkHref: '/registration',
-      attr: {
-        class: 'login',
+      linkHref: '/sign-up',
+      onSubmit: (data: TSignInData) => {
+        AuthController.signin(data);
       },
     });
   }

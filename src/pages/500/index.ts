@@ -1,10 +1,10 @@
-import { Block, TProps } from '../../utils/Block';
+import Block from '../../core/Block';
 import tpl from './tpl.hbs';
 import { Error } from '../../components/error';
 
-export class Page500 extends Block<TProps> {
-  constructor(props: TProps) {
-    super('div', props);
+export class Page500 extends Block {
+  constructor() {
+    super({});
   }
 
   override init() {

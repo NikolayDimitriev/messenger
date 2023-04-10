@@ -1,45 +1,59 @@
 import { AuthPage } from './pages/auth';
-import { RegistrationPage } from './pages/registration';
 import { ProfilePage } from './pages/profile';
-import { Chat } from './pages/chats';
+import { SignUpPage } from './pages/signUp';
+import { EditDataPage } from './pages/editData';
+import { EditPassPage } from './pages/editPass';
+import { ChatPage } from './pages/chats';
 import { Page404 } from './pages/404';
 import { Page500 } from './pages/500';
-import { Navigation } from './pages/navigation';
 
-import { Layout } from './components/layout';
+import router from './core/Router';
 
-import { render } from './utils/render';
+import AuthController from './controllers/AuthController';
 
-const routes = [
-  { path: '/', Page: Navigation },
-  { path: '/auth', Page: AuthPage },
-  { path: '/registration', Page: RegistrationPage },
-  { path: '/profile', Page: ProfilePage },
-  { path: '/chats', Page: Chat },
-  { path: '/404', Page: Page404 },
-  { path: '/500', Page: Page500 },
-];
-
-function router() {
-  const url = window.location.pathname;
-
-  const { Page } = routes.find(({ path }) => path === url) || {
-    Page: Page404,
-  };
-
-  render(
-    '#root',
-    new Layout({
-      page: new Page({
-        attr: {
-          class: 'page',
-        },
-      }),
-      attr: {
-        class: 'layout',
-      },
-    })
-  );
+enum Routes {
+  SignIn = '/',
+  SignUp = '/sign-up',
+  Profile = '/settings',
+  EditData = '/settings-edit-data',
+  EditPass = '/settings-edit-pass',
+  Chats = '/messenger',
+  Error404 = '/404',
+  Error500 = '/500',
 }
 
-window.addEventListener('load', router);
+window.addEventListener('DOMContentLoaded', async () => {
+  router
+    .use(Routes.SignIn, AuthPage)
+    .use(Routes.Profile, ProfilePage)
+    .use(Routes.EditData, EditDataPage)
+    .use(Routes.EditPass, EditPassPage)
+    .use(Routes.SignUp, SignUpPage)
+    .use(Routes.Chats, ChatPage)
+    .use(Routes.Error404, Page404)
+    .use(Routes.Error500, Page500);
+
+  let isProtectedRoute = true;
+  switch (window.location.pathname) {
+    case Routes.SignIn:
+    case Routes.SignUp:
+      isProtectedRoute = false;
+      break;
+  }
+
+  try {
+    await AuthController.getUser();
+
+    router.start();
+
+    if (!isProtectedRoute) {
+      router.go(Routes.Chats);
+    }
+  } catch (e) {
+    router.start();
+
+    if (isProtectedRoute) {
+      router.go(Routes.SignIn);
+    }
+  }
+});

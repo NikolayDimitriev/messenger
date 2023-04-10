@@ -1,5 +1,7 @@
-import { Block, TProps } from '../../utils/Block';
+import Block from '../../core/Block';
 import { Link } from '../link';
+
+import { TProps } from '../../typing';
 import tpl from './tpl.hbs';
 import './style.scss';
 
@@ -10,14 +12,14 @@ type TErrorProps = TProps & {
 
 export class Error extends Block<TErrorProps> {
   constructor(props: TErrorProps) {
-    super('div', props);
+    super(props);
   }
 
   init() {
     this.children.link = new Link({
       value: 'Назад к чатам',
       attr: {
-        href: '/chats',
+        href: '/messenger',
         class: 'form-link',
       },
     });
