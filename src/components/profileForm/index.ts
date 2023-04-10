@@ -12,12 +12,10 @@ type TProfileFormProps = Partial<TUser> & {
 };
 
 export class ProfileForm extends Block<TProfileFormProps> {
-  private _formValidation!: FormValidation;
-
   constructor(props: TProfileFormProps) {
     super(props);
     if (this.props.onSubmit) {
-      this._formValidation = new FormValidation(this, this.props.onSubmit);
+      new FormValidation(this, this.props.onSubmit);
     }
   }
 

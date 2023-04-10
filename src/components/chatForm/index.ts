@@ -14,10 +14,9 @@ type TChatFormProps = TProps & {
 };
 
 export class ChatForm extends Block<TChatFormProps> {
-  private _formValidation: FormValidation;
   constructor(props: TChatFormProps) {
     super(props);
-    this._formValidation = new FormValidation(this, (data: unknown) => {
+    new FormValidation(this, (data: unknown) => {
       this.props.onSubmit!(data);
     });
   }
