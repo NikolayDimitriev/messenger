@@ -1,6 +1,10 @@
 import { Route } from './Route';
 import Block from './Block';
 
+export interface BlockConstructable<P extends Record<string, any> = any> {
+  new(props: P): Block<P>;
+}
+
 class Router {
   private static __instance: Router;
   private _routes: Route[] = [];

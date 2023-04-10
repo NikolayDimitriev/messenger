@@ -53,6 +53,7 @@ const config = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+    alias: { handlebars: 'handlebars/dist/handlebars.js' },
   },
 };
 
