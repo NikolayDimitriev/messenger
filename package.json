@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Messenger App",
   "scripts": {
+    "start": "npm run build && node ./server.js",
     "dev-parcel": "parcel src/index.html --no-cache --port=3000 --open",
     "start-parcel": "parcel build src/index.html && node server.js",
     "build": "webpack --mode=production --node-env=production",
