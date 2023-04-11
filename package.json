@@ -26,14 +26,15 @@
     "typescript",
     "handlebars"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test && npx lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.ts": ["npm run eslint", "git add"],
-    "*.scss": ["npm run stylelint", "git add"]
+    "*.ts": [
+      "npm run eslint",
+      "git add"
+    ],
+    "*.scss": [
+      "npm run stylelint",
+      "git add"
+    ]
   },
   "author": "Nikolay Dimitriev",
   "license": "ISC",
