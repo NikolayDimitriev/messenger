@@ -10,7 +10,6 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "lint": "npm run stylelint & npm run eslint",
     "eslint": "eslint . --fix",
     "stylelint": "stylelint \"**/*.scss\" --fix",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
@@ -27,6 +26,15 @@
     "typescript",
     "handlebars"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": ["npm run eslint", "git add"],
+    "*.scss": ["npm run stylelint", "git add"]
+  },
   "author": "Nikolay Dimitriev",
   "license": "ISC",
   "bugs": {
@@ -50,6 +58,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
+    "lint-staged": "^13.2.1",
     "mini-css-extract-plugin": "^2.7.2",
     "mocha": "^10.2.0",
     "parcel": "2.8.2",
