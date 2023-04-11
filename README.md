@@ -4,12 +4,17 @@
 
 ## Проект на курсе Yandex Practicum Мидл фронтенд-разработчик.
 
+[Yandex Cloud](https://bban7tnhaqvt8i1mlncn.containers.yandexcloud.net/)
+
 [Netlify](https://candid-malabi-7e182e.netlify.app/)
 
-[Pull Request](https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/pull/4)
+[Pull Request](https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/pull/5)
 
-[Figma (макет от Яндекс)](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
+[Макет](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)
+
+[Swagger](https://ya-praktikum.tech/api/v2/swagger/#/)
 
 - `npm install` — установка зависимостей,
-- `npm run start` — запуск версии для разработчика,
-- `npm run build` — сборка продакт версии.
+- `npm run dev` — запуск версии для разработчика,
+- `npm run build` — сборка продакт версии,
+- `npm run test` — запуск тестов
