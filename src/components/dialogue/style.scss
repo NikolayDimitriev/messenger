@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .dialogue {
   display: flex;
@@ -24,7 +24,7 @@
     margin-right: 10px;
     border-radius: 50%;
     background-color: $empty-avatar;
-    
+
     &--image {
       width: 47px;
       height: 47px;
