@@ -3,24 +3,37 @@
   "version": "1.0.0",
   "description": "Messenger App",
   "scripts": {
-    "dev": "parcel src/index.html --no-cache --port=3000 --open",
-    "start": "npm run build && node server",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
+    "dev-parcel": "parcel src/index.html --no-cache --port=3000 --open",
+    "start-parcel": "parcel build src/index.html && node server.js",
     "build": "webpack --mode=production --node-env=production",
-    "lint": "eslint . --fix",
-    "stylelint": "stylelint \"**/*.scss\" --fix",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "lint": "npm run stylelint & npm run eslint",
+    "eslint": "eslint . --fix",
+    "stylelint": "stylelint \"**/*.scss\" --fix",
+    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
+    "prepare": "husky install"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "web-messenger",
+    "messenger",
+    "typescript",
+    "handlebars"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "pre-push": "npm run lint"
+    }
+  },
+  "author": "Nikolay Dimitriev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/NikolayDimitriev/middle.messenger.praktikum.yandex/issues"
@@ -41,6 +54,7 @@
     "eslint-config-airbnb": "19.0.4",
     "handlebars-loader": "^1.7.3",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.3",
     "jsdom": "^21.1.1",
     "mini-css-extract-plugin": "^2.7.2",
     "mocha": "^10.2.0",

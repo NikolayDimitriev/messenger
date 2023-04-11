@@ -136,7 +136,17 @@ class MessengerBase extends Block {
   }
 
   render() {
-    return this.compile(tpl, { ...this.props });
+    let avatar: string | null = null;
+    if ((this.props as TMessagePageProps).chat) {
+      avatar = (this.props as TMessagePageProps).chat!.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources/${this.props.chat.avatar}`
+        : this.props.chat.avatar;
+    }
+
+    return this.compile(tpl, {
+      ...this.props,
+      avatar,
+    });
   }
 }
 
