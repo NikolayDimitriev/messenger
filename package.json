@@ -27,12 +27,6 @@
     "typescript",
     "handlebars"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test",
-      "pre-push": "npm run lint"
-    }
-  },
   "author": "Nikolay Dimitriev",
   "license": "ISC",
   "bugs": {
