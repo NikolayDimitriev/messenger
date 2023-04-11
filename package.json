@@ -28,12 +28,10 @@
   ],
   "lint-staged": {
     "*.ts": [
-      "npm run eslint",
-      "git add"
+      "npm run eslint"
     ],
     "*.scss": [
-      "npm run stylelint",
-      "git add"
+      "npm run stylelint"
     ]
   },
   "author": "Nikolay Dimitriev",
