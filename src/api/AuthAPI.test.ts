@@ -5,7 +5,7 @@ import { expect } from 'chai';
 
 import { TSignInData, TSignUpData } from '../typing';
 
-describe.only('AuthAPI', () => {
+describe('AuthAPI', () => {
   class AuthAPIMock extends AuthAPI {}
 
   const originalXHR = global.XMLHttpRequest;
