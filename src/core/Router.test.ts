@@ -2,7 +2,7 @@ import Router, { BlockConstructable } from './Router';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-describe.only('Router', () => {
+describe('Router', () => {
   const originalBack = global.window.history.back;
   const originalForward = global.window.history.forward;
 
@@ -49,13 +49,37 @@ describe.only('Router', () => {
     expect(getContentFake.callCount).to.eq(1);
   });
 
-  describe('метод back()', () => {
-    it('должен рендорить страницу при вызове метода', () => {
-      Router.use('/', BlockMock).start();
+  it('должен рендорить страницу при вызове метода back()', () => {
+    Router.use('/', BlockMock).start();
 
-      Router.back();
+    Router.back();
 
-      expect(getContentFake.callCount).to.eq(1);
-    });
+    expect(getContentFake.callCount).to.eq(1);
+  });
+
+  it('должен рендорить страницу при вызове метода forward()', () => {
+    Router.use('/', BlockMock).start();
+
+    Router.forward();
+
+    expect(getContentFake.callCount).to.eq(1);
+  });
+
+  it('должен установить страницу 404, если не найден route', () => {
+    const getContentFakeTwo = sinon.fake.returns(document.createElement('div'));
+
+    const BlockMockTwo = class {
+      getContent = getContentFakeTwo;
+      dispatchComponentDidMount = () => {
+        return;
+      };
+    } as unknown as BlockConstructable;
+
+    Router.use('/', BlockMock).use('/404', BlockMockTwo).start();
+
+    Router.go('/some-strange-url');
+    
+
+    expect(getContentFakeTwo.callCount).to.eq(1);
   });
 });
