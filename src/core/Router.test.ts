@@ -2,7 +2,7 @@ import Router, { BlockConstructable } from './Router';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-describe('Router', () => {
+describe.only('Router', () => {
   const originalBack = global.window.history.back;
   const originalForward = global.window.history.forward;
 
@@ -32,27 +32,30 @@ describe('Router', () => {
 
   const BlockMock = class {
     getContent = getContentFake;
+    dispatchComponentDidMount = () => {
+      return;
+    };
   } as unknown as BlockConstructable;
 
-  it('use() should return Router instance', () => {
+  it('метод use() должен вернуть Router instance', () => {
     const result = Router.use('/', BlockMock);
 
     expect(result).to.eq(Router);
   });
 
-  describe('.back()', () => {
-    it('should render a page on history back action', () => {
+  it('должен отрендорить страницу при старте', () => {
+    Router.use('/', BlockMock).start();
+
+    expect(getContentFake.callCount).to.eq(1);
+  });
+
+  describe('метод back()', () => {
+    it('должен рендорить страницу при вызове метода', () => {
       Router.use('/', BlockMock).start();
 
       Router.back();
 
       expect(getContentFake.callCount).to.eq(1);
     });
-  });
-
-  it('should render a page on start', () => {
-    Router.use('/', BlockMock).start();
-
-    expect(getContentFake.callCount).to.eq(1);
   });
 });

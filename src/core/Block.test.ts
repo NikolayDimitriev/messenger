@@ -17,7 +17,7 @@ const { default: Block } = proxyquire('./Block', {
   },
 }) as { default: typeof BlockType };
 
-describe.only('Block', () => {
+describe('Block', () => {
   beforeEach(() => {
     eventBusMock.on.reset();
     eventBusMock.emit.reset();
@@ -62,7 +62,7 @@ describe.only('Block', () => {
 
     const func = () => {
       delete component.props.a;
-    }
+    };
 
     expect(func).to.throw(Error);
   });
