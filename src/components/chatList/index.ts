@@ -43,6 +43,9 @@ class ChatsListBase extends Block {
 
       return new Dialogue({
         ...data,
+        avatar: data.avatar
+          ? `https://ya-praktikum.tech/api/v2/resources/${data.avatar}`
+          : data.avatar,
         time,
         isSelected: this.props.selectedChat === data.id,
         events: {
