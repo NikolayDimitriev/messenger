@@ -17,33 +17,53 @@ const { default: Block } = proxyquire('./Block', {
   },
 }) as { default: typeof BlockType };
 
-describe('Block', () => {
+describe.only('Block', () => {
   beforeEach(() => {
     eventBusMock.on.reset();
     eventBusMock.emit.reset();
   });
 
-  class ComponentMock extends Block {}
+  it('должен сработать init при инициализация компонента', () => {
+    class ComponentMock extends Block {}
 
-  it('should fire init event on initialization', () => {
     new ComponentMock({});
 
     expect(eventBusMock.emit.calledWith('init')).to.eq(true);
   });
 
-  it('should fire protected componentDidMount on component-did-mount dispatch', () => {
-    let isCalled = false;
-
-    class ComponentMock extends Block {
-      componentDidMount() {
-        isCalled = true;
-      }
-    }
+  it('должен сработать flow:component-did-mount при dispatchComponentDidMount', () => {
+    class ComponentMock extends Block {}
 
     const component = new ComponentMock({});
 
     component.dispatchComponentDidMount();
 
-    expect(isCalled).to.eq(true);
+    expect(eventBusMock.emit.calledWith('flow:component-did-mount')).to.eq(
+      true
+    );
+  });
+
+  it('должен сработать flow:component-did-update при установке props', () => {
+    class ComponentMock extends Block {}
+
+    const component = new ComponentMock({});
+
+    component.setProps({ a: 2 });
+
+    expect(eventBusMock.emit.calledWith('flow:component-did-update')).to.eq(
+      true
+    );
+  });
+
+  it('должен выбросить ошибку при удалении пропсов', () => {
+    class ComponentMock extends Block {}
+
+    const component = new ComponentMock({ a: 2 });
+
+    const func = () => {
+      delete component.props.a;
+    }
+
+    expect(func).to.throw(Error);
   });
 });
