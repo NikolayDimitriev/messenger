@@ -7,10 +7,10 @@ import './style.scss';
 
 type TLinkProps = PropsWithRouter & {
   to: string;
-  label: string;
+  value: string;
 } & TProps;
 
-class BaseLink extends Block<TLinkProps> {
+export class BaseLink extends Block<TLinkProps> {
   constructor(props: TLinkProps) {
     super({
       ...props,

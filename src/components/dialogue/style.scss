@@ -24,6 +24,13 @@
     margin-right: 10px;
     border-radius: 50%;
     background-color: $empty-avatar;
+
+    &--image {
+      width: 47px;
+      height: 47px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
   }
 
   &__about {

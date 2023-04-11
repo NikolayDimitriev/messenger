@@ -6,6 +6,7 @@ import { EditPassPage } from './pages/editPass';
 import { ChatPage } from './pages/chats';
 import { Page404 } from './pages/404';
 import { Page500 } from './pages/500';
+import './style.scss';
 
 import router from './core/Router';
 

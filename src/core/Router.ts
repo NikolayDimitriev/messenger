@@ -1,6 +1,10 @@
 import { Route } from './Route';
 import Block from './Block';
 
+export interface BlockConstructable<P extends Record<string, any> = any> {
+  new (props: P): Block<P>;
+}
+
 class Router {
   private static __instance: Router;
   private _routes: Route[] = [];
@@ -36,7 +40,7 @@ class Router {
   }
 
   private _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
+    const route = this.getRoute(pathname) ?? this.getRoute('/404');
 
     if (!route) {
       return;

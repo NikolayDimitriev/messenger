@@ -18,11 +18,9 @@ type TFormProps = {
 };
 
 export class Form extends Block<TFormProps> {
-  private _formValidation: FormValidation;
-
   constructor(props: TFormProps) {
     super(props);
-    this._formValidation = new FormValidation(this, this.props.onSubmit);
+    new FormValidation(this, this.props.onSubmit);
   }
 
   init() {

@@ -6,7 +6,7 @@ const METHODS = {
   DELETE: 'DELETE',
 } as const;
 
-type METHODS = typeof METHODS[keyof typeof METHODS];
+type METHODS = (typeof METHODS)[keyof typeof METHODS];
 
 type Options = {
   method: METHODS;
